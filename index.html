@@ -1,126 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Webshop - Birthday Templates</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
-
-<style>
-  body {
-    margin: 0;
-    font-family: 'Montserrat Alternates', sans-serif;
-    background: #fff;
-  }
-
-  /* === Header met achtergrond === */
-  nav {
-    background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    padding: 40px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 60px;
-  }
-
-  nav ul li a {
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-    transition: color 0.3s ease;
-  }
-  nav ul li a:hover { color:#FF7929; }
-
-  .nav-icons { display:flex; gap:20px; align-items:center; }
-  .nav-icons img { width:28px; height:28px; cursor:pointer; }
-
-  /* === Top heading === */
-  .top-heading-wrapper { display:flex; justify-content:center; margin-top:20px; }
-  .top-heading {
-    font-weight:600; font-size:36px; letter-spacing:1.5px; text-transform:uppercase;
-    color:#FFD8A8; -webkit-text-stroke:1.5px #FF7929;
-    display:inline-flex; align-items:center; gap:18px;
-  }
-  .top-heading .arrow {
-    font-size:50px; color:#FFD8A8; -webkit-text-stroke:1.5px #FF7929;
-  }
-
-  /* === Product grid === */
-  :root {
-    --yellow-light:#FFF1B8;
-    --mango-orange:#FF8C2B;
-    --ink:#1F1F1F;
-    --card-bg:#FFFFFF;
-    --card-shadow:0 10px 30px rgba(0,0,0,0.07);
-    --radius-lg:18px;
-  }
-  .featured { padding:60px 5vw 80px; background:#fff; }
-  .featured-inner {
-    display:grid; gap:36px; max-width:1200px; margin:0 auto;
-    grid-template-columns:1fr;
-  }
-  @media(min-width:900px){ .featured-inner{ grid-template-columns:1fr 1fr;} }
-
-  .product-card {
-    background:var(--card-bg); border-radius:24px; box-shadow:var(--card-shadow);
-    overflow:hidden; display:flex; flex-direction:column;
-  }
-  .product-card .thumb {
-    aspect-ratio:4/3; background:#fafafa; overflow:hidden;
-  }
-  .product-card .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-  .product-body { padding:18px 20px 8px; }
-  .product-title {
-    margin:0 0 12px; font-weight:600; font-size:20px; color:var(--ink); text-align:center;
-  }
-
-  .btn-add-cart {
-    margin:16px; padding:16px 22px; width:calc(100% - 32px);
-    background:var(--yellow-light); color:var(--mango-orange);
-    border:none; border-radius:var(--radius-lg);
-    font-weight:600; font-size:16px; cursor:pointer;
-    transition:transform .08s ease, box-shadow .2s ease, opacity .2s ease;
-    box-shadow:0 6px 16px rgba(255,140,43,0.18);
-  }
-  .btn-add-cart:hover {
-    transform:translateY(-1px);
-    box-shadow:0 10px 22px rgba(255,140,43,0.22);
-    opacity:0.95;
-  }
-
-  /* === Footer === */
-  footer { position:relative; width:100%; margin-top:40px; }
-  .footer-decoration {
-    width:100%; height:220px; object-fit:cover; display:block; object-position:top;
-  }
-  .footer-text {
-    position:absolute; bottom:30px; width:100%; text-align:center;
-    color:#fff; font-size:14px; font-weight:500; text-shadow:1px 1px 3px rgba(0,0,0,0.6);
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Webshop - Birthday Templates</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #FFFFFF;
+      margin: 0;
+      font-family: 'Montserrat Alternates', sans-serif;
+    }
+    nav {
+      background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav ul {
+      list-style: none; margin:0; padding:0; display:flex; gap:60px;
+    }
+    nav ul li a {
+      text-decoration:none; color:white; font-size:18px; font-weight:600;
+    }
+    nav ul li a:hover { color:#FF7929; }
+    .cart-link img { width:36px; height:36px; }
+    .cart-badge {
+      position:absolute; top:-6px; right:-6px;
+      background:#FF6F61; color:#fff; font-size:12px; font-weight:600;
+      padding:2px 6px; border-radius:50%; min-width:18px; text-align:center;
+    }
+    footer {
+      position:relative; margin-top:60px;
+    }
+    .footer-decoration { width:100%; display:block; }
+    .footer-text {
+      position:absolute; bottom:10px; width:100%; text-align:center; color:#fff;
+      font-size:14px; text-shadow:1px 1px 3px rgba(0,0,0,0.5);
+    }
+  </style>
 </head>
-
 <body>
-  <div class="top-heading-wrapper">
-    <div class="top-heading">
-      PURCHASE THE BIRTHDAY TEMPLATES NOW
-      <span class="arrow">&#8595;</span>
-    </div>
-  </div>
-
   <header>
     <nav>
       <ul>
@@ -129,45 +52,26 @@
         <li><a href="tips.html">PLANNER TIPS</a></li>
         <li><a href="contact.html">CONTACT</a></li>
       </ul>
-      <div class="nav-icons">
-        <a href="account.html"><img src="https://raw.githubusercontent.com/Josephine1997/Starplanner-assets/refs/heads/main/139-person-3.svg" alt="Account"></a>
-        <a href="cart.html"><img src="https://raw.githubusercontent.com/Josephine1997/Starplanner-assets/refs/heads/main/001-shopping-bag.svg" alt="Cart"></a>
-      </div>
+
+      <a href="checkout.html" class="cart-link" style="position:relative; display:inline-block;">
+        <img src="shoppingbag.svg" alt="Cart">
+        <span id="cart-count" class="cart-badge">0</span>
+      </a>
     </nav>
   </header>
 
-  <!-- Productsectie met originele namen -->
-  <section class="featured">
-    <div class="featured-inner">
-
-      <!-- Product 1 -->
-      <article class="product-card">
-        <div class="thumb">
-          <img src="preview-january.png" alt="Birthday Template – Start in January (preview)">
-        </div>
-        <div class="product-body">
-          <h2 class="product-title">Birthday Template – Start in January</h2>
-        </div>
-        <button class="btn-add-cart">Add to cart</button>
-      </article>
-
-      <!-- Product 2 -->
-      <article class="product-card">
-        <div class="thumb">
-          <img src="preview-april.png" alt="Birthday Template – Start in April (preview)">
-        </div>
-        <div class="product-body">
-          <h2 class="product-title">Birthday Template – Start in April</h2>
-        </div>
-        <button class="btn-add-cart">Add to cart</button>
-      </article>
-
-    </div>
-  </section>
+  <h1 style="text-align:center;">Welcome to Starplanner</h1>
 
   <footer>
-    <img src="ArtworkWaterverfkwastFootheader.jpg" alt="Footer Decoration" class="footer-decoration">
+    <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
+
+  <script>
+    // Toon aantal producten in cart
+    const cartCount = document.getElementById('cart-count');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartCount.textContent = cart.length;
+  </script>
 </body>
 </html>
