@@ -1,48 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Starplanner – Home</title>
-
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
+      background: #FFFFFF;
       margin: 0;
-      background: #fff;
       font-family: 'Montserrat Alternates', sans-serif;
     }
 
     /* Header */
     nav {
-      background: url('ArtworkWaterverfkwastachterkopjes.jpg') center/contain no-repeat;
+      background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
+      background-size: contain;          /* niet meer te groot */
+      background-repeat: no-repeat;
+      background-position: center;
       padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
       display: flex;
       gap: 50px;
-      align-items: center;
     }
+
     nav ul li a {
       text-decoration: none;
-      font-weight: 600;
-      font-size: 18px;
       color: white;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-      transition: color .3s ease;
+      font-size: 18px;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
-    nav ul li a:hover { color: #FF7929; }
 
-    /* Cart */
-    .cart-link img { width: 34px; height: 34px; }
+    nav ul li a:hover { color:#FF7929; }
+
+    /* Shopping bag en badge */
+    .cart-link img {
+      width: 36px;
+      height: 36px;
+    }
+
     .cart-badge {
       position: absolute;
       top: -6px;
@@ -57,58 +62,72 @@
       text-align: center;
     }
 
-    h1 {
-      text-align: center;
-      margin-top: 40px;
-      color: #FF8C2B;
+    /* Productsectie (voor FREE DOWNLOAD) */
+    .featured {
+      padding: 60px 5vw 80px;
+      background: #fff;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    /* Birthday Templates section */
-    .templates {
-      max-width: 900px;
-      margin: 50px auto;
+    .featured-inner {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 36px;
     }
-    @media(min-width: 800px){
-      .templates {
-        grid-template-columns: 1fr 1fr;
-      }
+
+    @media(min-width:900px){
+      .featured-inner { grid-template-columns: 1fr 1fr; }
     }
-    .template-card {
-      border-radius: 18px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      overflow: hidden;
+
+    .product-card {
       background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
-    .template-card img {
+
+    .product-card .thumb {
+      aspect-ratio: 4/3;
+      background: #fafafa;
+      overflow: hidden;
+    }
+
+    .product-card .thumb img {
       width: 100%;
-      height: 250px;
+      height: 100%;
       object-fit: cover;
     }
-    .template-card h2 {
-      margin: 16px;
-      font-size: 20px;
-      color: #1F1F1F;
+
+    .product-body {
+      padding: 18px 20px;
       text-align: center;
     }
-    .btn-free {
-      margin: 0 auto 20px;
-      padding: 12px 22px;
-      background: #FFF1B8;
-      color: #FF8C2B;
+
+    .product-title {
+      font-size: 20px;
       font-weight: 600;
+      color: #1F1F1F;
+      margin-bottom: 12px;
+    }
+
+    .btn-free-download {
+      display: inline-block;
+      margin: 10px auto 20px auto;
+      padding: 14px 24px;
+      background: #FFC90E;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      font-size: 16px;
-      transition: background .3s ease;
+      transition: background 0.3s ease;
     }
-    .btn-free:hover {
-      background: #FFE680;
+    .btn-free-download:hover {
+      background:#e6b800;
     }
 
     /* Footer */
@@ -120,11 +139,10 @@
       width: 100%;
       height: auto;
       display: block;
-      object-fit: cover;
     }
     .footer-text {
       position: absolute;
-      bottom: 12px;
+      bottom: 10px;
       width: 100%;
       text-align: center;
       color: #fff;
@@ -133,53 +151,68 @@
     }
   </style>
 </head>
+
 <body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="story.html">THE STORY BEHIND</a></li>
+        <li><a href="shop.html">SHOP</a></li>
+        <li><a href="tips.html">PLANNER TIPS</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+      </ul>
 
-  <!-- Header -->
-  <nav>
-    <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="story.html">THE STORY BEHIND</a></li>
-      <li><a href="shop.html">SHOP</a></li>
-      <li><a href="tips.html">PLANNER TIPS</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
-    </ul>
+      <a href="checkout.html" class="cart-link" style="position:relative;">
+        <img src="shoppingbag.svg" alt="Cart">
+        <span class="cart-badge" id="cart-count">0</span>
+      </a>
+    </nav>
+  </header>
 
-    <a href="checkout.html" class="cart-link" style="position:relative; display:inline-block;">
-      <img src="shoppingbag.svg" alt="Cart">
-      <span id="cart-count" class="cart-badge">0</span>
-    </a>
-  </nav>
+  <h1 style="text-align:center; margin:40px 0;">Welcome to Starplanner</h1>
 
-  <h1>Welcome to Starplanner</h1>
+  <!-- FREE DOWNLOAD sectie -->
+  <section class="featured">
+    <div class="featured-inner">
 
-  <!-- Birthday Templates Section -->
-  <section class="templates">
-    <article class="template-card">
-      <img src="preview-january.png" alt="Birthday Template – Start in January">
-      <h2>Birthday Template – Start in January</h2>
-      <button class="btn-free">FREE DOWNLOAD</button>
-    </article>
+      <article class="product-card">
+        <div class="thumb">
+          <img src="preview-january.png" alt="Birthday Template – Start in January">
+        </div>
+        <div class="product-body">
+          <h2 class="product-title">Birthday Template – Start in January</h2>
+          <button class="btn-free-download" onclick="window.location.href='signup.html'">
+            FREE DOWNLOAD
+          </button>
+        </div>
+      </article>
 
-    <article class="template-card">
-      <img src="preview-april.png" alt="Birthday Template – Start in April">
-      <h2>Birthday Template – Start in April</h2>
-      <button class="btn-free">FREE DOWNLOAD</button>
-    </article>
+      <article class="product-card">
+        <div class="thumb">
+          <img src="preview-april.png" alt="Birthday Template – Start in April">
+        </div>
+        <div class="product-body">
+          <h2 class="product-title">Birthday Template – Start in April</h2>
+          <button class="btn-free-download" onclick="window.location.href='signup.html'">
+            FREE DOWNLOAD
+          </button>
+        </div>
+      </article>
+
+    </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
   <script>
-    // Toon winkelwagen teller
+    // Aantal items in cart
     const cartCount = document.getElementById('cart-count');
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     cartCount.textContent = cart.length;
   </script>
-
 </body>
 </html>
