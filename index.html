@@ -83,8 +83,10 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
     }
 
+    /* Thumbnail kleiner */
     .product-card .thumb {
       aspect-ratio: 4/3;
       background: #fafafa;
@@ -95,6 +97,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .thumb img {
+      transform: scale(1.05);
     }
 
     .product-body {
@@ -128,12 +135,17 @@
     footer {
       position: relative;
       margin-top: 60px;
+      overflow: hidden;
     }
+
+    /* hoogte gehalveerd */
     .footer-decoration {
       width: 100%;
-      height: auto;
+      height: 50%;       /* hoogte gehalveerd */
+      object-fit: cover; /* snijdt afbeelding bij in plaats van rekken */
       display: block;
     }
+
     .footer-text {
       position: absolute;
       bottom: 10px;
@@ -142,6 +154,35 @@
       color: #fff;
       font-size: 14px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+
+    /* Modal (grote weergave) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -170,25 +211,25 @@
   <section class="featured">
     <div class="featured-inner">
 
-      <article class="product-card">
+      <article class="product-card" onclick="openModal('voorbeeldjanuari.png')">
         <div class="thumb">
           <img src="voorbeeldjanuari.png" alt="Birthday Template – Start in January">
         </div>
         <div class="product-body">
           <h2 class="product-title">Birthday Template – Start in January</h2>
-          <button class="btn-free-download" onclick="window.location.href='signup.html'">
+          <button class="btn-free-download" onclick="event.stopPropagation(); window.location.href='signup.html'">
             FREE DOWNLOAD
           </button>
         </div>
       </article>
 
-      <article class="product-card">
+      <article class="product-card" onclick="openModal('voorbeeldapril.png')">
         <div class="thumb">
           <img src="voorbeeldapril.png" alt="Birthday Template – Start in April">
         </div>
         <div class="product-body">
           <h2 class="product-title">Birthday Template – Start in April</h2>
-          <button class="btn-free-download" onclick="window.location.href='signup.html'">
+          <button class="btn-free-download" onclick="event.stopPropagation(); window.location.href='signup.html'">
             FREE DOWNLOAD
           </button>
         </div>
@@ -202,11 +243,29 @@
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
+  <!-- Modal voor grote weergave -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <img id="modalImage" src="" alt="Preview">
+  </div>
+
   <script>
     // Aantal items in cart
     const cartCount = document.getElementById('cart-count');
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     cartCount.textContent = cart.length;
+
+    // Modal functies
+    function openModal(src){
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = src;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal(){
+      document.getElementById('imageModal').style.display = 'none';
+    }
   </script>
 </body>
 </html>
