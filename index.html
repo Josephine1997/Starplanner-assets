@@ -15,10 +15,12 @@
     /* Header */
     nav {
       background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
-      background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      padding: 20px 40px;
+      /* >>> aangepaste grootte: breder en iets hoger */
+      background-size: 120% 110%;
+      /* ↑ 120% breedte, 110% hoogte → breder & iets hoger */
+      padding: 40px 40px;  /* iets meer padding om extra hoogte te laten zien */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -86,7 +88,6 @@
       cursor: pointer;
     }
 
-    /* Thumbnail kleiner */
     .product-card .thumb {
       aspect-ratio: 4/3;
       background: #fafafa;
@@ -138,11 +139,11 @@
       overflow: hidden;
     }
 
-    /* hoogte gehalveerd */
+    /* >>> hoogte echt gehalveerd (vaste pixelhoogte) */
     .footer-decoration {
       width: 100%;
-      height: 50%;       /* hoogte gehalveerd */
-      object-fit: cover; /* snijdt afbeelding bij in plaats van rekken */
+      height: 100px;          /* halve hoogte bijvoorbeeld 100px, pas aan naar wens */
+      object-fit: cover;      /* snijdt mooi bij */
       display: block;
     }
 
