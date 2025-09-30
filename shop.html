@@ -11,153 +11,228 @@
   <style>
     body {
       font-family: 'Montserrat Alternates', sans-serif;
-      margin: 40px;
-      line-height: 1.6;
+      margin: 0;
+      background: #fff;
       color: #333;
-      background: #fff;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    p.intro {
-      max-width: 800px;
-      margin: 0 auto 60px auto;
-      text-align: center;
-    }
-
-    /* === Shop grid === */
-    :root {
-      --yellow-light: #FFF1B8;
-      --mango-orange: #FF8C2B;
-      --ink: #1F1F1F;
-      --card-bg: #FFFFFF;
-      --card-shadow: 0 10px 30px rgba(0,0,0,0.07);
-      --radius-lg: 18px;
-    }
-
-    .featured {
-      padding: 20px 5vw 80px;
-      background: #fff;
-    }
-
-    .featured-inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 36px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    @media (min-width: 900px) {
-      .featured-inner {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .product-card {
-      background: var(--card-bg);
-      border-radius: 24px;
-      box-shadow: var(--card-shadow);
-      overflow: hidden;
+    /* ===== Header & Nav ===== */
+    nav {
+      background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 20px 40px;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .product-card .thumb {
-      aspect-ratio: 4 / 3;
-      background: #fafafa;
-      overflow: hidden;
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 60px;
     }
 
-    .product-card .thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
     }
 
-    .product-body {
-      padding: 18px 20px 8px;
+    nav ul li a:hover {
+      color: #FF7929;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-icons img {
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+    }
+
+    .cart-link {
+      position: relative;
+      display: inline-block;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #FF6F61;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 50%;
+      min-width: 18px;
       text-align: center;
     }
 
-    .product-title {
-      margin: 0 0 12px 0;
-      font-weight: 600;
+    /* ===== Page Content ===== */
+    main {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    main h1 {
+      margin-bottom: 40px;
+      color: #1F1F1F;
+    }
+
+    main p {
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* ===== Subscribe Section ===== */
+    .subscribe-section {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .subscribe-section h2 {
       font-size: 20px;
-      color: var(--ink);
-    }
-
-    .btn-add-cart {
-      margin: 16px auto 20px auto;
-      padding: 14px 24px;
-      background: var(--yellow-light);
-      color: var(--mango-orange);
-      border: none;
-      border-radius: var(--radius-lg);
-      font-family: 'Montserrat Alternates', sans-serif;
       font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-      transition: transform .08s ease, box-shadow .2s ease, opacity .2s ease;
-      box-shadow: 0 6px 16px rgba(255, 140, 43, 0.18);
+      color: #FF8C2B;
+      margin-bottom: 16px;
     }
 
-    .btn-add-cart:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(255, 140, 43, 0.22);
-      opacity: 0.95;
+    .subscribe-box {
+      display: inline-flex;
+      align-items: center;
+      background: #FFF1B8;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .subscribe-input {
+      border: none;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: 'Montserrat Alternates', sans-serif;
+      outline: none;
+      width: 240px;
+      background: white;
+      color: #333;
+      border-radius: 18px 0 0 18px;
+    }
+
+    .subscribe-button {
+      background: #FF8C2B;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 0 18px 18px 0;
+      transition: background 0.3s ease;
+    }
+
+    .subscribe-button:hover {
+      background: #e67c20;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      position: relative;
+      margin-top: 60px;
+    }
+
+    .footer-decoration {
+      width: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .footer-text {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
   </style>
 </head>
 
 <body>
-  <h1>Shop</h1>
+  <!-- ===== Header ===== -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="story.html">THE STORY BEHIND</a></li>
+        <li><a href="shop.html">SHOP</a></li>
+        <li><a href="tips.html">PLANNER TIPS</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+      </ul>
 
-  <p class="intro">
-    The product ©Starplanner is currently in the making and is planned to be released for sale in February 2026.<br><br>
-    1. “The planner will run from April 2026 to March 2027, covering a full year from spring to spring.”<br>
-    2. “The planner will run from April 2026 to March 2027, designed to cover a complete year from April to March.”<br><br>
-    Subscribe to the email list if you (only, no spam!) want to receive an update when the product is about to be released on the website.<br>
-    This will be the first edition, and only 100 pieces of the planner will be available for sale!<br>
-    So subscribe now to the VIP list to be the first to know when the Starplanner is released!<br><br>
-    ------------------------------------------------------------------------------------------<br><br>
-    <strong>Why the Starplanner runs from April to March</strong><br>
-    The new year feels most natural starting with the first season — spring — marking a fresh cycle in nature.<br>
-    Even the Babylonians celebrated the new year around the last week of March or on April 1st, during the Akitu festival, derived from the Sumerian term Zagmuk, meaning "beginning of the year".<br>
-    For me, this has a personal connection: I was born on April 1st. Starting the Starplanner on April 1st feels like coming full circle, perfectly in tune with the rhythm of the seasons and the new beginnings each spring brings.
-  </p>
+      <div class="nav-icons">
+        <a href="account.html">
+          <img src="https://raw.githubusercontent.com/Josephine1997/Starplanner-assets/refs/heads/main/139-person-3.svg" alt="Account">
+        </a>
+        <a href="checkout.html" class="cart-link">
+          <img src="shoppingbag.svg" alt="Cart">
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+      </div>
+    </nav>
+  </header>
 
-  <!-- === Shop sectie met producten === -->
-  <section class="featured">
-    <div class="featured-inner">
+  <!-- ===== Main Content ===== -->
+  <main>
+    <h1>Shop</h1>
+    <p>
+      The product ©Starplanner is currently in the making and is planned to be released for sale in February 2026.<br><br>
+      1. “The planner will run from April 2026 to March 2027, covering a full year from spring to spring.”<br>
+      2. “The planner will run from April 2026 to March 2027, designed to cover a complete year from April to March.”<br><br>
+      Subscribe to the email list if you (only, no spam!) want to receive an update when the product is about to be released on the website.<br>
+      This will be the first edition, and only 100 pieces of the planner will be available for sale!<br>
+      So subscribe now to the VIP list to be the first to know when the Starplanner is released!<br><br>
+      <strong>Why the Starplanner runs from April to March</strong><br>
+      The new year feels most natural starting with the first season — spring — marking a fresh cycle in nature.<br>
+      Even the Babylonians celebrated the new year around the last week of March or on April 1st, during the Akitu festival, derived from the Sumerian term Zagmuk, meaning "beginning of the year".<br>
+      For me, this has a personal connection: I was born on April 1st. Starting the Starplanner on April 1st feels like coming full circle, perfectly in tune with the rhythm of the seasons and the new beginnings each spring brings.
+    </p>
 
-      <!-- Product 1 -->
-      <article class="product-card">
-        <div class="thumb">
-          <img src="preview-january.png" alt="Birthday Template – Start in January (preview)">
+    <!-- Subscribe VIP List -->
+    <div class="subscribe-section">
+      <h2>Subscribe to the VIP list:</h2>
+      <form action="https://formspree.io/f/yourFormID" method="POST">
+        <div class="subscribe-box">
+          <input type="email" name="email" class="subscribe-input" placeholder="Enter your email" required>
+          <button type="submit" class="subscribe-button">Submit</button>
         </div>
-        <div class="product-body">
-          <h2 class="product-title">Birthday Template – Start in January</h2>
-        </div>
-        <button class="btn-add-cart">Add to cart</button>
-      </article>
-
-      <!-- Product 2 -->
-      <article class="product-card">
-        <div class="thumb">
-          <img src="preview-april.png" alt="Birthday Template – Start in April (preview)">
-        </div>
-        <div class="product-body">
-          <h2 class="product-title">Birthday Template – Start in April</h2>
-        </div>
-        <button class="btn-add-cart">Add to cart</button>
-      </article>
-
+      </form>
     </div>
-  </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
+    <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Toon cart count
+    const cartCount = document.getElementById('cart-count');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartCount.textContent = cart.length;
+  </script>
 </body>
 </html>
