@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Starplanner</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      background: #FFFFFF;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat Alternates', sans-serif;
+    }
+
+    /* Header en navigatie */
+    nav {
+      background-image: url('balk.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 40px 0;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0 80px 0 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 60px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #FF7929;
+    }
+
+    .nav-icon img {
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-icon img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Contact sectie */
+    .contact-container {
+      max-width: 600px;
+      margin: 80px auto;
+      text-align: center;
+      color: #FF8C2B;
+    }
+
+    .contact-container h1 {
+      font-size: 42px;
+      font-weight: 600;
+      color: #FFD8A8; /* lichtgeel */
+      -webkit-text-stroke: 1.5px #FF8C2B; /* lichtoranje rand */
+      margin-bottom: 20px;
+    }
+
+    .contact-container p.subtitle {
+      font-size: 16px;
+      color: #FF8C2B;
+      margin-bottom: 20px;
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 16px;
+      color: #FF8C2B;
+    }
+
+    .contact-line img {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Formulier */
+    form {
+      margin-top: 30px;
+    }
+
+    .form-field {
+      text-align: left;
+      max-width: 400px;
+      margin: 20px auto;
+      font-size: 16px;
+      color: #FF8C2B;
+    }
+
+    .form-field label {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .required {
+      color: #FF6F61; /* koraalrood voor asterisk */
+      margin-left: 4px;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 2px solid #FFC90E; /* Oranje rand */
+      font-size: 14px;
+      font-family: 'Montserrat Alternates', sans-serif;
+      background: #FFFFFF;
+      resize: none;
+    }
+
+    .form-field textarea {
+      height: 150px; /* Groter tekstvak voor message */
+    }
+
+    /* Send knop */
+    .send-button {
+      display: inline-block;
+      background: #FFC90E;
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      margin-top: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .send-button:hover {
+      background: #e6b800;
+    }
+
+    .send-container {
+      text-align: left;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    footer {
+      position: relative;
+      width: 100%;
+      margin-top: 60px;
+    }
+
+    .footer-decoration {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .footer-text {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      font-family: 'Montserrat Alternates', sans-serif;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Pop-up melding */
+    .popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #fff;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 1000;
+      font-family: 'Montserrat Alternates', sans-serif;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .popup.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .popup.success {
+      background-color: #ff69b4; /* roze */
+    }
+
+    .popup.error {
+      background-color: #ff6f61; /* koraalrood */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="story.html">THE STORY BEHIND</a></li>
+        <li><a href="shop.html">SHOP</a></li>
+        <li><a href="tips.html">PLANNER TIPS</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+        <li class="nav-icon">
+          <a href="account.html">
+            <img src="https://raw.githubusercontent.com/Josephine1997/Starplanner-assets/refs/heads/main/139-person-3.svg" alt="Account">
+          </a>
+        </li>
+        <li class="nav-icon">
+          <a href="cart.html">
+            <img src="https://raw.githubusercontent.com/Josephine1997/Starplanner-assets/refs/heads/main/001-shopping-bag.svg" alt="Shopping Bag">
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contact content -->
+  <section class="contact-container">
+    <h1>Get in touch</h1>
+    <p class="subtitle">Feel free to contact me at:</p>
+
+    <div class="contact-line">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email Icon">
+      <span>josephine@planyourstardom.com</span>
+    </div>
+
+    <div class="contact-line">
+      <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone Icon">
+      <span>-telefoonnummer-</span>
+    </div>
+
+    <!-- Contactformulier -->
+    <form id="contact-form" action="https://formspree.io/f/movkdray" method="POST">
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" placeholder="Enter your name">
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+        <input type="email" name="_replyto" id="email" placeholder="Enter your email" required aria-required="true">
+      </div>
+
+      <div class="form-field">
+        <label for="phone">Phone Number</label>
+        <input type="text" name="phone" id="phone" placeholder="Enter your phone number">
+      </div>
+
+      <div class="form-field">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" placeholder="Type your message here" required></textarea>
+      </div>
+
+      <div class="send-container">
+        <button type="submit" class="send-button">SEND</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <img src="decorwebshop.jpg" alt="Footer Decoration" class="footer-decoration" />
+    <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
+  </footer>
+
+  <!-- Popup container met aria-live -->
+  <div id="popup" class="popup" aria-live="polite"></div>
+
+  <!-- Validatie script -->
+  <script>
+    const form = document.getElementById('contact-form');
+    const popup = document.getElementById('popup');
+
+    function showPopup(message, type) {
+      popup.textContent = message;
+      popup.className = 'popup ' + type + ' show';
+      setTimeout(() => {
+        popup.classList.remove('show');
+      }, 3000);
+    }
+
+    form.addEventListener('submit', function(event) {
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // Controle op lege velden
+      if (!email || !message) {
+        event.preventDefault();
+        showPopup('Please enter your email address and message before sending.', 'error');
+        return;
+      }
+
+      // Controle op incorrect e-mailformaat
+      if (!emailPattern.test(email)) {
+        event.preventDefault();
+        showPopup('Incorrect email address inserted.', 'error');
+        return;
+      }
+
+      // Alles correct
+      showPopup('Message successfully sent.', 'success');
+      // Formspree vangt de submit af en verwerkt server-side
+    });
+  </script>
+</body>
+</html>
