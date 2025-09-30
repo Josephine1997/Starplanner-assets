@@ -11,23 +11,43 @@
   /* ======= Navigatie ======= */
   nav {
     background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
-    background-size:cover;
-    background-repeat:no-repeat;
-    padding:20px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    background-size: contain;       /* ✅ kleiner gemaakt */
+    background-repeat: no-repeat;
+    background-position: center top;
+    padding: 20px 60px;             /* ✅ wat meer padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  nav ul { list-style:none; margin:0; padding:0; display:flex; gap:60px; }
-  nav ul li a { text-decoration:none; color:white; font-size:18px; font-weight:600; }
-  nav ul li a:hover { color:#FF7929; }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 40px;                /* ✅ meer ruimte naar rechts */
+    display: flex;
+    gap: 60px;
+  }
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  nav ul li a:hover { color: #FF7929; }
+
   .cart-link img { width:36px; height:36px; }
+
   .cart-badge {
-    position:absolute; top:-6px; right:-6px;
-    background:#FF6F61; color:#fff; font-size:12px; font-weight:600;
-    padding:2px 6px; border-radius:50%; min-width:18px; text-align:center;
+    position:absolute;
+    top:-6px; right:-6px;
+    background:#FF6F61; color:#fff;
+    font-size:12px; font-weight:600;
+    padding:2px 6px;
+    border-radius:50%;
+    min-width:18px;
+    text-align:center;
   }
 
+  /* ======= Checkout sectie ======= */
   main { padding:20px; max-width:900px; margin:0 auto; }
 
   h1 { color:#FFC90E; text-align:center; margin-top:30px; margin-bottom:10px; }
@@ -145,6 +165,7 @@
         <img src="https://raw.githubusercontent.com/Josephine1997/Starplanner-assets/refs/heads/main/139-person-3.svg" alt="Account" width="36" height="36">
       </a>
 
+      <!-- ✅ Shopping bag icoon -->
       <a href="checkout.html" class="cart-link" style="position:relative; display:inline-block;">
         <img src="shoppingbag.svg" alt="Cart">
         <span id="cart-count" class="cart-badge">0</span>
@@ -174,65 +195,4 @@
 <script>
   const cartContainer = document.getElementById('cart-items');
   const subtotalEl = document.getElementById('subtotal');
-  const cartCount = document.getElementById('cart-count');
-
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  cartCount.textContent = cart.length;
-
-  function renderCart() {
-    cartContainer.innerHTML = '';
-    let total = 0;
-
-    if (cart.length === 0) {
-      cartContainer.innerHTML = `<div class="empty-cart">Your cart is empty</div>`;
-    } else {
-      cart.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.classList.add('cart-item');
-        div.innerHTML = `
-          <div style="display:flex; align-items:center;">
-            <img src="${item.image}" alt="${item.name}">
-            <div class="product-info">
-              <div>${item.name}</div>
-              <div class="remove" onclick="removeItem(${index})">REMOVE</div>
-            </div>
-          </div>
-          <div>
-            €${item.price.toFixed(2)} <br>
-            <div class="qty-controls">
-              <button class="qty-btn" onclick="updateQty(${index}, -1)">–</button>
-              <span class="qty-box">${item.qty}</span>
-              <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
-            </div>
-          </div>
-        `;
-        cartContainer.appendChild(div);
-        total += item.price * item.qty;
-      });
-    }
-    subtotalEl.textContent = total.toFixed(2);
-  }
-
-  function removeItem(index) {
-    cart.splice(index,1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    cartCount.textContent = cart.length;
-    renderCart();
-  }
-
-  function updateQty(index, delta) {
-    cart[index].qty += delta;
-    if (cart[index].qty < 1) cart[index].qty = 1;
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
-  }
-
-  function proceedToCheckout() {
-    alert('Proceeding to checkout... (Hier later koppelen met Stripe/Mollie)');
-  }
-
-  renderCart();
-</script>
-
-</body>
-</html>
+  const cartCount = document.getEleme
