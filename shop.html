@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop - Starplanner</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Montserrat Alternates', sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    p.intro {
+      max-width: 800px;
+      margin: 0 auto 60px auto;
+      text-align: center;
+    }
+
+    /* === Shop grid === */
+    :root {
+      --yellow-light: #FFF1B8;
+      --mango-orange: #FF8C2B;
+      --ink: #1F1F1F;
+      --card-bg: #FFFFFF;
+      --card-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      --radius-lg: 18px;
+    }
+
+    .featured {
+      padding: 20px 5vw 80px;
+      background: #fff;
+    }
+
+    .featured-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 900px) {
+      .featured-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card .thumb {
+      aspect-ratio: 4 / 3;
+      background: #fafafa;
+      overflow: hidden;
+    }
+
+    .product-card .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-body {
+      padding: 18px 20px 8px;
+      text-align: center;
+    }
+
+    .product-title {
+      margin: 0 0 12px 0;
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--ink);
+    }
+
+    .btn-add-cart {
+      margin: 16px auto 20px auto;
+      padding: 14px 24px;
+      background: var(--yellow-light);
+      color: var(--mango-orange);
+      border: none;
+      border-radius: var(--radius-lg);
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform .08s ease, box-shadow .2s ease, opacity .2s ease;
+      box-shadow: 0 6px 16px rgba(255, 140, 43, 0.18);
+    }
+
+    .btn-add-cart:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(255, 140, 43, 0.22);
+      opacity: 0.95;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Shop</h1>
+
+  <p class="intro">
+    The product ©Starplanner is currently in the making and is planned to be released for sale in February 2026.<br><br>
+    1. “The planner will run from April 2026 to March 2027, covering a full year from spring to spring.”<br>
+    2. “The planner will run from April 2026 to March 2027, designed to cover a complete year from April to March.”<br><br>
+    Subscribe to the email list if you (only, no spam!) want to receive an update when the product is about to be released on the website.<br>
+    This will be the first edition, and only 100 pieces of the planner will be available for sale!<br>
+    So subscribe now to the VIP list to be the first to know when the Starplanner is released!<br><br>
+    ------------------------------------------------------------------------------------------<br><br>
+    <strong>Why the Starplanner runs from April to March</strong><br>
+    The new year feels most natural starting with the first season — spring — marking a fresh cycle in nature.<br>
+    Even the Babylonians celebrated the new year around the last week of March or on April 1st, during the Akitu festival, derived from the Sumerian term Zagmuk, meaning "beginning of the year".<br>
+    For me, this has a personal connection: I was born on April 1st. Starting the Starplanner on April 1st feels like coming full circle, perfectly in tune with the rhythm of the seasons and the new beginnings each spring brings.
+  </p>
+
+  <!-- === Shop sectie met producten === -->
+  <section class="featured">
+    <div class="featured-inner">
+
+      <!-- Product 1 -->
+      <article class="product-card">
+        <div class="thumb">
+          <img src="preview-january.png" alt="Birthday Template – Start in January (preview)">
+        </div>
+        <div class="product-body">
+          <h2 class="product-title">Birthday Template – Start in January</h2>
+        </div>
+        <button class="btn-add-cart">Add to cart</button>
+      </article>
+
+      <!-- Product 2 -->
+      <article class="product-card">
+        <div class="thumb">
+          <img src="preview-april.png" alt="Birthday Template – Start in April (preview)">
+        </div>
+        <div class="product-body">
+          <h2 class="product-title">Birthday Template – Start in April</h2>
+        </div>
+        <button class="btn-add-cart">Add to cart</button>
+      </article>
+
+    </div>
+  </section>
+</body>
+</html>
