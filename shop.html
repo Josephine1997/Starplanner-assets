@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shop - Starplanner</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
 
   <style>
@@ -19,10 +18,10 @@
     /* ===== Header & Nav ===== */
     nav {
       background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
-      background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      padding: 20px 40px;
+      background-size: 120% 110%;
+      padding: 40px 60px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -33,7 +32,8 @@
       margin: 0;
       padding: 0;
       display: flex;
-      gap: 60px;
+      gap: 70px;
+      padding-left: 100px;
     }
 
     nav ul li a {
@@ -41,16 +41,16 @@
       color: white;
       font-size: 18px;
       font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
-    nav ul li a:hover {
-      color: #FF7929;
-    }
+    nav ul li a:hover { color: #FF7929; }
 
     .nav-icons {
       display: flex;
-      gap: 20px;
+      gap: 30px;
       align-items: center;
+      position: relative;
     }
 
     .nav-icons img {
@@ -98,7 +98,7 @@
 
     /* ===== Subscribe Section ===== */
     .subscribe-section {
-      margin-top: 40px;
+      margin-top: 20px;
       text-align: center;
     }
 
@@ -116,6 +116,7 @@
       border-radius: 18px;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-top: 10px;
     }
 
     .subscribe-input {
@@ -142,20 +143,20 @@
       transition: background 0.3s ease;
     }
 
-    .subscribe-button:hover {
-      background: #e67c20;
-    }
+    .subscribe-button:hover { background: #e67c20; }
 
     /* ===== Footer ===== */
     footer {
       position: relative;
       margin-top: 60px;
+      overflow: hidden;
     }
 
     .footer-decoration {
       width: 100%;
+      height: 100px;        /* zelfde als index.html */
+      object-fit: cover;
       display: block;
-      object-fit: contain;
     }
 
     .footer-text {
@@ -183,11 +184,9 @@
       </ul>
 
       <div class="nav-icons">
-        <a href="account.html">
-          <img src="https://raw.githubusercontent.com/Josephine1997/Starplanner-assets/refs/heads/main/139-person-3.svg" alt="Account">
-        </a>
+        <img src="user-icon.svg" alt="User">
         <a href="checkout.html" class="cart-link">
-          <img src="shoppingbag.svg" alt="Cart">
+          <img src="shoppingbag.svg" alt="Shopping Bag">
           <span id="cart-count" class="cart-badge">0</span>
         </a>
       </div>
@@ -199,18 +198,13 @@
     <h1>Shop</h1>
     <p>
       The product ©Starplanner is currently in the making and is planned to be released for sale in February 2026.<br><br>
-      1. “The planner will run from April 2026 to March 2027, covering a full year from spring to spring.”<br>
-      2. “The planner will run from April 2026 to March 2027, designed to cover a complete year from April to March.”<br><br>
+      The planner will run from April 2026 to March 2027, covering a full year from spring to spring.<br><br>
       Subscribe to the email list if you (only, no spam!) want to receive an update when the product is about to be released on the website.<br>
       This will be the first edition, and only 100 pieces of the planner will be available for sale!<br>
-      So subscribe now to the VIP list to be the first to know when the Starplanner is released!<br><br>
-      <strong>Why the Starplanner runs from April to March</strong><br>
-      The new year feels most natural starting with the first season — spring — marking a fresh cycle in nature.<br>
-      Even the Babylonians celebrated the new year around the last week of March or on April 1st, during the Akitu festival, derived from the Sumerian term Zagmuk, meaning "beginning of the year".<br>
-      For me, this has a personal connection: I was born on April 1st. Starting the Starplanner on April 1st feels like coming full circle, perfectly in tune with the rhythm of the seasons and the new beginnings each spring brings.
+      So subscribe now to the VIP list to be the first to know when the Starplanner is released!
     </p>
 
-    <!-- Subscribe VIP List -->
+    <!-- Subscribe VIP List direct onder de tekst -->
     <div class="subscribe-section">
       <h2>Subscribe to the VIP list:</h2>
       <form action="https://formspree.io/f/yourFormID" method="POST">
@@ -220,6 +214,14 @@
         </div>
       </form>
     </div>
+
+    <p>
+      <br>
+      <strong>Why the Starplanner runs from April to March</strong><br>
+      The new year feels most natural starting with the first season — spring — marking a fresh cycle in nature.<br>
+      Even the Babylonians celebrated the new year around the last week of March or on April 1st, during the Akitu festival, derived from the Sumerian term Zagmuk, meaning "beginning of the year".<br>
+      For me, this has a personal connection: I was born on April 1st. Starting the Starplanner on April 1st feels like coming full circle, perfectly in tune with the rhythm of the seasons and the new beginnings each spring brings.
+    </p>
   </main>
 
   <!-- ===== Footer ===== -->
