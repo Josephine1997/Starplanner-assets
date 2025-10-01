@@ -4,9 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Starplanner – Home</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
-
   <style>
     body {
       background: #FFFFFF;
@@ -14,7 +12,7 @@
       font-family: 'Montserrat Alternates', sans-serif;
     }
 
-    /* ====== Header / Nav ====== */
+    /* Header */
     nav {
       background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
       background-repeat: no-repeat;
@@ -72,18 +70,18 @@
       text-align: center;
     }
 
-    /* ====== Hero tekst ====== */
+    /* Hero Text */
     .hero-text {
       text-align: center;
       margin: 40px 0;
       font-size: 36px;
       font-weight: 700;
       color: #FFA94D;
-      -webkit-text-stroke: 1.5px #FF7F50;  /* koraalkleurige omlijning */
+      -webkit-text-stroke: 1.5px #FF7F50;
       text-stroke: 1.5px #FF7F50;
     }
 
-    /* ====== Product sectie ====== */
+    /* Productsectie */
     .featured {
       padding: 40px 5vw 60px;
       background: #fff;
@@ -158,7 +156,7 @@
     }
     .btn-free-download:hover { background:#e6b800; }
 
-    /* ====== Footer ====== */
+    /* Footer */
     footer {
       position: relative;
       margin-top: 40px;
@@ -182,7 +180,7 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
 
-    /* ====== Modal ====== */
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -214,21 +212,90 @@
 </head>
 
 <body>
-  <!-- ====== Header ====== -->
   <header>
     <nav>
       <ul>
-        <!-- 🔁 Gebruik ./ i.p.v. index.html zodat HOME altijd naar de hoofdpagina van je GitHub Pages project gaat -->
-        <li><a href="./" aria-current="page">HOME</a></li>
-        <li><a href="thestorybehind.html">THE STORY BEHIND</a></li>
+        <!-- ✅ HOME verwijst nu altijd naar deze pagina (index.html) -->
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="story.html">THE STORY BEHIND</a></li>
         <li><a href="shop.html">SHOP</a></li>
-        <li><a href="plannertips.html">PLANNER TIPS</a></li>
+        <li><a href="tips.html">PLANNER TIPS</a></li>
         <li><a href="contact.html">CONTACT</a></li>
       </ul>
 
       <div class="nav-icons">
-        <!-- ✅ Klikbaar user-icoon -->
         <a href="account.html">
           <img src="user-icon.svg" alt="User">
         </a>
-        <a href="checkout.html
+        <a href="checkout.html" class="cart-link" style="position:relative;">
+          <img src="shoppingbag.svg" alt="Shopping Bag">
+          <span class="cart-badge" id="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <h1 class="hero-text">
+    Get the birthdaytemplate now ↓
+  </h1>
+
+  <section class="featured">
+    <div class="featured-inner">
+
+      <article class="product-card" onclick="openModal('voorbeeldjanuari.png')">
+        <div class="thumb">
+          <img src="voorbeeldjanuari.png" alt="Birthday Template – Start in January">
+        </div>
+        <div class="product-body">
+          <h2 class="product-title">Birthday Template – Start in January</h2>
+          <button class="btn-free-download" onclick="event.stopPropagation(); window.location.href='signup.html'">
+            FREE DOWNLOAD
+          </button>
+        </div>
+      </article>
+
+      <article class="product-card" onclick="openModal('voorbeeldapril.png')">
+        <div class="thumb">
+          <img src="voorbeeldapril.png" alt="Birthday Template – Start in April">
+        </div>
+        <div class="product-body">
+          <h2 class="product-title">Birthday Template – Start in April</h2>
+          <button class="btn-free-download" onclick="event.stopPropagation(); window.location.href='signup.html'">
+            FREE DOWNLOAD
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <footer>
+    <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
+    <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
+  </footer>
+
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <img id="modalImage" src="" alt="Preview">
+  </div>
+
+  <script>
+    // Cart teller
+    const cartCount = document.getElementById('cart-count');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartCount.textContent = cart.length;
+
+    // Modal functies
+    function openModal(src){
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = src;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal(){
+      document.getElementById('imageModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
