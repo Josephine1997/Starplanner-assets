@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact - Starplanner</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
 
   <style>
@@ -16,23 +15,25 @@
       font-family: 'Montserrat Alternates', sans-serif;
     }
 
-    /* Header en navigatie */
+    /* ======= Header en navigatie (zoals index.html) ======= */
     nav {
-      background-image: url('balk.jpg');
-      background-size: cover;
+      background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
       background-repeat: no-repeat;
       background-position: center;
-      padding: 40px 0;
+      background-size: 120% 110%;
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     nav ul {
       list-style: none;
       margin: 0;
-      padding: 0 80px 0 0;
+      padding: 0;
       display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 60px;
+      gap: 70px;
+      padding-left: 100px;
     }
 
     nav ul li a {
@@ -40,26 +41,44 @@
       color: white;
       font-size: 18px;
       font-weight: 600;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-      transition: color 0.3s ease;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
-    nav ul li a:hover {
-      color: #FF7929;
+    nav ul li a:hover { color: #FF7929; }
+
+    .nav-icons {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      position: relative;
     }
 
-    .nav-icon img {
+    .nav-icons img {
       width: 36px;
       height: 36px;
       cursor: pointer;
-      transition: transform 0.2s ease;
     }
 
-    .nav-icon img:hover {
-      transform: scale(1.1);
+    .cart-link {
+      position: relative;
+      display: inline-block;
     }
 
-    /* Contact sectie */
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #FF6F61;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 50%;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    /* ======= Contact sectie ======= */
     .contact-container {
       max-width: 600px;
       margin: 80px auto;
@@ -70,8 +89,8 @@
     .contact-container h1 {
       font-size: 42px;
       font-weight: 600;
-      color: #FFD8A8; /* lichtgeel */
-      -webkit-text-stroke: 1.5px #FF8C2B; /* lichtoranje rand */
+      color: #FFD8A8;
+      -webkit-text-stroke: 1.5px #FF8C2B;
       margin-bottom: 20px;
     }
 
@@ -96,10 +115,8 @@
       height: 22px;
     }
 
-    /* Formulier */
-    form {
-      margin-top: 30px;
-    }
+    /* ======= Formulier ======= */
+    form { margin-top: 30px; }
 
     .form-field {
       text-align: left;
@@ -109,33 +126,25 @@
       color: #FF8C2B;
     }
 
-    .form-field label {
-      display: block;
-      margin-bottom: 6px;
-    }
+    .form-field label { display: block; margin-bottom: 6px; }
 
-    .required {
-      color: #FF6F61; /* koraalrood voor asterisk */
-      margin-left: 4px;
-    }
+    .required { color: #FF6F61; margin-left: 4px; }
 
     .form-field input,
     .form-field textarea {
       width: 100%;
       padding: 10px 14px;
       border-radius: 8px;
-      border: 2px solid #FFC90E; /* Oranje rand */
+      border: 2px solid #FFC90E;
       font-size: 14px;
       font-family: 'Montserrat Alternates', sans-serif;
       background: #FFFFFF;
       resize: none;
     }
 
-    .form-field textarea {
-      height: 150px; /* Groter tekstvak voor message */
-    }
+    .form-field textarea { height: 150px; }
 
-    /* Send knop */
+    /* ======= Send knop ======= */
     .send-button {
       display: inline-block;
       background: #FFC90E;
@@ -150,9 +159,7 @@
       transition: background 0.3s ease;
     }
 
-    .send-button:hover {
-      background: #e6b800;
-    }
+    .send-button:hover { background: #e6b800; }
 
     .send-container {
       text-align: left;
@@ -160,15 +167,18 @@
       margin: 0 auto;
     }
 
+    /* ======= Footer ======= */
     footer {
       position: relative;
       width: 100%;
       margin-top: 60px;
+      overflow: hidden;
     }
 
     .footer-decoration {
       width: 100%;
-      height: auto;
+      height: 100px;          /* zelfde als index.html */
+      object-fit: cover;
       display: block;
     }
 
@@ -180,10 +190,10 @@
       color: #fff;
       font-size: 14px;
       font-family: 'Montserrat Alternates', sans-serif;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
 
-    /* Pop-up melding */
+    /* ======= Popup melding ======= */
     .popup {
       position: fixed;
       top: 20px;
@@ -196,49 +206,38 @@
       pointer-events: none;
       transition: opacity 0.4s ease;
       z-index: 1000;
-      font-family: 'Montserrat Alternates', sans-serif;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    .popup.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .popup.success {
-      background-color: #ff69b4; /* roze */
-    }
-
-    .popup.error {
-      background-color: #ff6f61; /* koraalrood */
-    }
+    .popup.show { opacity: 1; pointer-events: auto; }
+    .popup.success { background-color: #ff69b4; }
+    .popup.error { background-color: #ff6f61; }
   </style>
 </head>
 
 <body>
-  <!-- Header -->
+  <!-- ======= Header ======= -->
   <header>
     <nav>
       <ul>
+        <li><a href="index.html">HOME</a></li>
         <li><a href="story.html">THE STORY BEHIND</a></li>
         <li><a href="shop.html">SHOP</a></li>
         <li><a href="tips.html">PLANNER TIPS</a></li>
         <li><a href="contact.html">CONTACT</a></li>
-        <li class="nav-icon">
-          <a href="account.html">
-            <img src="https://raw.githubusercontent.com/Josephine1997/Starplanner-assets/refs/heads/main/139-person-3.svg" alt="Account">
-          </a>
-        </li>
-        <li class="nav-icon">
-          <a href="cart.html">
-            <img src="https://raw.githubusercontent.com/Josephine1997/Starplanner-assets/refs/heads/main/001-shopping-bag.svg" alt="Shopping Bag">
-          </a>
-        </li>
       </ul>
+
+      <div class="nav-icons">
+        <img src="user-icon.svg" alt="User">
+        <a href="checkout.html" class="cart-link">
+          <img src="shoppingbag.svg" alt="Shopping Bag">
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+      </div>
     </nav>
   </header>
 
-  <!-- Contact content -->
+  <!-- ======= Contact content ======= -->
   <section class="contact-container">
     <h1>Get in touch</h1>
     <p class="subtitle">Feel free to contact me at:</p>
@@ -253,7 +252,7 @@
       <span>-telefoonnummer-</span>
     </div>
 
-    <!-- Contactformulier -->
+    <!-- ======= Contactformulier ======= -->
     <form id="contact-form" action="https://formspree.io/f/movkdray" method="POST">
       <div class="form-field">
         <label for="name">Name</label>
@@ -261,8 +260,8 @@
       </div>
 
       <div class="form-field">
-        <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
-        <input type="email" name="_replyto" id="email" placeholder="Enter your email" required aria-required="true">
+        <label for="email">Email <span class="required">*</span></label>
+        <input type="email" name="_replyto" id="email" placeholder="Enter your email" required>
       </div>
 
       <div class="form-field">
@@ -281,19 +280,22 @@
     </form>
   </section>
 
-  <!-- Footer -->
+  <!-- ======= Footer ======= -->
   <footer>
-    <img src="decorwebshop.jpg" alt="Footer Decoration" class="footer-decoration" />
+    <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
-  <!-- Popup container met aria-live -->
+  <!-- ======= Popup ======= -->
   <div id="popup" class="popup" aria-live="polite"></div>
 
-  <!-- Validatie script -->
+  <!-- ======= Validatie script ======= -->
   <script>
     const form = document.getElementById('contact-form');
     const popup = document.getElementById('popup');
+    const cartCount = document.getElementById('cart-count');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartCount.textContent = cart.length;
 
     function showPopup(message, type) {
       popup.textContent = message;
@@ -306,26 +308,21 @@
     form.addEventListener('submit', function(event) {
       const email = document.getElementById('email').value.trim();
       const message = document.getElementById('message').value.trim();
+      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
 
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      // Controle op lege velden
       if (!email || !message) {
         event.preventDefault();
         showPopup('Please enter your email address and message before sending.', 'error');
         return;
       }
 
-      // Controle op incorrect e-mailformaat
       if (!emailPattern.test(email)) {
         event.preventDefault();
         showPopup('Incorrect email address inserted.', 'error');
         return;
       }
 
-      // Alles correct
       showPopup('Message successfully sent.', 'success');
-      // Formspree vangt de submit af en verwerkt server-side
     });
   </script>
 </body>
