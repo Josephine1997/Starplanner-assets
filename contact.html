@@ -221,7 +221,6 @@
     <nav>
       <ul>
         <li><a href="index.html">HOME</a></li>
-        <!-- ✅ Verwijst nu correct naar de nieuwe pagina -->
         <li><a href="thestorybehind.html">THE STORY BEHIND</a></li>
         <li><a href="shop.html">SHOP</a></li>
         <li><a href="plannertips.html">PLANNER TIPS</a></li>
@@ -229,7 +228,11 @@
       </ul>
 
       <div class="nav-icons">
-        <img src="user-icon.svg" alt="User">
+        <!-- ✅ User-icon leidt nu naar de accountpagina -->
+        <a href="account.html">
+          <img src="user-icon.svg" alt="User">
+        </a>
+
         <a href="checkout.html" class="cart-link">
           <img src="shoppingbag.svg" alt="Shopping Bag">
           <span id="cart-count" class="cart-badge">0</span>
@@ -309,7 +312,7 @@
     form.addEventListener('submit', function(event) {
       const email = document.getElementById('email').value.trim();
       const message = document.getElementById('message').value.trim();
-      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       if (!email || !message) {
         event.preventDefault();
