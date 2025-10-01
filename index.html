@@ -4,15 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Starplanner – Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
+
   <style>
     body {
       background: #FFFFFF;
       margin: 0;
+      padding: 0;
       font-family: 'Montserrat Alternates', sans-serif;
     }
 
-    /* Header */
+    /* ======= Header en navigatie ======= */
     nav {
       background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
       background-repeat: no-repeat;
@@ -41,7 +44,7 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
-    nav ul li a:hover { color:#FF7929; }
+    nav ul li a:hover { color: #FF7929; }
 
     .nav-icons {
       display: flex;
@@ -51,9 +54,14 @@
     }
 
     .nav-icons img {
-      width:36px;
-      height:36px;
+      width: 36px;
+      height: 36px;
       cursor: pointer;
+    }
+
+    .cart-link {
+      position: relative;
+      display: inline-block;
     }
 
     .cart-badge {
@@ -70,7 +78,7 @@
       text-align: center;
     }
 
-    /* Hero Text */
+    /* ======= Hero sectie ======= */
     .hero-text {
       text-align: center;
       margin: 40px 0;
@@ -78,88 +86,13 @@
       font-weight: 700;
       color: #FFA94D;
       -webkit-text-stroke: 1.5px #FF7F50;
-      text-stroke: 1.5px #FF7F50;
     }
 
-    /* Productsectie */
-    .featured {
-      padding: 40px 5vw 60px;
-      background: #fff;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .featured-inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-      justify-items: center;
-    }
-
-    @media(min-width:900px){
-      .featured-inner { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .product-card {
-      width: 250px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .product-card:hover { transform: scale(1.03); }
-
-    .product-card .thumb {
-      height: 150px;
-      background: #fafafa;
-      overflow: hidden;
-    }
-
-    .product-card .thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .product-card:hover .thumb img { transform: scale(1.05); }
-
-    .product-body {
-      padding: 12px 16px;
-      text-align: center;
-    }
-
-    .product-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1F1F1F;
-      margin-bottom: 8px;
-    }
-
-    .btn-free-download {
-      display: inline-block;
-      margin: 8px auto 16px auto;
-      padding: 10px 18px;
-      background: #FFC90E;
-      color: white;
-      font-weight: 600;
-      font-size: 14px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .btn-free-download:hover { background:#e6b800; }
-
-    /* Footer */
+    /* ======= Footer ======= */
     footer {
       position: relative;
-      margin-top: 40px;
+      width: 100%;
+      margin-top: 60px;
       overflow: hidden;
     }
 
@@ -179,44 +112,15 @@
       font-size: 14px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 40px;
-      color: #fff;
-      cursor: pointer;
-      font-weight: bold;
-    }
   </style>
 </head>
 
 <body>
+  <!-- ======= Header ======= -->
   <header>
     <nav>
       <ul>
         <li><a href="index.html">HOME</a></li>
-        <!-- ✅ Verwijst nu correct -->
         <li><a href="thestorybehind.html">THE STORY BEHIND</a></li>
         <li><a href="shop.html">SHOP</a></li>
         <li><a href="plannertips.html">PLANNER TIPS</a></li>
@@ -224,79 +128,35 @@
       </ul>
 
       <div class="nav-icons">
-        <img src="user-icon.svg" alt="User">
-        <a href="checkout.html" class="cart-link" style="position:relative;">
+        <!-- ✅ User-icon linkt nu naar accountpagina -->
+        <a href="account.html">
+          <img src="user-icon.svg" alt="User">
+        </a>
+
+        <a href="checkout.html" class="cart-link">
           <img src="shoppingbag.svg" alt="Shopping Bag">
-          <span class="cart-badge" id="cart-count">0</span>
+          <span id="cart-count" class="cart-badge">0</span>
         </a>
       </div>
     </nav>
   </header>
 
-  <!-- Hero-tekst -->
+  <!-- ======= Hero sectie ======= -->
   <h1 class="hero-text">
-    Get the birthdaytemplate now ↓
+    Welcome to Starplanner!
   </h1>
 
-  <!-- FREE DOWNLOAD sectie -->
-  <section class="featured">
-    <div class="featured-inner">
-
-      <article class="product-card" onclick="openModal('voorbeeldjanuari.png')">
-        <div class="thumb">
-          <img src="voorbeeldjanuari.png" alt="Birthday Template – Start in January">
-        </div>
-        <div class="product-body">
-          <h2 class="product-title">Birthday Template – Start in January</h2>
-          <button class="btn-free-download" onclick="event.stopPropagation(); window.location.href='signup.html'">
-            FREE DOWNLOAD
-          </button>
-        </div>
-      </article>
-
-      <article class="product-card" onclick="openModal('voorbeeldapril.png')">
-        <div class="thumb">
-          <img src="voorbeeldapril.png" alt="Birthday Template – Start in April">
-        </div>
-        <div class="product-body">
-          <h2 class="product-title">Birthday Template – Start in April</h2>
-          <button class="btn-free-download" onclick="event.stopPropagation(); window.location.href='signup.html'">
-            FREE DOWNLOAD
-          </button>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
+  <!-- ======= Footer ======= -->
   <footer>
     <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
-  <!-- Modal voor grote weergave -->
-  <div id="imageModal" class="modal" onclick="closeModal()">
-    <span class="modal-close" onclick="closeModal()">&times;</span>
-    <img id="modalImage" src="" alt="Preview">
-  </div>
-
   <script>
-    // Aantal items in cart
+    // Winkelmandje teller
     const cartCount = document.getElementById('cart-count');
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     cartCount.textContent = cart.length;
-
-    // Modal functies
-    function openModal(src){
-      const modal = document.getElementById('imageModal');
-      const modalImage = document.getElementById('modalImage');
-      modalImage.src = src;
-      modal.style.display = 'flex';
-    }
-
-    function closeModal(){
-      document.getElementById('imageModal').style.display = 'none';
-    }
   </script>
 </body>
 </html>
