@@ -15,7 +15,7 @@
       color: #333;
     }
 
-    /* ===== Header & Nav (consistent met andere pagina’s) ===== */
+    /* ===== Header & Nav ===== */
     nav {
       background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
       background-repeat: no-repeat;
@@ -162,7 +162,11 @@
       </ul>
 
       <div class="nav-icons">
-        <img src="user-icon.svg" alt="User">
+        <!-- ✅ User-icon is nu klikbaar -->
+        <a href="account.html">
+          <img src="user-icon.svg" alt="User">
+        </a>
+
         <a href="checkout.html" class="cart-link">
           <img src="shoppingbag.svg" alt="Shopping Bag">
           <span class="cart-badge" id="cart-count">0</span>
