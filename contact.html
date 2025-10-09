@@ -231,7 +231,6 @@
         <a href="account.html">
           <img src="user-icon.svg" alt="User">
         </a>
-
         <a href="checkout.html" class="cart-link">
           <img src="shoppingbag.svg" alt="Shopping Bag">
           <span id="cart-count" class="cart-badge">0</span>
@@ -296,9 +295,35 @@
   <script>
     const form = document.getElementById('contact-form');
     const popup = document.getElementById('popup');
-
-    // ✅ Veilig winkelwagen-script
     const cartCount = document.getElementById('cart-count');
-    if (cartCount) {
-      try {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartCount.textContent = cart.length;
+
+    function showPopup(message, type) {
+      popup.textContent = message;
+      popup.className = 'popup ' + type + ' show';
+      setTimeout(() => { popup.classList.remove('show'); }, 3000);
+    }
+
+    form.addEventListener('submit', function(event) {
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email || !message) {
+        event.preventDefault();
+        showPopup('Please enter your email and message.', 'error');
+        return;
+      }
+
+      if (!emailPattern.test(email)) {
+        event.preventDefault();
+        showPopup('Invalid email address.', 'error');
+        return;
+      }
+
+      showPopup('Message sent successfully!', 'success');
+    });
+  </script>
+</body>
+</html>
