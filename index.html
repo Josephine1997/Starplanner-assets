@@ -141,22 +141,28 @@
       margin-bottom: 8px;
     }
 
+    /* ✅ Free Download-stijl knop (zonder prijs) */
     .btn-add-cart {
       display: inline-block;
-      margin: 8px auto 16px auto;
-      padding: 10px 18px;
-      background: #FF7929;
+      margin: 10px auto 16px auto;
+      padding: 12px 26px;
+      background: linear-gradient(135deg, #FF9A3D, #FF66C4, #FFD36E);
       color: white;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 14px;
       border: none;
-      border-radius: 8px;
+      border-radius: 25px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
       text-decoration: none;
+      box-shadow: 0 5px 15px rgba(255,105,180,0.3);
     }
 
-    .btn-add-cart:hover { background:#e66d24; }
+    .btn-add-cart:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(255,105,180,0.45);
+      filter: brightness(1.1);
+    }
 
     .product-price {
       color: #333;
@@ -259,7 +265,7 @@
           <h2 class="product-title">Birthday Template – Start in January</h2>
           <div class="product-price">€4,99</div>
           <button class="btn-add-cart" onclick="addToCart(event, 'Birthday Template – Start in January', 'BIRTHDAYLIST_start_Januari.pdf', 4.99)">
-            Add to Cart – €4,99
+            Add to Cart
           </button>
         </div>
       </article>
@@ -273,7 +279,7 @@
           <h2 class="product-title">Birthday Template – Start in April</h2>
           <div class="product-price">€4,99</div>
           <button class="btn-add-cart" onclick="addToCart(event, 'Birthday Template – Start in April', 'BIRTHDAYLIST_start_April.pdf', 4.99)">
-            Add to Cart – €4,99
+            Add to Cart
           </button>
         </div>
       </article>
