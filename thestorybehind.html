@@ -87,10 +87,10 @@
     .coming-soon-box {
       display: inline-block;
       padding: 40px 50px;
-      border: 4px solid #D63384; /* magenta rand */
+      border: 4px solid #D63384;
       border-radius: 20px;
       background: linear-gradient(135deg, #FFB6F5, #FFD36E, #F8A1FF);
-      color: #8B005E; /* donkere magenta tekst */
+      color: #8B005E;
       font-size: 28px;
       font-weight: 700;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -109,7 +109,7 @@
       padding: 14px 28px;
       font-size: 16px;
       font-weight: 600;
-      background: #D63384; /* magenta */
+      background: #D63384;
       color: #fff;
       border: none;
       border-radius: 8px;
@@ -131,73 +131,4 @@
     }
 
     .footer-decoration {
-      width: 100%;
-      height: 100px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .footer-text {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      color: #fff;
-      font-size: 14px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    }
-  </style>
-</head>
-
-<body>
-  <!-- ===== Header ===== -->
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="thestorybehind.html" class="active">THE STORY BEHIND</a></li>
-        <li><a href="shop.html">SHOP</a></li>
-        <li><a href="plannertips.html">PLANNER TIPS</a></li>
-        <li><a href="contact.html">CONTACT</a></li>
-      </ul>
-
-      <div class="nav-icons">
-        <!-- ✅ User-icon is nu klikbaar -->
-        <a href="account.html">
-          <img src="user-icon.svg" alt="User">
-        </a>
-
-        <a href="checkout.html" class="cart-link">
-          <img src="shoppingbag.svg" alt="Shopping Bag">
-          <span class="cart-badge" id="cart-count">0</span>
-        </a>
-      </div>
-    </nav>
-  </header>
-
-  <!-- ===== Main Content ===== -->
-  <main>
-    <div class="coming-soon-box">
-      ✨ Magic is in the works... ✨<br>
-      🪄 Check back later to discover the full story!
-      <br>
-      <button class="magic-btn" onclick="window.location.href='index.html'">
-        Back to Home
-      </button>
-    </div>
-  </main>
-
-  <!-- ===== Footer ===== -->
-  <footer>
-    <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
-    <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
-  </footer>
-
-  <script>
-    // Winkelmandje teller
-    const cartCount = document.getElementById('cart-count');
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cartCount.textContent = cart.length;
-  </script>
-</body>
-</html>
+      width
