@@ -313,6 +313,9 @@
     }
 
     function renderCart() {
+      // ✅ Herstel ontbrekende of foutieve qty-waarden
+      cart = cart.map(i => ({ ...i, qty: Number(i.qty) || 1 }));
+
       cartContainer.innerHTML = '';
       let total = 0;
 
