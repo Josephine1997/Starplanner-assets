@@ -8,7 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family:'Montserrat Alternates',sans-serif; margin:0; padding:0; background:#fff; }
+    body { 
+      font-family:'Montserrat Alternates',sans-serif; 
+      margin:0; padding:0; background:#fff; 
+    }
 
     nav {
       background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
@@ -51,17 +54,100 @@
     h1 { color:#FFC90E; text-align:center; margin-top:30px; margin-bottom:10px; }
     .continue { color:#FFC90E; text-decoration:underline; text-align:center; cursor:pointer; }
     .cart-header { display:flex; justify-content:space-between; margin:40px 0 20px; color:#FFC90E; font-weight:600; font-size:16px; }
-    .cart-item { display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #ddd; }
-    .cart-item img { width:80px; height:auto; margin-right:20px; }
+
+    /* === CART ITEMS === */
+    .cart-item {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 0;
+      border-bottom:1px solid #ddd;
+      gap: 10px;
+    }
+
+    .cart-item-left {
+      display:flex;
+      align-items:center;
+      gap:15px;
+      flex:1;
+    }
+
+    .cart-item img.product-thumb {
+      width:80px;
+      height:auto;
+      border-radius:6px;
+    }
+
     .product-info { flex:1; }
-    .remove { color:#FFC90E; text-decoration:underline; cursor:pointer; font-size:14px; margin-top:4px; }
-    .qty-controls { display:flex; align-items:center; gap:5px; margin-top:5px; }
-    .qty-btn { background:#FFC90E; border:none; color:#fff; font-size:16px; width:28px; height:28px; border-radius:4px; cursor:pointer; font-weight:bold; }
-    .qty-box { min-width:40px; text-align:center; border:2px solid #FFC90E; padding:4px; border-radius:4px; font-weight:600; background:#fff; }
+
+    /* Right section (price + qty) */
+    .cart-item-right {
+      display:flex;
+      align-items:center;
+      gap:20px;
+      justify-content:flex-end;
+      min-width:160px;
+    }
+
+    .price {
+      font-weight:600;
+      color:#333;
+      font-size:16px;
+    }
+
+    .qty-controls {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:5px;
+      background:#fff;
+      border:1.5px solid #FFC90E;
+      border-radius:8px;
+      padding:3px 6px;
+    }
+
+    .qty-btn {
+      background:#FFC90E;
+      border:none;
+      color:#fff;
+      font-size:16px;
+      width:26px;
+      height:26px;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:bold;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:background 0.2s;
+    }
+    .qty-btn:hover { background:#e6b800; }
+
+    .qty-box {
+      min-width:32px;
+      text-align:center;
+      font-weight:600;
+      font-size:15px;
+      color:#333;
+    }
+
+    /* === Summary === */
     .empty-cart { text-align:center; font-size:18px; color:#666; margin:40px 0; }
     .summary { margin-top:40px; font-size:18px; font-weight:600; color:#333; }
     .tax-note { font-size:14px; color:#FFC90E; font-weight:400; margin-top:4px; }
-    .checkout-btn { display:inline-block; margin-top:20px; padding:16px 36px; background:#FFC90E; color:#fff; font-size:18px; font-weight:600; border:none; border-radius:6px; cursor:pointer; }
+    .checkout-btn {
+      display:inline-block;
+      margin-top:20px;
+      padding:16px 36px;
+      background:#FFC90E;
+      color:#fff;
+      font-size:18px;
+      font-weight:600;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      transition:background 0.2s;
+    }
     .checkout-btn:hover { background:#e6b800; }
 
     footer { position: relative; margin-top: 60px; overflow: hidden; }
@@ -114,7 +200,7 @@
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
-  <!-- ✅ Firebase compat SDK (werkt met je andere pagina’s) -->
+  <!-- ✅ Firebase compat SDK -->
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
@@ -136,12 +222,19 @@
     const cartContainer = document.getElementById('cart-items');
     const subtotalEl = document.getElementById('subtotal');
     const cartCount = document.getElementById('cart-count');
+
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cartCount.textContent = cart.length;
+    updateCartCount();
+
+    function updateCartCount() {
+      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+      cartCount.textContent = totalQty;
+    }
 
     function renderCart() {
       cartContainer.innerHTML = '';
       let total = 0;
+
       if (cart.length === 0) {
         cartContainer.innerHTML = `<div class="empty-cart">Your cart is empty</div>`;
       } else {
@@ -149,15 +242,14 @@
           const div = document.createElement('div');
           div.classList.add('cart-item');
           div.innerHTML = `
-            <div style="display:flex; align-items:center;">
-              <img src="shoppingbag.svg" alt="${item.name}">
+            <div class="cart-item-left">
+              <img src="shoppingbag.svg" alt="${item.name}" class="product-thumb">
               <div class="product-info">
                 <div>${item.name}</div>
-                <div class="remove" onclick="removeItem(${index})">REMOVE</div>
               </div>
             </div>
-            <div>
-              €${item.price.toFixed(2)} <br>
+            <div class="cart-item-right">
+              <div class="price">€${item.price.toFixed(2)}</div>
               <div class="qty-controls">
                 <button class="qty-btn" onclick="updateQty(${index}, -1)">–</button>
                 <span class="qty-box">${item.qty}</span>
@@ -169,24 +261,28 @@
           total += item.price * item.qty;
         });
       }
+
       subtotalEl.textContent = total.toFixed(2);
     }
 
     function removeItem(index) {
       cart.splice(index, 1);
       localStorage.setItem('cart', JSON.stringify(cart));
-      cartCount.textContent = cart.length;
+      updateCartCount();
       renderCart();
     }
 
     function updateQty(index, delta) {
       cart[index].qty += delta;
-      if (cart[index].qty < 1) cart[index].qty = 1;
+      if (cart[index].qty <= 0) {
+        removeItem(index);
+        return;
+      }
       localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
       renderCart();
     }
 
-    // 🟢 Order opslaan in Firestore
     async function placeOrder() {
       const user = auth.currentUser;
       if (!user) {
