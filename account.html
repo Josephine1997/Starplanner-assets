@@ -8,7 +8,7 @@
   <style>
     body { font-family:'Montserrat Alternates',sans-serif;margin:0;background:#fff;color:#333; }
 
-    /* ===== Header & Nav ===== */
+    /* ===== Header & Nav (ongewijzigd) ===== */
     nav{
       background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');
       background-repeat:no-repeat;background-position:center;background-size:120% 110%;
@@ -22,97 +22,6 @@
     .cart-link{position:relative;}
     .cart-badge{position:absolute;top:-6px;right:-6px;background:#FF6F61;color:#fff;font-size:12px;font-weight:600;padding:2px 6px;border-radius:50%;min-width:18px;text-align:center;}
 
-    /* ===== Main ===== */
-    main{max-width:720px;margin:80px auto;padding:20px;}
-    h1{color:#FF8C2B;font-size:38px;margin:0 0 24px;text-align:center;}
-
-    .form-box{
-      background:#FFF6E5;border-radius:16px;padding:32px 24px;box-shadow:0 4px 12px rgba(0,0,0,0.1);
-    }
-    .form-row{display:grid;grid-template-columns:1fr;gap:18px;}
-    .form-field{display:flex;flex-direction:column;}
-    .form-field label{font-weight:600;margin-bottom:6px;color:#FF8C2B;}
-    .form-field input{
-      width:100%;padding:12px 14px;border-radius:10px;border:2px solid #FFC90E;font-size:15px;outline:none;
-      transition:border-color .2s, box-shadow .2s;
-      background:#fff;
-    }
-    .form-field input:focus{border-color:#ffb600; box-shadow:0 0 0 3px rgba(255,201,14,.20);}
-
-    .submit-btn{
-      display:inline-block;width:100%;background:#FFC90E;color:#fff;font-weight:700;font-size:16px;border:none;
-      border-radius:10px;padding:14px 0;cursor:pointer;transition:background .3s; margin-top:8px;
-    }
-    .submit-btn:hover{background:#e6b800;}
-
-    .toggle-text{margin-top:16px;font-size:14px;color:#555;text-align:center;}
-    .toggle-text a{color:#FF8C2B;font-weight:600;text-decoration:none;cursor:pointer;}
-    .toggle-text a:hover{text-decoration:underline;}
-
-    /* ===== Account (ingelogd) ===== */
-    .account-info{
-      background:#FFF6E5;padding:32px 24px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.1);
-    }
-    .welcome{
-      display:flex;align-items:center;gap:16px;margin-bottom:10px;
-    }
-    .avatar{
-      width:64px;height:64px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
-      background: radial-gradient(120px 120px at 30% 30%, #FFF3B5, #FFE37A 60%, #FFC90E 100%);
-      border:3px solid #FFB545; box-shadow:0 4px 12px rgba(255,145,0,.25);
-    }
-    .welcome h2{margin:0;color:#FF8C2B;font-size:22px;}
-    .muted{color:#6b6b6b;font-size:14px;margin:2px 0 0;}
-
-    /* ✅ Papaya-oranje sign-out knop */
-    .logout-btn{
-      background:#FF9A6A; /* papaya coral */
-      color:#fff;
-      border:none;
-      border-radius:10px;
-      padding:10px 16px;
-      margin-top:18px;
-      font-weight:700;
-      cursor:pointer;
-      transition:background .2s, transform .1s;
-    }
-    .logout-btn:hover{
-      background:#FF864F;
-      transform:translateY(-1px);
-    }
-
-    /* ✅ Verificatietekst pastel-mandarijn */
-    #verify-note {
-      color:#FFA95E !important;
-      font-weight:600;
-    }
-
-    /* ✅ Orders-sectie */
-    .orders{margin-top:26px;}
-    .orders h3{
-      color:#A05A00;
-      margin:0 0 8px;
-      font-weight:700;
-    }
-    .orders p{
-      color:#A05A00;
-    }
-    .order{
-      background:#fff;
-      border:2px solid #FFC90E;
-      border-radius:10px;
-      padding:12px;
-      margin-bottom:12px;
-    }
-    .order h4{margin:0 0 8px;color:#FF8C2B;}
-    .order ul{margin:0;padding-left:18px;font-size:14px;}
-    .order ul li{margin-bottom:4px;color:#A05A00;}
-
-    /* ===== Footer ===== */
-    footer{position:relative;margin-top:60px;overflow:hidden;}
-    .footer-decoration{width:100%;height:100px;object-fit:cover;display:block;}
-    .footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
-
     /* ===== Banner (meldingen) ===== */
     .banner{position:fixed;top:16px;left:50%;transform:translateX(-50%);
       padding:12px 16px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.15);z-index:9999;display:none;}
@@ -120,33 +29,577 @@
     .banner.warn{background:#ff9f0a;color:#4a2a00;}
     .banner.error{background:#ff6f61;color:#fff;}
 
-    /* ===== Password checklist ===== */
-    .pw-wrap{
-      overflow:hidden; transition:max-height .35s ease, opacity .25s ease;
-      max-height:0; opacity:0; will-change:max-height, opacity;
-      margin-top:6px;
+    /* ===== Auth (boven de fold) ===== */
+    main{max-width:1100px;margin:60px auto;padding:0 20px;}
+    .auth-card{
+      max-width:640px;margin:0 auto;background:#FFF6E5;border-radius:16px;padding:32px 24px;box-shadow:0 4px 12px rgba(0,0,0,0.1);
     }
+    h1{color:#FF8C2B;font-size:36px;margin:0 0 24px;text-align:center;}
+    .form-row{display:grid;grid-template-columns:1fr;gap:18px;}
+    .form-field{display:flex;flex-direction:column;}
+    .form-field label{font-weight:600;margin-bottom:6px;color:#FF8C2B;}
+    .form-field input{
+      width:100%;padding:12px 14px;border-radius:10px;border:2px solid #FFC90E;font-size:15px;outline:none;
+      transition:border-color .2s, box-shadow .2s;background:#fff;
+    }
+    .form-field input:focus{border-color:#ffb600; box-shadow:0 0 0 3px rgba(255,201,14,.20);}
+    .submit-btn{display:inline-block;width:100%;background:#FFC90E;color:#fff;font-weight:700;font-size:16px;border:none;border-radius:10px;padding:14px 0;cursor:pointer;transition:background .3s;margin-top:8px;}
+    .submit-btn:hover{background:#e6b800;}
+    .toggle-text{margin-top:16px;font-size:14px;color:#555;text-align:center;}
+    .toggle-text a{color:#FF8C2B;font-weight:600;text-decoration:none;cursor:pointer;}
+    .toggle-text a:hover{text-decoration:underline;}
+    .error{font-size:12px;color:#FF6F61;margin-top:6px;display:none;}
+
+    /* ===== Password checklist ===== */
+    .pw-wrap{overflow:hidden; transition:max-height .25s ease, opacity .2s ease; max-height:0; opacity:0; margin-top:6px;}
     .pw-checklist{
       border-radius:12px; padding:14px 14px 10px;
       background: linear-gradient(180deg, #FFF9CF 0%, #FFE9A6 100%);
       border:1.5px solid #FFCE58;
-      box-shadow: 0 6px 16px rgba(255,161,22,.18) inset;
     }
     .pw-title{font-weight:700; color:#A45C00; margin:0 0 8px; font-size:14px;}
     .rule{display:flex;align-items:center;gap:10px; font-size:14px; color:#7a5200; padding:6px 0;}
-    .tick{
-      width:18px;height:18px; border-radius:4px; display:inline-flex; align-items:center; justify-content:center;
-      background:#fff3c8; border:1.5px solid #ffd166; transition:all .2s ease;
-      flex:0 0 18px;
+    .tick{width:18px;height:18px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;background:#fff3c8;border:1.5px solid #ffd166;flex:0 0 18px;}
+    .rule.ok .tick{ background:#E8F8E8; border-color:#2ecc71;}
+    .tick svg{width:12px;height:12px;opacity:.35;}
+    .rule.ok .tick svg{opacity:1;}
+
+    /* ===== Account Dashboard ===== */
+    .account-shell{display:grid;grid-template-columns:260px 1fr;gap:24px;align-items:start;}
+    .sidebar{
+      position:sticky; top:20px;
+      background:#FFF6E5;border-radius:16px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,0.08);
     }
-    .rule.ok .tick{ background:#E8F8E8; border-color:#2ecc71; box-shadow:0 0 0 2px rgba(46,204,113,.15); }
-    .tick svg{ width:12px; height:12px; opacity:.35; transition:opacity .2s ease; }
-    .rule.ok .tick svg{ opacity:1; }
+    .side-title{color:#FF8C2B;font-weight:700;margin:0 0 10px;font-size:18px;}
+    .side-nav{display:flex;flex-direction:column;gap:6px;}
+    .side-nav button{
+      text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600;color:#A05A00;
+    }
+    .side-nav button.active, .side-nav button:hover{background:#FFE7B3;}
+
+    .content{
+      background:#FFF6E5;border-radius:16px;padding:24px;box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+    .section-title{color:#FF8C2B;margin:0 0 14px;font-size:22px;}
+    .muted{color:#6b6b6b;font-size:14px;}
+
+    /* Avatar + Welcome */
+    .welcome{display:flex;align-items:center;gap:16px;margin-bottom:14px;}
+    .avatar{
+      width:64px;height:64px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+      background: radial-gradient(120px 120px at 30% 30%, #FFF3B5, #FFE37A 60%, #FFC90E 100%);
+      border:3px solid #FFB545;
+    }
+    .welcome h2{margin:0;color:#FF8C2B;font-size:22px;}
+
+    /* Verify note pastel mandarijn */
+    #verify-note{color:#FFA95E;font-weight:600;}
+
+    /* Orders */
+    .orders h3{color:#A05A00;margin:0 0 8px;font-weight:700;}
+    .orders p{color:#A05A00;}
+    .order{background:#fff;border:2px solid #FFC90E;border-radius:10px;padding:12px;margin-bottom:12px;}
+    .order h4{margin:0 0 8px;color:#FF8C2B;}
+    .order ul{margin:0;padding-left:18px;font-size:14px;}
+    .order ul li{margin-bottom:4px;color:#A05A00;}
+
+    /* Forms inside content */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .grid-1{display:grid;grid-template-columns:1fr;gap:14px;}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#FFC90E;color:#fff;border:none;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:700;
+    }
+    .btn:hover{background:#e6b800;}
+    .btn-outline{
+      background:transparent;color:#A05A00;border:2px solid #FFC90E;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer;
+    }
+    .btn-outline:hover{background:#FFF0C9;}
+    .danger{background:#ff6f61;}
+    .danger:hover{background:#e85b50;}
+
+    /* Papaya sign out */
+    .logout-btn{background:#FF9A6A;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;}
+    .logout-btn:hover{background:#FF864F;}
+
+    /* Footer */
+    footer{position:relative;margin:60px 0 0;overflow:hidden;}
+    .footer-decoration{width:100%;height:100px;object-fit:cover;display:block;}
+    .footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
   </style>
 </head>
-
 <body>
-  <!-- rest van de HTML blijft identiek aan jouw versie -->
-  <!-- (geen veranderingen aan scripts of structuur nodig) -->
+  <!-- Header -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="thestorybehind.html">THE STORY BEHIND</a></li>
+        <li><a href="shop.html">SHOP</a></li>
+        <li><a href="plannertips.html">PLANNER TIPS</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+      </ul>
+      <div class="nav-icons">
+        <a href="account.html"><img src="user-icon.svg" alt="User"></a>
+        <a href="checkout.html" class="cart-link">
+          <img src="shoppingbag.svg" alt="Shopping Bag">
+          <span class="cart-badge" id="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Banner -->
+  <div id="banner" class="banner"></div>
+
+  <main>
+    <!-- ========= AUTH ========= -->
+    <section id="auth-section">
+      <div class="auth-card">
+        <h1 id="form-title">Create Account</h1>
+        <form id="account-form" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="Enter your email" required>
+              <div id="emailError" class="error">Please enter a valid email address.</div>
+            </div>
+
+            <div class="form-field">
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="Create a password" required>
+              <!-- Password checklist -->
+              <div id="pwWrap" class="pw-wrap">
+                <div class="pw-checklist" id="pwChecklist">
+                  <p class="pw-title">Your password must contain:</p>
+                  <div class="rule" data-rule="len"><span class="tick"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span>At least 8 characters</span></div>
+                  <div class="rule" data-rule="lower"><span class="tick"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span>Lower case letters (a-z)</span></div>
+                  <div class="rule" data-rule="upper"><span class="tick"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span>Upper case letters (A-Z)</span></div>
+                  <div class="rule" data-rule="num"><span class="tick"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span>Numbers (0-9)</span></div>
+                  <div class="rule" data-rule="spec"><span class="tick"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span>Special characters (e.g. !@#$%^&*)</span></div>
+                  <div class="rule" data-rule="match"><span class="tick"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span>Passwords match</span></div>
+                </div>
+              </div>
+              <div id="passwordError" class="error">Please meet the password requirements.</div>
+            </div>
+
+            <div class="form-field" id="repeat-field">
+              <label for="repeat">Repeat Password</label>
+              <input type="password" id="repeat" placeholder="Repeat your password">
+              <div id="repeatError" class="error">Passwords don’t match.</div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submit-btn">Register</button>
+          </div>
+        </form>
+
+        <div class="toggle-text">
+          Already have an account? <a id="toggle-link" onclick="toggleForm()">Login</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= ACCOUNT DASHBOARD ========= -->
+    <section id="account-section" style="display:none;">
+      <div class="account-shell">
+        <aside class="sidebar">
+          <p class="side-title">My Account</p>
+          <div class="welcome" style="margin:8px 0 14px;">
+            <div class="avatar" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="34" height="34" fill="#C97300">
+                <path d="M12 12c2.76 0 5-2.24 5-5S14.76 2 12 2 7 4.24 7 7s2.24 5 5 5zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5z"/>
+              </svg>
+            </div>
+            <div>
+              <strong id="user-email" style="color:#A05A00;"></strong>
+              <div id="verify-note" class="muted" style="display:none;">Your email is not verified yet. Please check your inbox. <a href="#" id="resend-link" style="color:#FF8C2B;text-decoration:underline;">Resend verification email</a></div>
+            </div>
+          </div>
+
+          <div class="side-nav">
+            <button class="active" data-target="sec-orders">Orders</button>
+            <button data-target="sec-addresses">Addresses</button>
+            <button data-target="sec-security">Security</button>
+            <button data-target="sec-payments">Payments</button>
+            <button data-target="sec-preferences">Preferences</button>
+            <button data-target="sec-returns">Returns</button>
+          </div>
+
+          <div style="margin-top:16px;">
+            <button class="logout-btn" onclick="logout()">Sign out</button>
+          </div>
+        </aside>
+
+        <div class="content">
+          <!-- Orders -->
+          <section id="sec-orders">
+            <h3 class="section-title">My Orders</h3>
+            <div id="orders" class="orders"><p class="muted">Loading orders…</p></div>
+          </section>
+
+          <!-- Addresses -->
+          <section id="sec-addresses" style="display:none;">
+            <h3 class="section-title">Addresses</h3>
+            <p class="muted">Primary shipping address and optional billing address.</p>
+
+            <div class="grid-2" style="margin-top:10px;">
+              <div>
+                <h4 style="margin:0 0 8px;color:#A05A00;">Primary Shipping</h4>
+                <form id="form-ship" class="grid-1">
+                  <input id="ship_name" placeholder="Full name">
+                  <input id="ship_line1" placeholder="Address line 1">
+                  <input id="ship_line2" placeholder="Address line 2 (optional)">
+                  <input id="ship_city" placeholder="City">
+                  <input id="ship_postal" placeholder="Postal code">
+                  <input id="ship_country" placeholder="Country">
+                  <button type="button" class="btn" onclick="saveAddress('shipping')">Save</button>
+                </form>
+              </div>
+
+              <div>
+                <h4 style="margin:0 0 8px;color:#A05A00;">Billing (optional)</h4>
+                <form id="form-bill" class="grid-1">
+                  <input id="bill_name" placeholder="Full name">
+                  <input id="bill_line1" placeholder="Address line 1">
+                  <input id="bill_line2" placeholder="Address line 2 (optional)">
+                  <input id="bill_city" placeholder="City">
+                  <input id="bill_postal" placeholder="Postal code">
+                  <input id="bill_country" placeholder="Country">
+                  <button type="button" class="btn" onclick="saveAddress('billing')">Save</button>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          <!-- Security -->
+          <section id="sec-security" style="display:none;">
+            <h3 class="section-title">Security</h3>
+            <div class="grid-2">
+              <div>
+                <h4 style="color:#A05A00;margin:0 0 8px;">Change password</h4>
+                <form id="form-change-pass" class="grid-1">
+                  <input type="password" id="cur_pass" placeholder="Current password" autocomplete="current-password">
+                  <input type="password" id="new_pass" placeholder="New password (8+ & strong)" autocomplete="new-password">
+                  <input type="password" id="new_pass_repeat" placeholder="Repeat new password" autocomplete="new-password">
+                  <button type="button" class="btn" onclick="changePassword()">Update password</button>
+                </form>
+              </div>
+              <div>
+                <h4 style="color:#A05A00;margin:0 0 8px;">Sessions</h4>
+                <p class="muted" style="margin:0 0 8px;">Sign out on this device, or contact support to revoke all sessions globally.</p>
+                <button class="btn-outline" onclick="logout()">Sign out on this device</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Payments -->
+          <section id="sec-payments" style="display:none;">
+            <h3 class="section-title">Payments</h3>
+            <p class="muted">Saved payment methods (read-only). Adding/removing cards will be enabled when Stripe/Mollie is connected.</p>
+            <ul id="saved-methods" class="muted" style="margin-top:10px;">
+              <li>No saved methods yet.</li>
+            </ul>
+          </section>
+
+          <!-- Preferences -->
+          <section id="sec-preferences" style="display:none;">
+            <h3 class="section-title">Preferences</h3>
+            <div class="grid-2">
+              <div>
+                <label style="color:#A05A00;font-weight:700;">Language</label>
+                <select id="pref-lang" class="form-field" style="padding:10px;border:2px solid #FFC90E;border-radius:10px;">
+                  <option value="en">English</option>
+                  <option value="nl">Nederlands</option>
+                </select>
+              </div>
+              <div>
+                <label style="color:#A05A00;font-weight:700;">Currency</label>
+                <select id="pref-cur" class="form-field" style="padding:10px;border:2px solid #FFC90E;border-radius:10px;">
+                  <option value="EUR">EUR (€)</option>
+                  <option value="USD">USD ($)</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-top:12px;">
+              <button class="btn" onclick="savePreferences()">Save preferences</button>
+            </div>
+          </section>
+
+          <!-- Returns -->
+          <section id="sec-returns" style="display:none;">
+            <h3 class="section-title">Start a Return</h3>
+            <form id="form-return" class="grid-1" style="max-width:520px;">
+              <input id="ret_order" placeholder="Order ID">
+              <input id="ret_reason" placeholder="Reason">
+              <button type="button" class="btn" onclick="submitReturn()">Submit return request</button>
+            </form>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
+    <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
+  </footer>
+
+  <!-- Firebase (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+
+  <script>
+    /* ==== Firebase init ==== */
+    const firebaseConfig = {
+      apiKey:"AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
+      authDomain:"starplanner-3acf9.firebaseapp.com",
+      projectId:"starplanner-3acf9",
+      storageBucket:"starplanner-3acf9.firebasestorage.app",
+      messagingSenderId:"793684440573",
+      appId:"1:793684440573:web:5beb2ab6f64b4fc110d594"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth=firebase.auth();
+    const db=firebase.firestore();
+
+    /* ==== Cart badge ==== */
+    (function(){ const c=document.getElementById('cart-count'); const cart=JSON.parse(localStorage.getItem('cart'))||[]; c.textContent=cart.length; })();
+
+    /* ==== Banner ==== */
+    const banner=document.getElementById('banner');
+    function showBanner(type,text,ms=3000){
+      banner.className='banner '+type;
+      banner.textContent=text;
+      banner.style.display='block';
+      clearTimeout(showBanner._t);
+      showBanner._t=setTimeout(()=>banner.style.display='none',ms);
+    }
+    function showError(id,show=true){ const el=document.getElementById(id); if(el) el.style.display=show?'block':'none'; }
+
+    /* ==== Auth toggle ==== */
+    let isRegister=true;
+    function toggleForm(){
+      isRegister=!isRegister;
+      document.getElementById('form-title').textContent=isRegister?'Create Account':'Login';
+      document.getElementById('submit-btn').textContent=isRegister?'Register':'Login';
+      document.getElementById('repeat-field').style.display=isRegister?'block':'none';
+      ['emailError','passwordError','repeatError'].forEach(id=>showError(id,false));
+      if (isRegister) setChecklistVisible(true); else setChecklistVisible(false);
+    }
+
+    /* ==== Password checklist live ==== */
+    const pwInput = document.getElementById('password');
+    const rptInput = document.getElementById('repeat');
+    const pwWrap  = document.getElementById('pwWrap');
+    const rulesEl = document.getElementById('pwChecklist');
+    let hideTimer = null;
+
+    const rules = {
+      len:   v => v.length >= 8,
+      lower: v => /[a-z]/.test(v),
+      upper: v => /[A-Z]/.test(v),
+      num:   v => /[0-9]/.test(v),
+      spec:  v => /[!@#$%^&*]/.test(v),
+      match: (v, r) => v.length>0 && v === r
+    };
+    function setChecklistVisible(visible){
+      if (visible) { pwWrap.style.maxHeight = rulesEl.scrollHeight + 24 + 'px'; pwWrap.style.opacity='1'; }
+      else { pwWrap.style.maxHeight='0'; pwWrap.style.opacity='0'; }
+    }
+    function updateChecklist(){
+      const v = pwInput.value || '';
+      const r = rptInput.value || '';
+      const results = { len:rules.len(v), lower:rules.lower(v), upper:rules.upper(v), num:rules.num(v), spec:rules.spec(v), match:rules.match(v,r) };
+      Object.keys(results).forEach(k=>{
+        const row = rulesEl.querySelector(`.rule[data-rule="${k}"]`);
+        if (row) row.classList.toggle('ok', !!results[k]);
+      });
+      const allOk = Object.values(results).every(Boolean);
+      clearTimeout(hideTimer);
+      if (allOk) { setChecklistVisible(true); hideTimer=setTimeout(()=>setChecklistVisible(false),3000); }
+      else { setChecklistVisible(true); }
+    }
+    pwInput.addEventListener('input', updateChecklist);
+    rptInput.addEventListener('input', updateChecklist);
+    pwInput.addEventListener('focus', ()=> setChecklistVisible(true));
+    rptInput.addEventListener('focus', ()=> setChecklistVisible(true));
+
+    /* ==== Submit auth ==== */
+    document.getElementById('account-form').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const pass  = pwInput.value;
+      const rep   = rptInput.value;
+
+      let hasErr=false;
+      showError('emailError', false); showError('passwordError', false); showError('repeatError', false);
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('emailError', true); hasErr=true; }
+
+      if (isRegister) {
+        const okAll = rules.len(pass) && rules.lower(pass) && rules.upper(pass) && rules.num(pass) && rules.spec(pass) && rules.match(pass, rep);
+        if (!okAll) { showError('passwordError', true); hasErr=true; }
+        if (pass !== rep) { showError('repeatError', true); hasErr=true; }
+      } else {
+        if (!pass) { showError('passwordError', true); hasErr=true; }
+      }
+      if (hasErr) return;
+
+      try{
+        if (isRegister){
+          const cred = await auth.createUserWithEmailAndPassword(email, pass);
+          await db.collection('users').doc(cred.user.uid).set({
+            email, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge:true });
+          await cred.user.sendEmailVerification();
+          showBanner('success','✅ Confirmation email sent! Please verify your inbox.');
+        } else {
+          await auth.signInWithEmailAndPassword(email, pass);
+          showBanner('success','✅ Login successful!');
+        }
+      }catch(err){ showBanner('error', err.message || 'Something went wrong.'); }
+    });
+
+    /* ==== Auth state ==== */
+    auth.onAuthStateChanged(async user=>{
+      if(user){
+        document.getElementById('auth-section').style.display='none';
+        document.getElementById('account-section').style.display='block';
+        document.getElementById('user-email').textContent = `Logged in as: ${user.email}`;
+        document.getElementById('verify-note').style.display = user.emailVerified ? 'none' : 'block';
+        loadOrders(user.uid);
+        loadAddresses(user.uid);
+        loadPreferences();
+      }else{
+        document.getElementById('auth-section').style.display='block';
+        document.getElementById('account-section').style.display='none';
+      }
+    });
+
+    /* ==== Resend verification ==== */
+    document.getElementById('resend-link')?.addEventListener('click', async e=>{
+      e.preventDefault();
+      const u=auth.currentUser; if(!u) return;
+      try{ await u.sendEmailVerification(); showBanner('success','Verification email resent. Please check your inbox.'); }
+      catch{ showBanner('error','Could not resend verification.'); }
+    });
+
+    /* ==== Sidebar nav ==== */
+    document.querySelectorAll('.side-nav button').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.side-nav button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const tgt = btn.getAttribute('data-target');
+        document.querySelectorAll('.content > section').forEach(s=> s.style.display = (s.id===tgt ? 'block' : 'none'));
+      });
+    });
+
+    /* ==== Orders ==== */
+    async function loadOrders(userId){
+      const ordersDiv=document.getElementById('orders');
+      ordersDiv.innerHTML = "<p class='muted'>Loading orders…</p>";
+      try{
+        const snap=await db.collection('orders').where('userId','==',userId).orderBy('date','desc').get();
+        if(snap.empty){ ordersDiv.innerHTML = "<p class='muted'>No orders yet.</p>"; return; }
+        ordersDiv.innerHTML = "";
+        snap.forEach(doc=>{
+          const o=doc.data();
+          const when=o.date?.toDate?o.date.toDate().toLocaleString():'Unknown date';
+          const itemsHtml=Array.isArray(o.items)?o.items.map(i=>`<li>${i.name} – €${Number(i.price).toFixed(2)} × ${i.qty}</li>`).join(''):'';
+          const block=document.createElement('div');
+          block.className='order';
+          block.innerHTML=`<h4>Order on ${when}</h4><ul>${itemsHtml}</ul><p><strong>Total:</strong> €${Number(o.total||0).toFixed(2)}</p>`;
+          ordersDiv.appendChild(block);
+        });
+      }catch{ ordersDiv.innerHTML = "<p class='muted'>Could not load orders.</p>"; }
+    }
+
+    /* ==== Addresses ==== */
+    async function loadAddresses(uid){
+      try{
+        const doc = await db.collection('users').doc(uid).get();
+        const prof = doc.exists ? doc.data() : {};
+        const s = prof?.shipping || {};
+        const b = prof?.billing || {};
+
+        setVal('ship_name', s.name); setVal('ship_line1', s.line1); setVal('ship_line2', s.line2);
+        setVal('ship_city', s.city); setVal('ship_postal', s.postal); setVal('ship_country', s.country);
+
+        setVal('bill_name', b.name); setVal('bill_line1', b.line1); setVal('bill_line2', b.line2);
+        setVal('bill_city', b.city); setVal('bill_postal', b.postal); setVal('bill_country', b.country);
+      }catch{}
+    }
+    function setVal(id,v){ const el=document.getElementById(id); if(el) el.value = v || ''; }
+
+    async function saveAddress(kind){
+      const u = auth.currentUser; if(!u) return;
+      const data = (kind==='shipping') ? {
+        shipping:{
+          name: val('ship_name'), line1: val('ship_line1'), line2: val('ship_line2'),
+          city: val('ship_city'), postal: val('ship_postal'), country: val('ship_country')
+        }
+      } : {
+        billing:{
+          name: val('bill_name'), line1: val('bill_line1'), line2: val('bill_line2'),
+          city: val('bill_city'), postal: val('bill_postal'), country: val('bill_country')
+        }
+      };
+      try{
+        await db.collection('users').doc(u.uid).set(data,{merge:true});
+        showBanner('success', (kind==='shipping'?'Shipping':'Billing')+' address saved.');
+      }catch{ showBanner('error','Could not save address.'); }
+    }
+    function val(id){ const el=document.getElementById(id); return el?el.value.trim():''; }
+
+    /* ==== Security: change password ==== */
+    async function changePassword(){
+      const user = auth.currentUser; if(!user) return;
+      const cur = document.getElementById('cur_pass').value;
+      const np  = document.getElementById('new_pass').value;
+      const nr  = document.getElementById('new_pass_repeat').value;
+
+      if (!np || np.length<8 || np!==nr){ showBanner('error','Check new password fields.'); return; }
+      try{
+        const cred = firebase.auth.EmailAuthProvider.credential(user.email, cur);
+        await user.reauthenticateWithCredential(cred);
+        await user.updatePassword(np);
+        showBanner('success','Password updated.');
+        document.getElementById('cur_pass').value=''; document.getElementById('new_pass').value=''; document.getElementById('new_pass_repeat').value='';
+      }catch(err){ showBanner('error', err.message || 'Could not update password.'); }
+    }
+
+    /* ==== Preferences (local only) ==== */
+    function loadPreferences(){
+      const lang = localStorage.getItem('pref_lang') || 'en';
+      const cur  = localStorage.getItem('pref_cur') || 'EUR';
+      document.getElementById('pref-lang').value = lang;
+      document.getElementById('pref-cur').value  = cur;
+    }
+    function savePreferences(){
+      localStorage.setItem('pref_lang', document.getElementById('pref-lang').value);
+      localStorage.setItem('pref_cur', document.getElementById('pref-cur').value);
+      showBanner('success','Preferences saved.');
+    }
+
+    /* ==== Returns ==== */
+    async function submitReturn(){
+      const u=auth.currentUser; if(!u) return;
+      const orderId = document.getElementById('ret_order').value.trim();
+      const reason  = document.getElementById('ret_reason').value.trim();
+      if (!orderId || !reason){ showBanner('error','Please fill Order ID and Reason.'); return; }
+      try{
+        await db.collection('returns').add({
+          userId:u.uid, email:u.email, orderId, reason, date: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        showBanner('success','Return request submitted.');
+        document.getElementById('ret_order').value=''; document.getElementById('ret_reason').value='';
+      }catch{ showBanner('error','Could not submit return.'); }
+    }
+
+    /* ==== Logout ==== */
+    function logout(){ auth.signOut().then(()=> showBanner('success','You have been logged out successfully.')); }
+  </script>
 </body>
 </html>
