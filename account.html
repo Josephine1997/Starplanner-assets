@@ -257,6 +257,38 @@ async function loadOrders(userId){
   }
 }
 
+// ✅ Retourformulier opslaan in Firestore
+async function submitReturn() {
+  const user = auth.currentUser;
+  const orderId = document.getElementById('ret_order').value.trim();
+  const reason = document.getElementById('ret_reason').value.trim();
+
+  if (!user) {
+    alert("You must be logged in to submit a return.");
+    return;
+  }
+
+  if (!orderId || !reason) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  try {
+    await db.collection('returns').add({
+      userId: user.uid,
+      email: user.email,
+      orderId: orderId,
+      reason: reason,
+      date: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    alert("Your return request has been submitted successfully!");
+    document.getElementById('form-return').reset();
+  } catch (error) {
+    alert("Error submitting return: " + error.message);
+  }
+}
+
 // ✅ Navigatie menu functionaliteit
 document.querySelectorAll('.side-nav button').forEach(btn=>{
  btn.addEventListener('click',()=>{
