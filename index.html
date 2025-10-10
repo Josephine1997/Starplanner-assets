@@ -221,6 +221,13 @@
     const cartCount = document.getElementById('cart-count');
     const overlay = document.getElementById('loading-overlay');
 
+    // ✅ HOME-link guard (forceer altijd naar index.html)
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('nav a').forEach(a => {
+        if (a.textContent.trim().toUpperCase() === 'HOME') a.setAttribute('href','index.html');
+      });
+    });
+
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCartCount();
 
