@@ -15,7 +15,6 @@
       color: #333;
     }
 
-    /* ===== Header & Nav (consistent) ===== */
     nav {
       background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
       background-repeat: no-repeat;
@@ -49,11 +48,7 @@
       align-items: center;
       position: relative;
     }
-    .nav-icons img {
-      width:36px;
-      height:36px;
-      cursor: pointer;
-    }
+    .nav-icons img { width:36px; height:36px; cursor: pointer; }
     .cart-link { position: relative; }
     .cart-badge {
       position: absolute; top:-6px; right:-6px;
@@ -62,19 +57,14 @@
       min-width:18px; text-align:center;
     }
 
-    /* ===== Main Content ===== */
     main {
-      max-width: 400px;
+      max-width: 420px;
       margin: 80px auto;
       padding: 20px;
       text-align: center;
     }
 
-    h1 {
-      color: #FF8C2B;
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
+    h1 { color: #FF8C2B; font-size: 32px; margin-bottom: 20px; }
 
     .form-box {
       background: #FFF6E5;
@@ -83,86 +73,70 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .form-field {
-      text-align: left;
-      margin-bottom: 18px;
-    }
-
-    .form-field label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #FF8C2B;
-    }
-
+    .form-field { text-align: left; margin-bottom: 18px; }
+    .form-field label { display: block; font-weight: 600; margin-bottom: 6px; color: #FF8C2B; }
     .form-field input {
-      width: 100%;
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 2px solid #FFC90E;
-      font-size: 14px;
-      font-family: 'Montserrat Alternates', sans-serif;
+      width: 100%; padding: 10px 14px; border-radius: 8px;
+      border: 2px solid #FFC90E; font-size: 14px;
     }
 
     .submit-btn {
-      display: inline-block;
-      width: 100%;
-      background: #FFC90E;
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 0;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      margin-top: 10px;
+      display: inline-block; width: 100%; background: #FFC90E;
+      color: white; font-weight: 600; font-size: 16px;
+      border: none; border-radius: 8px; padding: 12px 0;
+      cursor: pointer; transition: background 0.3s ease; margin-top: 10px;
     }
-
     .submit-btn:hover { background: #e6b800; }
 
-    .toggle-text {
-      margin-top: 16px;
-      font-size: 14px;
-      color: #555;
-    }
-
-    .toggle-text a {
-      color: #FF8C2B;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-    }
+    .toggle-text { margin-top: 16px; font-size: 14px; color: #555; }
+    .toggle-text a { color: #FF8C2B; font-weight: 600; text-decoration: none; cursor: pointer; }
     .toggle-text a:hover { text-decoration: underline; }
 
-    /* ===== Footer ===== */
+    .account-info {
+      background: #FFF6E5;
+      padding: 30px 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .logout-btn {
+      background: #FF6F61; color: #fff; border: none;
+      border-radius: 8px; padding: 10px 20px;
+      margin-top: 20px; font-weight: 600;
+      cursor: pointer; transition: background 0.3s ease;
+    }
+    .logout-btn:hover { background: #e85b50; }
+
+    .orders {
+      margin-top: 30px;
+      text-align: left;
+    }
+    .order {
+      background: #fff;
+      border: 2px solid #FFC90E;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .order h3 { margin: 0 0 8px; color: #FF8C2B; }
+    .order ul { margin: 0; padding-left: 18px; font-size: 14px; }
+    .order ul li { margin-bottom: 4px; }
+
     footer {
       position: relative;
       margin-top: 60px;
       overflow: hidden;
     }
-
-    .footer-decoration {
-      width: 100%;
-      height: 100px;
-      object-fit: cover;
-      display: block;
-    }
-
+    .footer-decoration { width: 100%; height: 100px; object-fit: cover; display: block; }
     .footer-text {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      color: #fff;
-      font-size: 14px;
+      position: absolute; bottom: 10px; width: 100%;
+      text-align: center; color: #fff; font-size: 14px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
   </style>
 </head>
 
 <body>
-  <!-- ===== Header ===== -->
   <header>
     <nav>
       <ul>
@@ -172,11 +146,8 @@
         <li><a href="plannertips.html">PLANNER TIPS</a></li>
         <li><a href="contact.html">CONTACT</a></li>
       </ul>
-
       <div class="nav-icons">
-        <a href="account.html">
-          <img src="user-icon.svg" alt="User">
-        </a>
+        <a href="account.html"><img src="user-icon.svg" alt="User"></a>
         <a href="checkout.html" class="cart-link">
           <img src="shoppingbag.svg" alt="Shopping Bag">
           <span class="cart-badge" id="cart-count">0</span>
@@ -185,69 +156,142 @@
     </nav>
   </header>
 
-  <!-- ===== Main Content ===== -->
   <main>
-    <h1 id="form-title">Create Account</h1>
-    <div class="form-box">
-      <form id="account-form">
-        <div class="form-field">
-          <label for="username">Username</label>
-          <input type="text" id="username" placeholder="Enter your username" required>
+    <section id="auth-section">
+      <h1 id="form-title">Create Account</h1>
+      <div class="form-box">
+        <form id="account-form">
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+          </div>
+          <div class="form-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+          </div>
+          <button type="submit" class="submit-btn" id="submit-btn">Register</button>
+        </form>
+        <div class="toggle-text">
+          Already have an account? <a id="toggle-link" onclick="toggleForm()">Login</a>
         </div>
-
-        <div class="form-field">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter your password" required>
-        </div>
-
-        <button type="submit" class="submit-btn" id="submit-btn">Register</button>
-      </form>
-
-      <div class="toggle-text">
-        Already have an account?
-        <a id="toggle-link" onclick="toggleForm()">Login</a>
       </div>
-    </div>
+    </section>
+
+    <section id="account-section" style="display:none;">
+      <div class="account-info">
+        <h1>Welcome back!</h1>
+        <p id="user-email"></p>
+        <div id="orders" class="orders"></div>
+        <button class="logout-btn" onclick="logout()">Log out</button>
+      </div>
+    </section>
   </main>
 
-  <!-- ===== Footer ===== -->
   <footer>
     <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
+  <!-- 🔥 Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+
   <script>
-    // Winkelmandje teller
-    const cartCount = document.getElementById('cart-count');
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cartCount.textContent = cart.length;
+    const firebaseConfig = {
+      apiKey: "AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
+      authDomain: "starplanner-3acf9.firebaseapp.com",
+      projectId: "starplanner-3acf9",
+      storageBucket: "starplanner-3acf9.firebasestorage.app",
+      messagingSenderId: "793684440573",
+      appId: "1:793684440573:web:5beb2ab6f64b4fc110d594"
+    };
 
-    // Toggle tussen Register en Login
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
     let isRegister = true;
-
     function toggleForm() {
-      const formTitle = document.getElementById('form-title');
+      const title = document.getElementById('form-title');
       const submitBtn = document.getElementById('submit-btn');
       const toggleLink = document.getElementById('toggle-link');
-
+      isRegister = !isRegister;
       if (isRegister) {
-        formTitle.textContent = 'Login';
-        submitBtn.textContent = 'Login';
-        toggleLink.textContent = 'Register';
-        isRegister = false;
-      } else {
-        formTitle.textContent = 'Create Account';
+        title.textContent = 'Create Account';
         submitBtn.textContent = 'Register';
         toggleLink.textContent = 'Login';
-        isRegister = true;
+      } else {
+        title.textContent = 'Login';
+        submitBtn.textContent = 'Login';
+        toggleLink.textContent = 'Register';
       }
     }
 
-    // Eenvoudige placeholder voor submit
-    document.getElementById('account-form').addEventListener('submit', function(e) {
+    document.getElementById('account-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      alert(isRegister ? 'Account created!' : 'Logged in!');
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      try {
+        if (isRegister) {
+          await auth.createUserWithEmailAndPassword(email, password);
+          alert('Account created successfully!');
+        } else {
+          await auth.signInWithEmailAndPassword(email, password);
+          alert('Login successful!');
+        }
+      } catch (error) {
+        alert(error.message);
+      }
     });
+
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        document.getElementById('auth-section').style.display = 'none';
+        document.getElementById('account-section').style.display = 'block';
+        document.getElementById('user-email').textContent = `Logged in as: ${user.email}`;
+        loadOrders(user.uid);
+      } else {
+        document.getElementById('auth-section').style.display = 'block';
+        document.getElementById('account-section').style.display = 'none';
+      }
+    });
+
+    async function loadOrders(userId) {
+      const ordersDiv = document.getElementById('orders');
+      ordersDiv.innerHTML = "<h2>My Orders</h2>";
+      const snapshot = await db.collection('orders')
+        .where('userId', '==', userId)
+        .orderBy('date', 'desc')
+        .get();
+
+      if (snapshot.empty) {
+        ordersDiv.innerHTML += "<p>No orders yet.</p>";
+        return;
+      }
+
+      snapshot.forEach(doc => {
+        const order = doc.data();
+        const div = document.createElement('div');
+        div.classList.add('order');
+        div.innerHTML = `
+          <h3>Order on ${order.date?.toDate().toLocaleString() || 'Unknown date'}</h3>
+          <ul>
+            ${order.items.map(item => `<li>${item.name} – €${item.price.toFixed(2)} × ${item.qty}</li>`).join('')}
+          </ul>
+          <p><strong>Total:</strong> €${order.total.toFixed(2)}</p>
+        `;
+        ordersDiv.appendChild(div);
+      });
+    }
+
+    function logout() { auth.signOut(); }
+
+    const cartCount = document.getElementById('cart-count');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartCount.textContent = cart.length;
   </script>
 </body>
 </html>
+
+
