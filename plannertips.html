@@ -69,10 +69,7 @@
 </style>
 <!-- ✅ EINDE DIKLIJSTCODE -->
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
-
 <style>
-/* ===== Jouw originele stijl ===== */
 body {font-family:'Montserrat Alternates',sans-serif;margin:0;background:#fff;color:#333;}
 nav{background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');background-repeat:no-repeat;background-position:center;background-size:120% 110%;padding:40px 60px;display:flex;justify-content:space-between;align-items:center;}
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:70px;padding-left:100px;}
@@ -84,7 +81,7 @@ nav ul li a:hover{color:#FF7929;}
 .cart-badge{position:absolute;top:-6px;right:-6px;background:#FF6F61;color:#fff;font-size:12px;font-weight:600;padding:2px 6px;border-radius:50%;min-width:18px;text-align:center;}
 main{display:flex;justify-content:center;align-items:center;height:calc(100vh - 220px);text-align:center;padding:0 20px;}
 .coming-soon{display:inline-block;padding:40px 50px;border:4px solid #FF8C2B;border-radius:18px;background:linear-gradient(135deg,#FFD36E,#FFA8A8,#F8A1FF);color:#8B005E;font-size:28px;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,0.15);animation:pulse 2s infinite;}
-@keyframes pulse{0%{transform:scale(1);box-shadow:0 8px 20px rgba(0,0,0,0.15);}50%{transform:scale(1.05);box-shadow:0 10px 25px rgba(255,140,43,0.3);}100%{transform:scale(1);box-shadow:0 8px 20px rgba(0,0,0,0.15);}}
+@keyframes pulse{0%{transform:scale(1);box-shadow:0 8px 20px rgba(0,0,0,0.15);}50%{transform:scale(1.05);box-shadow:0 10px 25px rgba(255,140,43,0.3);}100%{transform:scale(1);box-shadow:0 8px 20px rgba(0,0,0,0.15);} }
 footer{position:relative;margin-top:0;overflow:hidden;}
 .footer-decoration{width:100%;height:100px;object-fit:cover;display:block;}
 .footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
@@ -98,7 +95,7 @@ footer{position:relative;margin-top:0;overflow:hidden;}
       <li><a href="index.html">HOME</a></li>
       <li><a href="thestorybehind.html">THE STORY BEHIND</a></li>
       <li><a href="shop.html">SHOP</a></li>
-      <li><a href="plannertips.html">PLANNER TIPS</a></li>
+      <li><a href="plannertips.html" class="active">PLANNER TIPS</a></li>
       <li><a href="contact.html">CONTACT</a></li>
     </ul>
     <div class="nav-icons">
@@ -113,7 +110,7 @@ footer{position:relative;margin-top:0;overflow:hidden;}
 
 <main>
   <div class="coming-soon">
-    🚧 Website is being worked on...<br>
+    🚧 We’re crafting something magical...<br>
     ✨ Check back soon for inspiring Planner Tips!
   </div>
 </main>
@@ -126,7 +123,7 @@ footer{position:relative;margin-top:0;overflow:hidden;}
 <script>
 const cartCount = document.getElementById('cart-count');
 const cart = JSON.parse(localStorage.getItem('cart')) || [];
-cartCount.textContent = cart.length;
+cartCount.textContent = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
 </script>
 </body>
 </html>
