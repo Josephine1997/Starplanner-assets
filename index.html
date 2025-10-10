@@ -78,7 +78,7 @@
     padding:40px 60px;display:flex;justify-content:space-between;align-items:center;
   }
   nav ul{list-style:none;margin:0;padding:0;display:flex;gap:70px;padding-left:100px;}
-  nav ul li a{text-decoration:none;color:white;font-size:18px;font-weight:600;text-shadow:1px 1px 3px rgba(0,0,0,0.3);}
+  nav ul li a{text-decoration:none;color:white;font-size:18px;font-weight:600;text-shadow:1px 1px 3px rgba(0,0,0,0.3);transition:color .2s;}
   nav ul li a:hover{color:#FF7929;}
   .nav-icons{display:flex;gap:30px;align-items:center;position:relative;}
   .nav-icons img{width:36px;height:36px;cursor:pointer;}
@@ -204,6 +204,29 @@
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
 
   <script>
+    // 🔒 Forceer HOME-links naar index.html + voorkom dat de site start op checkout.html
+    (function() {
+      // 1) Als iemand direct binnenkomt op checkout (geen referrer), stuur naar index.html
+      if (document.referrer === '' && /checkout\.html$/i.test(location.pathname)) {
+        location.replace('index.html');
+      }
+
+      // 2) HOME-anchors altijd naar index.html laten gaan
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('a').forEach(function(a){
+          if ((a.textContent || '').trim().toUpperCase() === 'HOME') {
+            a.setAttribute('href','index.html');
+            a.addEventListener('click', function(e){
+              e.preventDefault();
+              window.location.href = 'index.html';
+            });
+          }
+        });
+      });
+    })();
+  </script>
+
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
       authDomain: "starplanner-3acf9.firebaseapp.com",
@@ -220,13 +243,6 @@
     const subtotalEl = document.getElementById('subtotal');
     const cartCount = document.getElementById('cart-count');
     const overlay = document.getElementById('loading-overlay');
-
-    // ✅ HOME-link guard (forceer altijd naar index.html)
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('nav a').forEach(a => {
-        if (a.textContent.trim().toUpperCase() === 'HOME') a.setAttribute('href','index.html');
-      });
-    });
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCartCount();
@@ -321,7 +337,6 @@
       }
     }
 
-    // Start render
     window.addEventListener('load', renderCart);
   </script>
 </body>
