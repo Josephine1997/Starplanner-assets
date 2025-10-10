@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Starplanner – Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     body {
       background: #FFFFFF;
@@ -272,7 +273,7 @@
 
     updateCartCount();
 
-    // Product toevoegen
+    // Product toevoegen met qty ondersteuning
     function addToCart(event, name, file, price) {
       event.stopPropagation();
 
@@ -283,12 +284,12 @@
         cart.push({ name, file, price, qty: 1 });
       }
 
+      localStorage.setItem('cart', JSON.stringify(cart));
       updateCartCount();
-      saveOrderToFirestore(name, file, price);
-      alert(`${name} toegevoegd aan winkelwagen!`);
+      alert(`${name} is toegevoegd aan je winkelwagen!`);
     }
 
-    // Firestore opslaan
+    // Firestore logica (optioneel bewaren van bestellingen)
     async function saveOrderToFirestore(name, file, price) {
       const user = firebase.auth().currentUser;
       try {
@@ -305,7 +306,6 @@
       }
     }
 
-    // Optioneel: placeholder voor modal
     function openModal(image) {
       console.log("Open modal met:", image);
     }
