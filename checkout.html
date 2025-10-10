@@ -114,10 +114,10 @@
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
-  <!-- 🔥 Firebase SDK + Config -->
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+  <!-- ✅ Firebase compat SDK (werkt met je andere pagina’s) -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
 
   <script>
     const firebaseConfig = {
@@ -132,9 +132,7 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
-  </script>
 
-  <script>
     const cartContainer = document.getElementById('cart-items');
     const subtotalEl = document.getElementById('subtotal');
     const cartCount = document.getElementById('cart-count');
@@ -188,7 +186,7 @@
       renderCart();
     }
 
-    // ✅ Nieuw: Bestelling opslaan in Firestore
+    // 🟢 Order opslaan in Firestore
     async function placeOrder() {
       const user = auth.currentUser;
       if (!user) {
@@ -200,20 +198,22 @@
         return;
       }
 
+      const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
       try {
         await db.collection('orders').add({
           userId: user.uid,
           email: user.email,
           items: cart,
-          total: cart.reduce((sum, item) => sum + (item.price * item.qty), 0),
+          total: totalAmount,
           date: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        alert("Your order has been placed successfully!");
+        alert("✅ Your order has been placed successfully!");
         localStorage.removeItem('cart');
         window.location.href = "account.html";
       } catch (error) {
-        alert("Error placing order: " + error.message);
+        alert("❌ Error placing order: " + error.message);
       }
     }
 
