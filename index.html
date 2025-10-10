@@ -141,7 +141,6 @@
       margin-bottom: 8px;
     }
 
-    /* === Knoppen-stijl === */
     .btn-add-cart {
       display: inline-block;
       margin: 8px auto 16px auto;
@@ -165,7 +164,6 @@
       margin-bottom: 8px;
     }
 
-    /* Footer */
     footer {
       position: relative;
       margin-top: 40px;
@@ -262,20 +260,29 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // Winkelmandje
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    // === Winkelmandje logica ===
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartCount = document.getElementById('cart-count');
-    cartCount.textContent = cart.length;
 
     function updateCartCount() {
-      cartCount.textContent = cart.length;
+      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+      cartCount.textContent = totalQty;
       localStorage.setItem('cart', JSON.stringify(cart));
     }
 
+    updateCartCount();
+
     // Product toevoegen
-    async function addToCart(event, name, file, price) {
+    function addToCart(event, name, file, price) {
       event.stopPropagation();
-      cart.push({ name, file, price });
+
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.qty += 1;
+      } else {
+        cart.push({ name, file, price, qty: 1 });
+      }
+
       updateCartCount();
       saveOrderToFirestore(name, file, price);
       alert(`${name} toegevoegd aan winkelwagen!`);
@@ -296,6 +303,11 @@
       } catch (error) {
         console.error("Fout bij opslaan:", error);
       }
+    }
+
+    // Optioneel: placeholder voor modal
+    function openModal(image) {
+      console.log("Open modal met:", image);
     }
   </script>
 </body>
