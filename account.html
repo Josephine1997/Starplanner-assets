@@ -4,64 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Account – Starplanner</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
-
   <style>
-    body { font-family: 'Montserrat Alternates', sans-serif; margin: 0; background: #fff; color: #333; }
-
-    nav {
-      background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 120% 110%;
-      padding: 40px 60px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 70px; padding-left: 100px; }
-    nav ul li a { text-decoration: none; color: white; font-size: 18px; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
-    nav ul li a:hover { color: #FF7929; }
-    .nav-icons { display: flex; gap: 30px; align-items: center; position: relative; }
-    .nav-icons img { width:36px; height:36px; cursor: pointer; }
-    .cart-link { position: relative; }
-    .cart-badge { position: absolute; top:-6px; right:-6px; background:#FF6F61; color:#fff; font-size:12px; font-weight:600; padding:2px 6px; border-radius:50%; min-width:18px; text-align:center; }
-
-    main { max-width: 420px; margin: 80px auto; padding: 20px; text-align: center; }
-    h1 { color: #FF8C2B; font-size: 32px; margin-bottom: 20px; }
-    .form-box { background: #FFF6E5; border-radius: 16px; padding: 30px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .form-field { text-align: left; margin-bottom: 18px; }
-    .form-field label { display:block; font-weight:600; margin-bottom:6px; color:#FF8C2B; }
-    .form-field input { width:100%; padding:10px 14px; border-radius:8px; border:2px solid #FFC90E; font-size:14px; }
-    .hint { font-size:12px; color:#777; margin-top:6px; }
-    .error { font-size:12px; color:#FF6F61; margin-top:6px; display:none; }
-
-    .submit-btn { display:inline-block; width:100%; background:#FFC90E; color:#fff; font-weight:600; font-size:16px; border:none; border-radius:8px; padding:12px 0; cursor:pointer; transition:background .3s; margin-top:10px; }
-    .submit-btn:hover { background:#e6b800; }
-
-    .toggle-text { margin-top:16px; font-size:14px; color:#555; }
-    .toggle-text a { color:#FF8C2B; font-weight:600; text-decoration:none; cursor:pointer; }
-    .toggle-text a:hover { text-decoration: underline; }
-
-    .account-info { background:#FFF6E5; padding:30px 20px; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:left; }
-    .logout-btn { background:#FF6F61; color:#fff; border:none; border-radius:8px; padding:10px 20px; margin-top:20px; font-weight:600; cursor:pointer; transition:background .3s; }
-    .logout-btn:hover { background:#e85b50; }
-
-    .orders { margin-top: 30px; }
-    .order { background:#fff; border:2px solid #FFC90E; border-radius:8px; padding:12px; margin-bottom:10px; }
-    .order h3 { margin:0 0 8px; color:#FF8C2B; }
-    .order ul { margin:0; padding-left:18px; font-size:14px; }
-    .order ul li { margin-bottom:4px; }
-
-    footer { position: relative; margin-top: 60px; overflow: hidden; }
-    .footer-decoration { width:100%; height:100px; object-fit:cover; display:block; }
-    .footer-text { position:absolute; bottom:10px; width:100%; text-align:center; color:#fff; font-size:14px; text-shadow:1px 1px 3px rgba(0,0,0,0.5); }
-
-    .banner { position:fixed; top:16px; left:50%; transform:translateX(-50%); padding:12px 16px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,.15); z-index:9999; display:none; }
-    .banner.success { background:#34c759; color:#fff; }
-    .banner.error { background:#ff6f61; color:#fff; }
+    body { font-family:'Montserrat Alternates',sans-serif;margin:0;background:#fff;color:#333;}
+    nav{background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');background-repeat:no-repeat;background-position:center;background-size:120% 110%;padding:40px 60px;display:flex;justify-content:space-between;align-items:center;}
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:70px;padding-left:100px;}
+    nav ul li a{text-decoration:none;color:white;font-size:18px;font-weight:600;text-shadow:1px 1px 3px rgba(0,0,0,0.3);}
+    nav ul li a:hover{color:#FF7929;}
+    .nav-icons{display:flex;gap:30px;align-items:center;position:relative;}
+    .nav-icons img{width:36px;height:36px;cursor:pointer;}
+    .cart-link{position:relative;}
+    .cart-badge{position:absolute;top:-6px;right:-6px;background:#FF6F61;color:#fff;font-size:12px;font-weight:600;padding:2px 6px;border-radius:50%;min-width:18px;text-align:center;}
+    main{max-width:420px;margin:80px auto;padding:20px;text-align:center;}
+    h1{color:#FF8C2B;font-size:32px;margin-bottom:20px;}
+    .form-box{background:#FFF6E5;border-radius:16px;padding:30px 20px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+    .form-field{text-align:left;margin-bottom:18px;}
+    .form-field label{display:block;font-weight:600;margin-bottom:6px;color:#FF8C2B;}
+    .form-field input{width:100%;padding:10px 14px;border-radius:8px;border:2px solid #FFC90E;font-size:14px;}
+    .hint{font-size:12px;color:#777;margin-top:6px;}
+    .error{font-size:12px;color:#FF6F61;margin-top:6px;display:none;}
+    .submit-btn{display:inline-block;width:100%;background:#FFC90E;color:#fff;font-weight:600;font-size:16px;border:none;border-radius:8px;padding:12px 0;cursor:pointer;transition:background .3s;margin-top:10px;}
+    .submit-btn:hover{background:#e6b800;}
+    .toggle-text{margin-top:16px;font-size:14px;color:#555;}
+    .toggle-text a{color:#FF8C2B;font-weight:600;text-decoration:none;cursor:pointer;}
+    .toggle-text a:hover{text-decoration:underline;}
+    .account-info{background:#FFF6E5;padding:30px 20px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.1);text-align:left;}
+    .logout-btn{background:#FF6F61;color:#fff;border:none;border-radius:8px;padding:10px 20px;margin-top:20px;font-weight:600;cursor:pointer;transition:background .3s;}
+    .logout-btn:hover{background:#e85b50;}
+    .orders{margin-top:30px;}
+    .order{background:#fff;border:2px solid #FFC90E;border-radius:8px;padding:12px;margin-bottom:10px;}
+    .order h3{margin:0 0 8px;color:#FF8C2B;}
+    .order ul{margin:0;padding-left:18px;font-size:14px;}
+    .order ul li{margin-bottom:4px;}
+    footer{position:relative;margin-top:60px;overflow:hidden;}
+    .footer-decoration{width:100%;height:100px;object-fit:cover;display:block;}
+    .footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
+    .banner{position:fixed;top:16px;left:50%;transform:translateX(-50%);padding:12px 16px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.15);z-index:9999;display:none;}
+    .banner.success{background:#34c759;color:#fff;}
+    .banner.warn{background:#ff9f0a;color:#4a2a00;}
+    .banner.error{background:#ff6f61;color:#fff;}
   </style>
 </head>
-
 <body>
   <header>
     <nav>
@@ -82,7 +65,6 @@
     </nav>
   </header>
 
-  <!-- Banner -->
   <div id="banner" class="banner"></div>
 
   <main>
@@ -95,23 +77,19 @@
             <input type="email" id="email" placeholder="Enter your email" required>
             <div id="emailError" class="error">Please enter a valid email address.</div>
           </div>
-
           <div class="form-field">
             <label for="password">Password</label>
             <input type="password" id="password" placeholder="Min. 6 characters" required minlength="6">
             <div class="hint">Minimum 6 characters.</div>
             <div id="passwordError" class="error">Password must be at least 6 characters.</div>
           </div>
-
           <div id="repeat-field" class="form-field">
             <label for="repeat">Repeat Password</label>
             <input type="password" id="repeat" placeholder="Repeat your password">
             <div id="repeatError" class="error">Passwords don’t match.</div>
           </div>
-
           <button type="submit" class="submit-btn" id="submit-btn">Register</button>
         </form>
-
         <div class="toggle-text">
           Already have an account? <a id="toggle-link" onclick="toggleForm()">Login</a>
         </div>
@@ -126,9 +104,7 @@
           Your email is not verified yet. Please check your inbox.
           <a href="#" id="resend-link" style="color:#FF8C2B; text-decoration:underline;">Resend verification email</a>
         </p>
-
         <div id="orders" class="orders"></div>
-
         <button class="logout-btn" onclick="logout()">Log out</button>
       </div>
     </section>
@@ -139,7 +115,125 @@
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.c
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey:"AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
+      authDomain:"starplanner-3acf9.firebaseapp.com",
+      projectId:"starplanner-3acf9",
+      storageBucket:"starplanner-3acf9.firebasestorage.app",
+      messagingSenderId:"793684440573",
+      appId:"1:793684440573:web:5beb2ab6f64b4fc110d594"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth=firebase.auth();
+    const db=firebase.firestore();
+
+    const banner=document.getElementById('banner');
+    function showBanner(type,text,ms=3000){
+      banner.className='banner '+type;
+      banner.textContent=text;
+      banner.style.display='block';
+      clearTimeout(showBanner._t);
+      showBanner._t=setTimeout(()=>banner.style.display='none',ms);
+    }
+    function showError(id,show=true){
+      const el=document.getElementById(id);
+      if(!el)return;
+      el.style.display=show?'block':'none';
+    }
+
+    let isRegister=true;
+    function toggleForm(){
+      isRegister=!isRegister;
+      document.getElementById('form-title').textContent=isRegister?'Create Account':'Login';
+      document.getElementById('submit-btn').textContent=isRegister?'Register':'Login';
+      document.getElementById('repeat-field').style.display=isRegister?'block':'none';
+      ['emailError','passwordError','repeatError'].forEach(id=>showError(id,false));
+    }
+
+    document.getElementById('account-form').addEventListener('submit',async e=>{
+      e.preventDefault();
+      const email=document.getElementById('email').value.trim();
+      const password=document.getElementById('password').value;
+      const repeat=document.getElementById('repeat').value;
+
+      ['emailError','passwordError','repeatError'].forEach(id=>showError(id,false));
+      let hasErr=false;
+      if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showError('emailError',true);hasErr=true;}
+      if(!password||password.length<6){showError('passwordError',true);hasErr=true;}
+      if(isRegister&&password!==repeat){showError('repeatError',true);hasErr=true;}
+      if(hasErr)return;
+
+      try{
+        if(isRegister){
+          const cred=await auth.createUserWithEmailAndPassword(email,password);
+          await db.collection('users').doc(cred.user.uid).set({
+            email,
+            createdAt:firebase.firestore.FieldValue.serverTimestamp()
+          },{merge:true});
+          await cred.user.sendEmailVerification();
+          showBanner('success','✅ Confirmation email sent! Please check your inbox.');
+        }else{
+          await auth.signInWithEmailAndPassword(email,password);
+          showBanner('success','✅ Login successful!');
+        }
+      }catch(err){
+        showBanner('error',err.message);
+      }
+    });
+
+    auth.onAuthStateChanged(async user=>{
+      if(user){
+        document.getElementById('auth-section').style.display='none';
+        document.getElementById('account-section').style.display='block';
+        document.getElementById('user-email').textContent=`Logged in as: ${user.email}`;
+        document.getElementById('verify-note').style.display=user.emailVerified?'none':'block';
+        loadOrders(user.uid);
+      }else{
+        document.getElementById('auth-section').style.display='block';
+        document.getElementById('account-section').style.display='none';
+      }
+    });
+
+    document.getElementById('resend-link').addEventListener('click',async e=>{
+      e.preventDefault();
+      const u=auth.currentUser;
+      if(!u)return;
+      try{
+        await u.sendEmailVerification();
+        showBanner('success','Verification email resent. Please check your inbox.');
+      }catch(err){showBanner('error','Could not resend verification.');}
+    });
+
+    async function loadOrders(userId){
+      const ordersDiv=document.getElementById('orders');
+      ordersDiv.innerHTML="<h2>My Orders</h2>";
+      try{
+        const snap=await db.collection('orders').where('userId','==',userId).orderBy('date','desc').get();
+        if(snap.empty){ordersDiv.innerHTML+="<p>No orders yet.</p>";return;}
+        snap.forEach(doc=>{
+          const o=doc.data();
+          const when=o.date?.toDate?o.date.toDate().toLocaleString():'Unknown date';
+          const itemsHtml=Array.isArray(o.items)?o.items.map(i=>`<li>${i.name} – €${Number(i.price).toFixed(2)} × ${i.qty}</li>`).join(''):'';
+          ordersDiv.innerHTML+=`
+            <div class="order">
+              <h3>Order on ${when}</h3>
+              <ul>${itemsHtml}</ul>
+              <p><strong>Total:</strong> €${Number(o.total||0).toFixed(2)}</p>
+            </div>`;
+        });
+      }catch(err){ordersDiv.innerHTML+="<p>Could not load orders.</p>";}
+    }
+
+    function logout(){auth.signOut().then(()=>showBanner('success','You have been logged out successfully.'));}
+
+    const cartCount=document.getElementById('cart-count');
+    const cart=JSON.parse(localStorage.getItem('cart'))||[];
+    cartCount.textContent=cart.length;
+  </script>
+</body>
+</html>
