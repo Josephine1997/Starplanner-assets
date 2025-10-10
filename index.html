@@ -141,29 +141,22 @@
       margin-bottom: 8px;
     }
 
-    /* === Knoppen-stijl (exact als Free Download) === */
-    .btn-free-download,
+    /* === Knoppen-stijl === */
     .btn-add-cart {
       display: inline-block;
       margin: 8px auto 16px auto;
       padding: 10px 18px;
-      background: #FFC90E;              /* lichtoranje */
-      color: #FFFFFF;
-      font-family: 'Montserrat Alternates', sans-serif; /* zelfde font */
+      background: #FFC90E;
+      color: white;
       font-weight: 600;
       font-size: 14px;
-      border: 2px solid #e6b800;        /* donkerder oranje rand */
+      border: 2px solid #e6b800;
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s ease, border-color 0.3s ease;
-      text-decoration: none;
-      text-transform: uppercase;         /* FREE DOWNLOAD was uppercase */
+      text-transform: uppercase;
     }
-    .btn-free-download:hover,
-    .btn-add-cart:hover {
-      background:#e6b800;
-      border-color:#cc9f00;
-    }
+    .btn-add-cart:hover { background:#e6b800; border-color:#cc9f00; }
 
     .product-price {
       color: #333;
@@ -195,35 +188,6 @@
       font-size: 14px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 40px;
-      color: #fff;
-      cursor: pointer;
-      font-weight: bold;
-    }
   </style>
 </head>
 
@@ -239,9 +203,7 @@
       </ul>
 
       <div class="nav-icons">
-        <a href="account.html">
-          <img src="user-icon.svg" alt="User">
-        </a>
+        <a href="account.html"><img src="user-icon.svg" alt="User"></a>
         <a href="checkout.html" class="cart-link" style="position:relative;">
           <img src="shoppingbag.svg" alt="Shopping Bag">
           <span class="cart-badge" id="cart-count">0</span>
@@ -250,44 +212,91 @@
     </nav>
   </header>
 
-  <h1 class="hero-text">
-    Get the birthday template now ↓
-  </h1>
+  <h1 class="hero-text">Get the birthday template now ↓</h1>
 
   <section class="featured">
     <div class="featured-inner">
-
-      <!-- ✅ Product: Januari -->
+      <!-- Product 1 -->
       <article class="product-card" onclick="openModal('voorbeeldjanuari.png')">
-        <div class="thumb">
-          <img src="voorbeeldjanuari.png" alt="Birthday Template – Start in January">
-        </div>
+        <div class="thumb"><img src="voorbeeldjanuari.png" alt="Birthday Template – Start in January"></div>
         <div class="product-body">
           <h2 class="product-title">Birthday Template – Start in January</h2>
           <div class="product-price">€4,99</div>
-          <button class="btn-add-cart" onclick="addToCart(event, 'Birthday Template – Start in January', 'BIRTHDAYLIST_start_Januari.pdf', 4.99)">
-            ADD TO CART
-          </button>
+          <button class="btn-add-cart" onclick="addToCart(event, 'Birthday Template – Start in January', 'BIRTHDAYLIST_start_Januari.pdf', 4.99)">ADD TO CART</button>
         </div>
       </article>
 
-      <!-- ✅ Product: April -->
+      <!-- Product 2 -->
       <article class="product-card" onclick="openModal('voorbeeldapril.png')">
-        <div class="thumb">
-          <img src="voorbeeldapril.png" alt="Birthday Template – Start in April">
-        </div>
+        <div class="thumb"><img src="voorbeeldapril.png" alt="Birthday Template – Start in April"></div>
         <div class="product-body">
           <h2 class="product-title">Birthday Template – Start in April</h2>
           <div class="product-price">€4,99</div>
-          <button class="btn-add-cart" onclick="addToCart(event, 'Birthday Template – Start in April', 'BIRTHDAYLIST_start_April.pdf', 4.99)">
-            ADD TO CART
-          </button>
+          <button class="btn-add-cart" onclick="addToCart(event, 'Birthday Template – Start in April', 'BIRTHDAYLIST_start_April.pdf', 4.99)">ADD TO CART</button>
         </div>
       </article>
-
     </div>
   </section>
 
   <footer>
     <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
-    <div class="footer-text">© 2025 Starplanner – All rights reserved.</div
+    <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
+  </footer>
+
+  <!-- 🔥 Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
+      authDomain: "starplanner-3acf9.firebaseapp.com",
+      projectId: "starplanner-3acf9",
+      storageBucket: "starplanner-3acf9.firebasestorage.app",
+      messagingSenderId: "793684440573",
+      appId: "1:793684440573:web:5beb2ab6f64b4fc110d594"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Winkelmandje
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = document.getElementById('cart-count');
+    cartCount.textContent = cart.length;
+
+    function updateCartCount() {
+      cartCount.textContent = cart.length;
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Product toevoegen
+    async function addToCart(event, name, file, price) {
+      event.stopPropagation();
+      cart.push({ name, file, price });
+      updateCartCount();
+      saveOrderToFirestore(name, file, price);
+      alert(`${name} toegevoegd aan winkelwagen!`);
+    }
+
+    // Firestore opslaan
+    async function saveOrderToFirestore(name, file, price) {
+      const user = firebase.auth().currentUser;
+      try {
+        await db.collection("orders").add({
+          user: user ? user.email : "guest",
+          product: name,
+          file: file,
+          price: price,
+          date: firebase.firestore.Timestamp.now()
+        });
+        console.log("Order opgeslagen in Firestore!");
+      } catch (error) {
+        console.error("Fout bij opslaan:", error);
+      }
+    }
+  </script>
+</body>
+</html>
