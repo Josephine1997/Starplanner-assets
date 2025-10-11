@@ -100,6 +100,31 @@ Subtotal: €<span id="subtotal">0.00</span>
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
 
 <script>
+// 🔊 AUDIO FIX – unlock as soon as user interacts once
+const whoosh=document.getElementById('sound-whoosh');
+const chime =document.getElementById('sound-chime');
+let soundReady=false;
+const queue=[];
+
+function unlockAudio(){
+  if(soundReady) return;
+  soundReady=true;
+  [whoosh,chime].forEach(a=>{
+    try{a.play().then(()=>a.pause()).catch(()=>{});}catch(_){}
+  });
+  flushQueue();
+}
+["click","touchstart","keydown","pointerdown"].forEach(ev=>{
+  window.addEventListener(ev,unlockAudio,{once:true,passive:true});
+});
+
+function playSound(el,vol=0.8){
+  const fn=()=>{try{el.currentTime=0;el.volume=vol;el.play().catch(()=>{});}catch(_){}}; 
+  if(soundReady) fn(); else queue.push(fn);
+}
+function flushQueue(){while(queue.length){try{queue.shift()();}catch(_){}}}
+
+// 🔥 Firebase setup
 const firebaseConfig={apiKey:"AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",authDomain:"starplanner-3acf9.firebaseapp.com",projectId:"starplanner-3acf9",storageBucket:"starplanner-3acf9.firebasestorage.app",messagingSenderId:"793684440573",appId:"1:793684440573:web:5beb2ab6f64b4fc110d594"};
 firebase.initializeApp(firebaseConfig);
 const auth=firebase.auth();const db=firebase.firestore();
@@ -144,30 +169,6 @@ renderCart();
 function removeItem(i){cart.splice(i,1);localStorage.setItem('cart',JSON.stringify(cart));cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);renderCart();}
 function updateQty(i,d){const c=Number(cart[i]?.qty)||1;if(c===1&&d<0){removeItem(i);return;}cart[i].qty=c+d<1?1:c+d;localStorage.setItem('cart',JSON.stringify(cart));cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);renderCart();}
 async function placeOrder(){const u=auth.currentUser;if(!u){alert("You must be logged in to complete your order.");return;}if(cart.length===0){alert("Your cart is empty.");return;}const t=cart.reduce((s,it)=>s+((Number(it.price)||0)*(Number(it.qty)||1)),0);try{await db.collection('orders').add({userId:u.uid,email:u.email,items:cart,total:t,date:firebase.firestore.FieldValue.serverTimestamp()});alert("✅ Your order has been placed successfully!");localStorage.removeItem('cart');window.location.href="account.html";}catch(e){alert("❌ Error placing order: "+e.message);}}
-
-/* 🔊 Automatische audio-unlock bij eerste klik/tik */
-const whoosh=document.getElementById('sound-whoosh');
-const chime =document.getElementById('sound-chime');
-let soundReady=false;
-const queue=[];
-
-function unlockAudio(){
-  if(soundReady) return;
-  soundReady=true;
-  [whoosh,chime].forEach(a=>{
-    try{a.play().then(()=>a.pause()).catch(()=>{});}catch(_){}
-  });
-  flushQueue();
-}
-function playSound(el,vol=0.8){
-  const fn=()=>{try{el.currentTime=0;el.volume=vol;el.play().catch(()=>{});}catch(_){}}; 
-  if(soundReady) fn(); else queue.push(fn);
-}
-function flushQueue(){while(queue.length){try{queue.shift()();}catch(_){}}}
-
-["click","touchstart","keydown","pointerdown"].forEach(ev=>{
-  window.addEventListener(ev,unlockAudio,{once:true,passive:true});
-});
 
 /* 🌌 Stardust animatie */
 window.addEventListener('load',()=>{
