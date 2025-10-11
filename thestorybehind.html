@@ -6,42 +6,35 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-<!-- 🌟 SEO & Vindbaarheid -->
 <title>The Story Behind – Starplanner | Astrology & Goalsetting Planner 2025</title>
 <meta name="description" content="Discover the story behind Starplanner – an astrology-inspired planner designed for mindfulness, productivity, and goalsetting." />
 <meta name="author" content="Starplanner" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://www.starplanner.com/thestorybehind.html" />
 
-<!-- 🔍 Zoekwoorden -->
 <meta name="keywords" content="Astrologie planner, Astrology planner, Astrologie agenda, Astrology agenda, Birthday template, Verjaardagstemplate, Verjaardagskalender, Verjaardagskalender template, Planner starting in April, Agenda starting in April, full 12 month agenda, celestial planner, celestial agenda, most practical planner, most practical agenda, to do list agenda, to do list planner, goalsetting planner, goalsetting agenda, colorful planner, colourfull planner, colourfull agenda, ADHD planner, ADHD agenda, mindful planner, productivity planner, daily planner, weekly planner, monthly planner, creative planner, self care planner, spiritual planner, zodiac planner, manifestation planner, bullet journal, journaling planner, digital planner, printable planner, habit tracker planner, planner for students, planner for work, 2025 planner, astrology goals, horoscope planner, planner with moon phases, celestial design planner, dream planner, personal growth planner, focus planner, planner met affirmaties, planner met doelen, planner met to do lijst, planner met overzicht, agenda met doelensheets, praktische planner, kleurrijke planner, stijlvolle planner, star themed planner" />
 
-<!-- 📱 Mobielvriendelijke instellingen -->
 <meta name="theme-color" content="#FFC90E" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-<!-- 💬 Open Graph -->
 <meta property="og:title" content="The Story Behind – Starplanner | Astrology & Goalsetting Planner 2025">
 <meta property="og:description" content="Read about the inspiration and creation behind the celestial Starplanner – for dreamers and doers who plan with the stars.">
 <meta property="og:image" content="https://www.starplanner.com/starplanner-preview.jpg">
 <meta property="og:url" content="https://www.starplanner.com/thestorybehind.html">
 <meta property="og:type" content="article">
 
-<!-- 🐦 Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Story Behind – Starplanner | Astrology & Goalsetting Planner 2025">
 <meta name="twitter:description" content="The story of how astrology meets productivity in the Starplanner.">
 <meta name="twitter:image" content="https://www.starplanner.com/starplanner-preview.jpg">
 
-<!-- 🚀 Performance & snelheid -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="shoppingbag.svg">
 <link rel="preload" as="image" href="ArtworkWaterverfkwastachterkopjes.jpg">
 
-<!-- 📄 Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -59,7 +52,6 @@
 }
 </script>
 
-<!-- ⚡ Optimalisatie voor mobiele snelheid -->
 <style>
   img { max-width: 100%; height: auto; }
   body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -134,5 +126,22 @@ const cartCount=document.getElementById('cart-count');
 const cart=JSON.parse(localStorage.getItem('cart'))||[];
 cartCount.textContent=cart.reduce((sum, item)=>sum+(item.qty||1),0);
 </script>
+
+<!--
+Apache serverconfiguratie voor caching en headers
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options nosniff
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+-->
 </body>
 </html>
