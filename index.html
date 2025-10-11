@@ -80,6 +80,31 @@
   .footer-decoration { width:100%; height:100px; object-fit:cover; display:block; }
   .footer-text { position:absolute; bottom:10px; width:100%; text-align:center; color:#fff; font-size:14px;
     text-shadow:1px 1px 3px rgba(0,0,0,0.5); }
+
+  /* ===== Checkout overlay (iframe met autoplay) ===== */
+  #checkout-modal {
+    position:fixed; inset:0; z-index:10000; display:none;
+  }
+  #checkout-modal.active { display:block; }
+  #checkout-modal .backdrop {
+    position:absolute; inset:0; background:rgba(0,0,0,.55);
+  }
+  #checkout-modal .panel {
+    position:absolute; top:4vh; left:50%; transform:translateX(-50%);
+    width:min(1000px, 94vw); height:min(88vh, 900px);
+    background:#fff; border-radius:16px; overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.35);
+  }
+  #checkout-modal .close {
+    position:absolute; top:8px; right:10px; z-index:2;
+    width:36px; height:36px; border:none; border-radius:50%;
+    background:#00000022; color:#333; font-size:20px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  #checkout-frame {
+    position:absolute; inset:0; width:100%; height:100%; border:0;
+    background:#fff;
+  }
 </style>
 </head>
 
@@ -95,6 +120,7 @@
     </ul>
     <div class="nav-icons">
       <a href="account.html"><img src="user-icon.svg" alt="User"></a>
+      <!-- We intercept this click to open the overlay instead of navigating -->
       <a href="checkout.html" class="cart-link" style="position:relative;">
         <img src="shoppingbag.svg" alt="Shopping Bag">
         <span class="cart-badge" id="cart-count">0</span>
@@ -140,6 +166,16 @@
   <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
 </footer>
 
+<!-- ===== Checkout overlay ===== -->
+<div id="checkout-modal" aria-hidden="true">
+  <div class="backdrop"></div>
+  <div class="panel">
+    <button class="close" id="close-checkout" aria-label="Close">✕</button>
+    <!-- Belangrijk: allow="autoplay" -->
+    <iframe id="checkout-frame" src="" allow="autoplay"></iframe>
+  </div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
@@ -161,6 +197,12 @@
   const cartCount = document.getElementById('cart-count');
   const popup = document.getElementById('cart-popup');
 
+  // Overlay refs
+  const modal = document.getElementById('checkout-modal');
+  const iframe = document.getElementById('checkout-frame');
+  const closeBtn = document.getElementById('close-checkout');
+  const cartLink = document.querySelector('.cart-link');
+
   updateCartCount();
 
   function updateCartCount() {
@@ -175,14 +217,14 @@
     setTimeout(() => popup.style.display = 'none', 2000);
   }
 
-  // ✅ Toegevoegd: juiste addToCart met audio-unlock en triggers
+  // ✅ Add-to-Cart: audio pre-unlock + triggers voor checkout-animatie
   async function addToCart(event, name, file, price) {
     event.stopPropagation();
     let existing = cart.find(i => i.name === name);
     if (existing) existing.qty = (existing.qty || 1) + 1;
     else cart.push({ name, file, price, qty: 1 });
 
-    // 🔊 Audio alvast ontgrendelen via deze klik
+    // 🔊 Audio alvast "ontgrendelen" via deze klik (onhoorbaar)
     try {
       const a1 = new Audio("whoosh-soft.mp3");
       const a2 = new Audio("sparkle-chime.mp3");
@@ -191,7 +233,7 @@
       a2.play().then(() => a2.pause()).catch(()=>{});
     } catch(_) {}
 
-    // ✅ Bewaar cart en triggers voor de checkout-animatie
+    // ✅ Triggers voor checkout
     localStorage.setItem('cart', JSON.stringify(cart));
     localStorage.setItem('justAdded', 'true');
     localStorage.setItem('lastAddedItemName', name);
@@ -212,6 +254,33 @@
       console.warn("Firestore save skipped:", e.message);
     }
   }
+
+  /* ====== Checkout overlay i.p.v. navigeren (zorgt dat audio direct mag spelen) ====== */
+  function openCheckoutOverlay() {
+    if (!iframe.src) {
+      // Je kunt eventueel een hash toevoegen, maar is niet nodig
+      iframe.src = 'checkout.html';
+    }
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCheckoutOverlay() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Intercept klik op cart-link → open overlay met iframe (allow="autoplay")
+  cartLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openCheckoutOverlay();
+  });
+
+  // Sluiten overlay
+  closeBtn.addEventListener('click', closeCheckoutOverlay);
+  modal.querySelector('.backdrop').addEventListener('click', closeCheckoutOverlay);
+  window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeCheckoutOverlay(); });
 </script>
 </body>
 </html>
