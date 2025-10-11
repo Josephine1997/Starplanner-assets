@@ -38,7 +38,8 @@ footer{position:relative;margin-top:60px;overflow:hidden;}
 
 /* 🌟 Stardust overlay */
 #stardust-overlay{
-  display:none;justify-content:center;align-items:center;
+  display:none;
+  justify-content:center;align-items:center;
   position:fixed;top:0;left:0;width:100%;height:100%;
   background:rgba(0,0,0,0.6);color:white;font-size:22px;font-weight:600;
   z-index:9999;flex-direction:column;overflow:hidden;text-align:center;
@@ -100,16 +101,8 @@ Subtotal: €<span id="subtotal">0.00</span>
 <audio id="sound-whoosh" src="whoosh-soft.mp3" preload="auto" playsinline></audio>
 <audio id="sound-chime" src="sparkle-chime.mp3" preload="auto" playsinline></audio>
 
-<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
-
 <script>
-/* --- basic setup --- */
-const firebaseConfig={apiKey:"AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",authDomain:"starplanner-3acf9.firebaseapp.com",projectId:"starplanner-3acf9",storageBucket:"starplanner-3acf9.firebasestorage.app",messagingSenderId:"793684440573",appId:"1:793684440573:web:5beb2ab6f64b4fc110d594"};
-firebase.initializeApp(firebaseConfig);
-const auth=firebase.auth();const db=firebase.firestore();
-
+/* --- Audio setup --- */
 const whoosh=document.getElementById('sound-whoosh');
 const chime=document.getElementById('sound-chime');
 let soundReady=false;const queue=[];
@@ -119,7 +112,7 @@ function stopSound(el){try{el.pause();el.currentTime=0;}catch(_){}}
 function flushQueue(){while(queue.length){try{queue.shift()();}catch(_){}}}
 ["click","touchstart","keydown","pointerdown"].forEach(ev=>{window.addEventListener(ev,unlockAudio,{once:true,passive:true});});
 
-/* --- Stardust --- */
+/* --- Stardust animation --- */
 window.addEventListener('load',()=>{
   const overlay=document.getElementById('stardust-overlay');
   const textEl=document.getElementById('overlay-text');
@@ -129,7 +122,7 @@ window.addEventListener('load',()=>{
 
   const justAdded=localStorage.getItem('justAdded')==='true';
   localStorage.removeItem('justAdded');
-  if(!justAdded)return; // geen animatie als niets net toegevoegd
+  if(!justAdded)return;
 
   function getTargetPos(){
     if(!targetBag)return {cx:window.innerWidth/2,cy:window.innerHeight/2};
@@ -139,8 +132,8 @@ window.addEventListener('load',()=>{
 
   function startStardust(){
     unlockAudio();
-    overlay.style.display='flex';
     textEl.textContent="Sprinkling a little stardust…";
+    overlay.style.display='flex';
 
     const stars=[];
     for(let i=0;i<30;i++){
@@ -155,7 +148,6 @@ window.addEventListener('load',()=>{
       stars.push(s);
     }
 
-    // doel bepalen
     const last=localStorage.getItem('lastAddedItemName');
     if(last){
       document.querySelectorAll('.cart-item').forEach(it=>{
@@ -169,7 +161,7 @@ window.addEventListener('load',()=>{
       targetBag=document.querySelector('.nav-icons img[alt="Shopping Bag"]');
     }
 
-    // Extra wachttijd (1,5s) vóór samenkomen
+    // 1.5s rustmoment vóór swirl
     setTimeout(()=>{
       playSound(chime,0.9);
       swirlActive=true;
@@ -185,16 +177,14 @@ window.addEventListener('load',()=>{
         });
       };
       moveStars();
-      // realtime volgen bij scroll
-      window.addEventListener('scroll',()=>{
-        if(swirlActive)moveStars();
-      });
+      window.addEventListener('scroll',()=>{if(swirlActive)moveStars();});
 
-      // na 3s (1,5s rust + 1,5s samenkomen)
+      // Whoosh + explosie na 3s
       setTimeout(()=>{
         swirlActive=false;
         const {cx,cy}=getTargetPos();
         playSound(whoosh,0.9);
+
         const flare=document.createElement('div');
         flare.style.position='fixed';
         flare.style.left=`${cx-50}px`;flare.style.top=`${cy-50}px`;
@@ -225,14 +215,12 @@ window.addEventListener('load',()=>{
           });
         }
 
-        // geluid stop pas na +1s
         setTimeout(()=>{
           stopSound(whoosh);
           setTimeout(()=>stopSound(chime),1000);
         },1200);
 
-        // fade-out iets later (extra 1.5s)
-        fadeOut(5500);
+        fadeOut(5500); // +1.5s langer
       },3000);
     },1500);
   }
