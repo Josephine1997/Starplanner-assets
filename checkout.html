@@ -36,10 +36,21 @@ footer{position:relative;margin-top:60px;overflow:hidden;}
 .footer-decoration{width:100%;height:100px;object-fit:cover;display:block;}
 .footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
 
-/* 🌟 Stardust overlay */
-#stardust-overlay{display:none;justify-content:center;align-items:center;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);color:white;font-size:22px;font-weight:600;z-index:9999;flex-direction:column;overflow:hidden;text-align:center;}
+/* 🌟 Stardust overlay (verborgen tot 1e scroll) */
+#stardust-overlay{
+  display:none;justify-content:center;align-items:center;
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.6);color:white;font-size:22px;font-weight:600;
+  z-index:9999;flex-direction:column;overflow:hidden;text-align:center;
+}
 #stardust{position:absolute;width:100%;height:100%;top:0;left:0;overflow:hidden;}
-.star{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,1) 0%,#fff4b0 40%,#ffc0cb 90%);box-shadow:0 0 8px 2px rgba(255,255,255,0.8);opacity:0;animation:twinkle 2s infinite ease-in-out;transform-origin:center;transition:opacity .5s;}
+.star{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,1) 0%,#fff4b0 40%,#ffc0cb 90%);
+  box-shadow:0 0 8px 2px rgba(255,255,255,0.8);
+  opacity:0;animation:twinkle 2s infinite ease-in-out;transform-origin:center;
+  transition:opacity .5s;
+}
 @keyframes twinkle{0%,100%{opacity:0;transform:scale(1);}50%{opacity:1;transform:scale(1.6);}}
 </style>
 </head>
@@ -94,29 +105,40 @@ Subtotal: €<span id="subtotal">0.00</span>
 const cartContainer=document.getElementById('cart-items');
 const subtotalEl=document.getElementById('subtotal');
 const cartCount=document.getElementById('cart-count');
-let cart=(JSON.parse(localStorage.getItem('cart'))||[]).map(it=>({...it,qty:Number(it?.qty)>0?Number(it.qty):1,price:Number(it?.price)?Number(it.price):0}));
+let cart=(JSON.parse(localStorage.getItem('cart'))||[]).map(it=>({
+  ...it,
+  qty: Number(it?.qty)>0 ? Number(it.qty):1,
+  price: Number(it?.price)||0
+}));
 localStorage.setItem('cart',JSON.stringify(cart));
 cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);
 
 function renderCart(){
-  cartContainer.innerHTML='';let total=0;
-  if(cart.length===0){cartContainer.innerHTML=`<div class="empty-cart">Your cart is empty</div>`;}
-  else{
+  cartContainer.innerHTML='';
+  let total=0;
+  if(cart.length===0){
+    cartContainer.innerHTML=`<div class="empty-cart">Your cart is empty</div>`;
+  }else{
     cart.forEach((item,index)=>{
-      const price=Number(item.price)||0;const qty=Number(item.qty)||1;
+      const price=Number(item.price)||0;
+      const qty=Number(item.qty)||1;
       const div=document.createElement('div');
       div.classList.add('cart-item');
-      div.innerHTML='<div style="display:flex;align-items:center;">'
-        +'<img src="shoppingbag.svg" alt="'+item.name+'">'
-        +'<div class="product-info"><div>'+item.name+'</div>'
-        +'<div class="remove" onclick="removeItem('+index+')">REMOVE</div>'
-        +'</div></div>'
-        +'<div>€'+price.toFixed(2)+'<br>'
-        +'<div class="qty-controls">'
-        +'<button class="qty-btn" onclick="updateQty('+index+',-1)">–</button>'
-        +'<span class="qty-box">'+qty+'</span>'
-        +'<button class="qty-btn" onclick="updateQty('+index+',1)">+</button>'
-        +'</div></div>';
+      div.innerHTML=
+        `<div style="display:flex;align-items:center;">
+           <img src="shoppingbag.svg" alt="${item.name}">
+           <div class="product-info">
+             <div>${item.name}</div>
+             <div class="remove" onclick="removeCartItem(${index})">REMOVE</div>
+           </div>
+         </div>
+         <div>€${price.toFixed(2)}<br>
+           <div class="qty-controls">
+             <button class="qty-btn" onclick="updateQty(${index},-1)">–</button>
+             <span class="qty-box">${qty}</span>
+             <button class="qty-btn" onclick="updateQty(${index},1)">+</button>
+           </div>
+         </div>`;
       cartContainer.appendChild(div);
       total+=price*qty;
     });
@@ -125,8 +147,8 @@ function renderCart(){
 }
 renderCart();
 
-/* Global */
-window.removeItem=function(i){
+/* Globaal maken zodat inline onclick werkt */
+window.removeCartItem=function(i){
   cart.splice(i,1);
   localStorage.setItem('cart',JSON.stringify(cart));
   cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);
@@ -134,130 +156,215 @@ window.removeItem=function(i){
 }
 window.updateQty=function(i,d){
   const c=Number(cart[i]?.qty)||1;
-  if(c===1 && d<0){removeItem(i);return;}
-  cart[i].qty=c+d<1?1:c+d;
+  if(c===1 && d<0){ removeCartItem(i); return; }
+  cart[i].qty = Math.max(1, c+d);
   localStorage.setItem('cart',JSON.stringify(cart));
   cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);
   renderCart();
 }
 window.placeOrder=function(){
-  if(cart.length===0){alert("Your cart is empty.");return;}
-  alert("✅ Order placed successfully! (demo mode)");
+  if(cart.length===0){ alert("Your cart is empty."); return; }
+  alert("✅ Order placed successfully! (demo)");
   localStorage.removeItem('cart');
   renderCart();
 }
 
 /* ===== AUDIO ===== */
 const whoosh=document.getElementById('sound-whoosh');
-const chime=document.getElementById('sound-chime');
-let soundReady=false;const queue=[];
-function unlockAudio(){if(soundReady)return;soundReady=true;[whoosh,chime].forEach(a=>{try{a.play().then(()=>a.pause()).catch(()=>{});}catch(_){}});flushQueue();}
-function playSound(el,vol=0.85){const fn=()=>{try{el.currentTime=0;el.volume=vol;el.play().catch(()=>{});}catch(_){}}; if(soundReady)fn(); else queue.push(fn);}
-function stopSound(el){try{el.pause();el.currentTime=0;}catch(_){}} 
-function flushQueue(){while(queue.length){try{queue.shift()();}catch(_){}}}
-["click","touchstart","keydown","pointerdown"].forEach(ev=>{window.addEventListener(ev,unlockAudio,{once:true,passive:true});});
+const chime =document.getElementById('sound-chime');
+let soundReady=false; const queue=[];
+function unlockAudio(){
+  if(soundReady) return;
+  soundReady=true;
+  [whoosh,chime].forEach(a=>{ try{ a.play().then(()=>a.pause()).catch(()=>{});}catch(_){ }});
+  flushQueue();
+}
+function playSound(el,vol=0.85){
+  const fn=()=>{ try{ el.currentTime=0; el.volume=vol; el.play().catch(()=>{});}catch(_){ } };
+  if(soundReady) fn(); else queue.push(fn);
+}
+function fadeAudioOut(el,durMs=1000){
+  try{
+    const startVol = el.volume ?? 1; const t0=performance.now();
+    function step(t){
+      const k=Math.min(1,(t-t0)/durMs);
+      el.volume = startVol * (1-k);
+      if(k<1) requestAnimationFrame(step); else { el.pause(); el.currentTime=0; el.volume=startVol; }
+    }
+    requestAnimationFrame(step);
+  }catch(_){}
+}
+function stopSound(el){ try{ el.pause(); el.currentTime=0; }catch(_){ } }
+function flushQueue(){ while(queue.length){ try{ queue.shift()(); }catch(_){ } } }
+/* ook wheel/scroll meerekenen voor unlock */
+["click","touchstart","keydown","pointerdown","wheel","scroll"].forEach(ev=>{
+  window.addEventListener(ev,unlockAudio,{once:true,passive:true});
+});
 
-/* ===== STARDUST ===== */
+/* ===== STARDUST (rAF-gestuurde multi-swirl) ===== */
 window.addEventListener('load',()=>{
   const overlay=document.getElementById('stardust-overlay');
   const textEl=document.getElementById('overlay-text');
   const field=document.getElementById('stardust');
-  const justAdded=localStorage.getItem('justAdded')==='true';
+
+  const justAdded = localStorage.getItem('justAdded')==='true';
   localStorage.removeItem('justAdded');
   if(!justAdded) return;
 
-  const PAUSE_BEFORE_SWIRL=1500;
-  const SWIRL_DURATION=3000;
-  const CHIME_EXTRA_AFTER=1000;
-  let started=false, animFrame;
+  // Timings — pre-swirl 2s langer dan eerder (1.5s → nu 3.5s)
+  const PRE_SWIRL_PAUSE = 3500;     // ms (tekst + sterren langer zichtbaar)
+  const SWIRL_DURATION  = 3000;     // ms — tijd tot aankomst
+  const CHIME_EXTRA_HOLD= 3000;     // ms — 2s langer dan eerder (was ~1s)
+  const CHIME_FADE_MS   = 2000;     // ms — zachte fade-out
+
+  let started=false;
+
+  function norm(s){ return (s||'').normalize('NFKD').replace(/\s+/g,' ').trim().toLowerCase(); }
 
   function findTargets(){
-    const last=localStorage.getItem('lastAddedItemName');
-    const targets=[];
+    // unieke producten op naam → bij elk corresponderende .cart-item img
+    const seen=new Set(); const targets=[];
     document.querySelectorAll('.cart-item').forEach(it=>{
-      const img=it.querySelector('img');
-      if(!img) return;
-      if(cart.length>1 || it.textContent.includes(last)) targets.push(img);
+      const nameEl = it.querySelector('.product-info > div');
+      const name = norm(nameEl?.textContent);
+      if(!name) return;
+      if(!seen.has(name)){ seen.add(name); const img=it.querySelector('img'); if(img) targets.push(img); }
     });
     if(targets.length===0){
       const bag=document.querySelector('.nav-icons img[alt="Shopping Bag"]');
       if(bag) targets.push(bag);
     }
-    return targets;
+    return targets.slice(0,3); // safety: niet onnodig veel doelen
   }
-  function getPos(el){const r=el.getBoundingClientRect();return {cx:r.left+r.width/2,cy:r.top+r.height/2};}
+
+  function getCenter(el){
+    if(!el) return {cx: innerWidth/2, cy: innerHeight/2};
+    const r=el.getBoundingClientRect();
+    return {cx:r.left + r.width/2, cy:r.top + r.height/2};
+  }
+
+  function easeOutCubic(t){ return 1-Math.pow(1-t,3); }
 
   function startStardust(){
-    if(started)return; started=true;
+    if(started) return; started=true;
     unlockAudio();
+
     overlay.style.display='flex';
     textEl.textContent="Sprinkling a little stardust…";
 
+    // losse sterren maken
     const stars=[];
-    for(let i=0;i<40;i++){
+    const STAR_COUNT=40;
+    for(let i=0;i<STAR_COUNT;i++){
       const s=document.createElement('span');
       s.classList.add('star');
-      const size=Math.random()*2+1;
-      s.style.width=s.style.height=size+'px';
-      s.style.top=(Math.random()*window.innerHeight)+'px';
-      s.style.left=(Math.random()*window.innerWidth)+'px';
-      s.style.animationDelay=(Math.random()*2)+'s';
+      const size = Math.random()*2+1;
+      s.style.width=s.style.height=`${size}px`;
+      s.style.top  = `${Math.random()*innerHeight}px`;
+      s.style.left = `${Math.random()*innerWidth}px`;
+      s.style.animationDelay=`${Math.random()*2}s`;
       field.appendChild(s);
       stars.push(s);
     }
 
-    const targets=findTargets();
-    const groupSize=Math.ceil(stars.length/targets.length);
-    const starGroups=targets.map((_,i)=>stars.slice(i*groupSize,(i+1)*groupSize));
+    const targets = findTargets();
+    // splits sterren gelijkmatig over doelen
+    const groupSize = Math.ceil(stars.length / targets.length);
+    const groups = targets.map((_,i)=>stars.slice(i*groupSize,(i+1)*groupSize));
 
+    // 2s extra wachttijd vóór swirl
     setTimeout(()=>{
+      // chime start bij samenkomen
       playSound(chime,0.9);
 
-      const animateSwirl=()=>{
+      // rAF-animatie: per frame herbereken eindpunt en interpoleer
+      const t0 = performance.now();
+      // initial startpos voor elke ster om nette easing te doen
+      const starMeta = stars.map((s,idx)=>({
+        el:s,
+        // startpositie
+        sx: parseFloat(s.style.left)|| (innerWidth/2),
+        sy: parseFloat(s.style.top )|| (innerHeight/2),
+        // vaste hoek per ster in z’n groep (mooie spiraal)
+        a: idx*0.4
+      }));
+
+      function frame(now){
+        let p = Math.min(1, (now - t0)/SWIRL_DURATION);
+        const e = easeOutCubic(p);
+
         targets.forEach((t,ti)=>{
-          const {cx,cy}=getPos(t);
-          const g=starGroups[ti]||[];
-          g.forEach((s,i)=>{
-            const a=i*0.4;
-            s.style.top=(cy+Math.sin(a)*8)+'px';
-            s.style.left=(cx+Math.cos(a)*8)+'px';
-            s.style.transform=`scale(0.3) rotate(${a*8}rad)`;
-            s.style.opacity='0.9';
+          const {cx,cy}=getCenter(t);
+          const g = groups[ti]||[];
+          g.forEach((s)=>{
+            const meta = starMeta[stars.indexOf(s)];
+            const tx = cx + Math.cos(meta.a)*8;
+            const ty = cy + Math.sin(meta.a)*8;
+            const nx = meta.sx + (tx - meta.sx)*e;
+            const ny = meta.sy + (ty - meta.sy)*e;
+            s.style.left = nx+'px';
+            s.style.top  = ny+'px';
+            s.style.transform = `scale(${1 - 0.7*e}) rotate(${meta.a*8}rad)`;
+            s.style.opacity = String(0.3 + 0.6*e);
           });
         });
-        animFrame=requestAnimationFrame(animateSwirl);
-      };
-      animateSwirl();
 
-      setTimeout(()=>{
-        cancelAnimationFrame(animFrame);
+        if(p<1) requestAnimationFrame(frame);
+        else onArrive(); // klaar → explosie/whoosh
+      }
+
+      requestAnimationFrame(frame);
+
+      function onArrive(){
+        // WHOOSH bij aankomst (1x, centraal)
         playSound(whoosh,0.9);
+
+        // kleine flares & bursts bij elk doel
         targets.forEach(t=>{
-          const {cx,cy}=getPos(t);
+          const {cx,cy}=getCenter(t);
           const flare=document.createElement('div');
           flare.style.position='fixed';
           flare.style.left=(cx-50)+'px';
-          flare.style.top=(cy-50)+'px';
-          flare.style.width='100px';
-          flare.style.height='100px';
+          flare.style.top =(cy-50)+'px';
+          flare.style.width='100px'; flare.style.height='100px';
           flare.style.borderRadius='50%';
           flare.style.background='radial-gradient(circle,rgba(255,255,200,0.9)0%,rgba(255,180,120,0.3)50%,transparent 80%)';
-          flare.style.pointerEvents='none';
-          flare.style.opacity='0';
+          flare.style.pointerEvents='none'; flare.style.opacity='0';
           flare.style.transition='opacity .6s ease-out,transform .6s ease-out';
           flare.style.zIndex='10000';
           document.body.appendChild(flare);
           requestAnimationFrame(()=>{flare.style.opacity='1';flare.style.transform='scale(1.6)';});
           setTimeout(()=>flare.remove(),700);
+
+          for(let j=0;j<12;j++){
+            const sp=document.createElement('span');
+            sp.classList.add('star');
+            sp.style.width='3px'; sp.style.height='3px';
+            sp.style.top =cy+'px'; sp.style.left=cx+'px'; sp.style.opacity='1';
+            sp.style.transition='top .8s ease-out,left .8s ease-out,opacity .8s ease-out,transform .8s ease-out';
+            field.appendChild(sp);
+            const ang=Math.random()*Math.PI*2, dist=60+Math.random()*90;
+            requestAnimationFrame(()=>{
+              sp.style.top  =(cy+Math.sin(ang)*dist)+'px';
+              sp.style.left =(cx+Math.cos(ang)*dist)+'px';
+              sp.style.opacity='0'; sp.style.transform='scale(0.6)';
+            });
+          }
         });
-        setTimeout(()=>{stopSound(whoosh);setTimeout(()=>stopSound(chime),CHIME_EXTRA_AFTER);},1200);
-        fadeOut(SWIRL_DURATION+1500);
-      },SWIRL_DURATION);
-    },PAUSE_BEFORE_SWIRL);
+
+        // whoosh snel klaar; chime 2s langer houden, daarna zacht uitfaden
+        setTimeout(()=>stopSound(whoosh), 900);
+        setTimeout(()=>fadeAudioOut(chime, CHIME_FADE_MS), CHIME_EXTRA_HOLD); // 3s extra hold, dan 2s fade
+
+        // overlay weghalen iets later
+        fadeOut(1200 + CHIME_EXTRA_HOLD + CHIME_FADE_MS); // na burst + chime-hold + fade
+      }
+
+    }, PRE_SWIRL_PAUSE); // extra lange pre-swirl
   }
 
-  function firstScroll(){window.removeEventListener('scroll',firstScroll);startStardust();}
-  window.addEventListener('scroll',firstScroll,{once:true,passive:true});
+  function firstScroll(){ window.removeEventListener('scroll',firstScroll); startStardust(); }
+  window.addEventListener('scroll', firstScroll, {once:true,passive:true});
 });
 
 function fadeOut(delayMs){
