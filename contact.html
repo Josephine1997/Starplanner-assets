@@ -59,7 +59,6 @@
   img { max-width: 100%; height: auto; }
   body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
-  /* Alleen mobiel */
   @media (max-width: 768px) {
     nav { flex-wrap: wrap; padding: 20px; background-size: cover; }
     nav ul { flex-direction: column; gap: 20px; padding-left: 0; align-items: center; }
@@ -73,7 +72,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet" />
 
 <style>
-/* jouw originele contact.css */
 body {background:#FFFFFF;margin:0;padding:0;font-family:'Montserrat Alternates',sans-serif;}
 nav{background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');background-repeat:no-repeat;background-position:center;background-size:120% 110%;padding:40px 60px;display:flex;justify-content:space-between;align-items:center;}
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:70px;padding-left:100px;}
@@ -124,9 +122,7 @@ footer{position:relative;width:100%;margin-top:60px;overflow:hidden;}
     </ul>
 
     <div class="nav-icons">
-      <a href="account.html">
-        <img src="user-icon.svg" alt="User">
-      </a>
+      <a href="account.html"><img src="user-icon.svg" alt="User"></a>
       <a href="checkout.html" class="cart-link">
         <img src="shoppingbag.svg" alt="Shopping Bag">
         <span id="cart-count" class="cart-badge">0</span>
@@ -216,5 +212,22 @@ footer{position:relative;width:100%;margin-top:60px;overflow:hidden;}
     showPopup('Message sent successfully!', 'success');
   });
 </script>
+
+<!--
+Apache serverconfiguratie voor caching en headers
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options nosniff
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+-->
 </body>
 </html>
