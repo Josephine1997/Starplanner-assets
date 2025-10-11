@@ -9,71 +9,65 @@
   <style>
     body { font-family:'Montserrat Alternates',sans-serif; margin:0; padding:0; background:#fff; }
 
+    /* Header */
     nav {
-      background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 120% 110%;
-      padding: 40px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:120% 110%;
+      padding:40px 60px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 70px; padding-left: 100px; }
-    nav ul li a { text-decoration: none; color: white; font-size: 18px; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
-    nav ul li a:hover { color: #FF7929; }
-
-    .nav-icons { display: flex; gap: 30px; align-items: center; position: relative; }
+    nav ul {
+      list-style:none; margin:0; padding:0;
+      display:flex; gap:70px; padding-left:100px;
+    }
+    nav ul li a {
+      text-decoration:none; color:white; font-size:18px;
+      font-weight:600; text-shadow:1px 1px 3px rgba(0,0,0,0.3);
+    }
+    nav ul li a:hover { color:#FF7929; }
+    .nav-icons { display:flex; gap:30px; align-items:center; position:relative; }
     .nav-icons img { width:36px; height:36px; cursor:pointer; }
-    .cart-link { position: relative; }
     .cart-badge {
       position:absolute; top:-6px; right:-6px;
-      background:#FF6F61; color:#fff; font-size:12px;
-      font-weight:600; padding:2px 6px; border-radius:50%;
-      min-width:18px; text-align:center;
+      background:#FF6F61; color:#fff; font-size:12px; font-weight:600;
+      padding:2px 6px; border-radius:50%; min-width:18px; text-align:center;
     }
 
+    /* Main */
     main { padding:20px; max-width:900px; margin:0 auto; }
     h1 { color:#FFC90E; text-align:center; margin-top:30px; margin-bottom:10px; }
     .continue { color:#FFC90E; text-decoration:underline; text-align:center; cursor:pointer; }
     .cart-header { display:flex; justify-content:space-between; margin:40px 0 20px; color:#FFC90E; font-weight:600; font-size:16px; }
 
     .cart-item {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:18px 0;
-      border-bottom:1px solid #ddd;
-      gap:10px;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px 0; border-bottom:1px solid #ddd; gap:10px;
     }
     .cart-item-left { display:flex; align-items:center; gap:15px; flex:1; }
-    .cart-item img.product-thumb { width:80px; height:auto; border-radius:6px; }
+    .product-thumb { width:80px; height:auto; border-radius:6px; }
     .product-info { flex:1; }
-
-    .cart-item-right {
-      display:flex; align-items:center; gap:20px; justify-content:flex-end; min-width:160px;
-    }
+    .cart-item-right { display:flex; align-items:center; gap:20px; justify-content:flex-end; min-width:160px; }
     .price { font-weight:600; color:#333; font-size:16px; }
 
     .qty-controls {
-      display:flex; align-items:center; justify-content:center;
-      gap:5px; background:#fff;
+      display:flex; align-items:center; justify-content:center; gap:5px;
       border:1.5px solid #FFC90E; border-radius:8px; padding:3px 6px;
     }
     .qty-btn {
-      background:#FFC90E; border:none; color:#fff;
-      font-size:18px; width:28px; height:28px;
-      border-radius:6px; cursor:pointer; font-weight:bold;
-      display:flex; align-items:center; justify-content:center;
-      transition:background 0.2s;
+      background:#FFC90E; border:none; color:#fff; font-size:18px;
+      width:28px; height:28px; border-radius:6px; cursor:pointer; font-weight:bold;
+      display:flex; align-items:center; justify-content:center; transition:background .2s;
     }
     .qty-btn:hover { background:#e6b800; }
     .qty-box { min-width:34px; text-align:center; font-weight:600; font-size:15px; color:#333; }
 
     .remove-btn {
       background:none; border:none; color:#FF6F61;
-      font-weight:700; cursor:pointer; font-size:16px;
-      transition:color 0.2s;
+      font-weight:700; cursor:pointer; font-size:16px; transition:color .2s;
     }
     .remove-btn:hover { color:#ff3d2e; }
 
@@ -81,218 +75,247 @@
     .summary { margin-top:40px; font-size:18px; font-weight:600; color:#333; }
     .tax-note { font-size:14px; color:#FFC90E; font-weight:400; margin-top:4px; }
     .checkout-btn {
-      display:inline-block; margin-top:20px;
-      padding:16px 36px; background:#FFC90E;
-      color:#fff; font-size:18px; font-weight:600;
-      border:none; border-radius:6px; cursor:pointer;
-      transition:background 0.2s;
+      display:inline-block; margin-top:20px; padding:16px 36px;
+      background:#FFC90E; color:#fff; font-size:18px; font-weight:600;
+      border:none; border-radius:6px; cursor:pointer; transition:background .2s;
     }
     .checkout-btn:hover { background:#e6b800; }
 
-    footer { position: relative; margin-top: 60px; overflow: hidden; }
-    .footer-decoration { width: 100%; height: 100px; object-fit: cover; display: block; }
-    .footer-text { position: absolute; bottom: 10px; width: 100%; text-align: center; color: #fff; font-size: 14px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+    footer { position:relative; margin-top:60px; overflow:hidden; }
+    .footer-decoration { width:100%; height:100px; object-fit:cover; display:block; }
+    .footer-text {
+      position:absolute; bottom:10px; width:100%; text-align:center;
+      color:#fff; font-size:14px; text-shadow:1px 1px 3px rgba(0,0,0,0.5);
+    }
 
+    /* 🌟 Loading overlay styles */
     #loading-overlay {
-      position: fixed; top:0; left:0; width:100%; height:100%;
-      background: rgba(255,255,255,0.8); backdrop-filter: blur(2px);
-      display:flex; flex-direction:column; justify-content:center; align-items:center;
-      z-index:9999; transition:opacity 1.8s ease, visibility 1.8s ease;
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(255,255,255,0.8);
+      backdrop-filter:blur(2px);
+      display:none; /* standaard verborgen */
+      flex-direction:column; justify-content:center; align-items:center;
+      z-index:9999;
     }
     .loading-text {
       font-family:'Poppins',sans-serif; font-style:italic; font-weight:500; font-size:26px;
-      letter-spacing:0.5px; background:linear-gradient(90deg,#fff7cc,#ffe4b2,#ffd7a3,#ffc38b,#ffb07a);
+      background:linear-gradient(90deg,#fff7cc,#ffe4b2,#ffd7a3,#ffc38b,#ffb07a);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      text-shadow:0 0 8px rgba(255,207,150,0.3); margin-bottom:25px;
+      text-shadow:0 0 8px rgba(255,207,150,0.3);
+      margin-bottom:25px;
     }
     .loading-bar {
       width:60%; height:10px; border-radius:8px;
       background:linear-gradient(135deg,#ffffff 0%,#FFF8D6 20%,#FFE6B3 40%,#FFD18B 60%,#FFB35C 80%,#FFA073 100%);
       background-size:300% 300%; animation:gradientFlow 2.5s ease-in-out infinite;
-      box-shadow:0 0 12px rgba(255,180,90,0.25); position:relative; overflow:hidden;
+      box-shadow:0 0 12px rgba(255,180,90,0.25);
+      position:relative; overflow:hidden;
     }
-    @keyframes gradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-    .stardust { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden; }
+    @keyframes gradientFlow {
+      0% { background-position:0% 50%; }
+      50% { background-position:100% 50%; }
+      100% { background-position:0% 50%; }
+    }
+    .stardust {
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      pointer-events:none; overflow:hidden;
+    }
     .stardust span {
       position:absolute; width:2px; height:2px;
       background:radial-gradient(circle,rgba(255,255,255,0.95)0%,rgba(255,247,200,0.4)60%,transparent 100%);
       border-radius:50%; opacity:0; animation:twinkle 4s ease-in-out infinite;
     }
-    @keyframes twinkle { 0%,100%{opacity:0;transform:scale(0.5);} 50%{opacity:1;transform:scale(1.3);} }
-    #loading-overlay.fade-out { opacity:0; visibility:hidden; transition:opacity 1.8s ease-out,visibility 1.8s ease-out; }
+    @keyframes twinkle {
+      0%,100% { opacity:0; transform:scale(0.5); }
+      50% { opacity:1; transform:scale(1.3); }
+    }
   </style>
 </head>
 
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="thestorybehind.html">THE STORY BEHIND</a></li>
-        <li><a href="shop.html">SHOP</a></li>
-        <li><a href="plannertips.html">PLANNER TIPS</a></li>
-        <li><a href="contact.html">CONTACT</a></li>
-      </ul>
-      <div class="nav-icons">
-        <a href="account.html"><img src="user-icon.svg" alt="User"></a>
-        <a href="checkout.html" class="cart-link">
-          <img src="shoppingbag.svg" alt="Shopping Bag">
-          <span id="cart-count" class="cart-badge">0</span>
-        </a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <h1>Your cart</h1>
-    <div class="continue" onclick="window.location.href='shop.html'">Continue shopping</div>
-
-    <div class="cart-header">
-      <div>PRODUCT</div>
-      <div>PRICE</div>
+<header>
+  <nav>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="thestorybehind.html">THE STORY BEHIND</a></li>
+      <li><a href="shop.html">SHOP</a></li>
+      <li><a href="plannertips.html">PLANNER TIPS</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+    <div class="nav-icons">
+      <a href="account.html"><img src="user-icon.svg" alt="User"></a>
+      <a href="checkout.html" class="cart-link">
+        <img src="shoppingbag.svg" alt="Shopping Bag">
+        <span id="cart-count" class="cart-badge">0</span>
+      </a>
     </div>
+  </nav>
+</header>
 
-    <div id="cart-items" class="cart-items"></div>
+<main>
+  <h1>Your cart</h1>
+  <div class="continue" onclick="window.location.href='shop.html'">Continue shopping</div>
 
-    <div class="summary">
-      Subtotal: €<span id="subtotal">0.00</span>
-      <div class="tax-note">Taxes and shipping calculated at checkout</div>
-      <button class="checkout-btn" onclick="placeOrder()">Checkout</button>
-    </div>
-  </main>
-
-  <footer>
-    <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
-    <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
-  </footer>
-
-  <!-- Loading overlay -->
-  <div id="loading-overlay">
-    <div class="stardust" id="stardust"></div>
-    <div class="loading-text">Sprinkling a little stardust…</div>
-    <div class="loading-bar"></div>
+  <div class="cart-header">
+    <div>PRODUCT</div>
+    <div>PRICE</div>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+  <div id="cart-items"></div>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
-      authDomain: "starplanner-3acf9.firebaseapp.com",
-      projectId: "starplanner-3acf9",
-      storageBucket: "starplanner-3acf9.firebasestorage.app",
-      messagingSenderId: "793684440573",
-      appId: "1:793684440573:web:5beb2ab6f64b4fc110d594"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
+  <div class="summary">
+    Subtotal: €<span id="subtotal">0.00</span>
+    <div class="tax-note">Taxes and shipping calculated at checkout</div>
+    <button class="checkout-btn" onclick="placeOrder()">Checkout</button>
+  </div>
+</main>
 
-    const cartContainer = document.getElementById('cart-items');
-    const subtotalEl = document.getElementById('subtotal');
-    const cartCount = document.getElementById('cart-count');
+<footer>
+  <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
+  <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
+</footer>
 
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    // Zorg dat qty altijd bestaat
-    cart = cart.map(item => ({ ...item, qty: item.qty || 1 }));
-    updateCartCount();
-    renderCart();
+<!-- 🌟 Loading overlay -->
+<div id="loading-overlay">
+  <div class="stardust" id="stardust"></div>
+  <div class="loading-text">Sprinkling a little stardust…</div>
+  <div class="loading-bar"></div>
+</div>
 
-    function updateCartCount() {
-      const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-      cartCount.textContent = totalQty;
-    }
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
 
-    function renderCart() {
-      cartContainer.innerHTML = '';
-      let total = 0;
+<script>
+  // === Firebase setup ===
+  const firebaseConfig = {
+    apiKey: "AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
+    authDomain: "starplanner-3acf9.firebaseapp.com",
+    projectId: "starplanner-3acf9",
+    storageBucket: "starplanner-3acf9.firebasestorage.app",
+    messagingSenderId: "793684440573",
+    appId: "1:793684440573:web:5beb2ab6f64b4fc110d594"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
 
-      if (cart.length === 0) {
-        cartContainer.innerHTML = `<div class="empty-cart">Your cart is empty</div>`;
-        subtotalEl.textContent = '0.00';
-        return;
-      }
+  // === Elements ===
+  const cartContainer = document.getElementById('cart-items');
+  const subtotalEl = document.getElementById('subtotal');
+  const cartCount = document.getElementById('cart-count');
+  const overlay = document.getElementById('loading-overlay');
 
-      cart.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.classList.add('cart-item');
-        div.innerHTML = `
-          <div class="cart-item-left">
-            <img src="shoppingbag.svg" alt="${item.name}" class="product-thumb">
-            <div class="product-info">
-              <div><strong>${item.name}</strong></div>
-              <div style="font-size:13px; color:#999;">${item.file}</div>
-            </div>
-          </div>
-          <div class="cart-item-right">
-            <div class="price">€${(item.price * item.qty).toFixed(2)}</div>
-            <div class="qty-controls">
-              <button class="qty-btn" onclick="updateQty(${index}, -1)">–</button>
-              <span class="qty-box">${item.qty}</span>
-              <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
-            </div>
-            <button class="remove-btn" onclick="removeItem(${index})">✕</button>
-          </div>`;
-        cartContainer.appendChild(div);
-        total += item.price * item.qty;
-      });
+  // === Cart logic ===
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart = cart.map(item => ({ ...item, qty: item.qty || 1 }));
 
-      subtotalEl.textContent = total.toFixed(2);
-      localStorage.setItem('cart', JSON.stringify(cart));
+  function updateCartCount() {
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+  }
+
+  function renderCart() {
+    cartContainer.innerHTML = '';
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartContainer.innerHTML = `<div class="empty-cart">Your cart is empty</div>`;
+      subtotalEl.textContent = '0.00';
       updateCartCount();
+      return;
     }
 
-    function updateQty(index, delta) {
-      cart[index].qty += delta;
-      if (cart[index].qty <= 0) { removeItem(index); return; }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    }
-
-    async function placeOrder() {
-      const user = auth.currentUser;
-      if (!user) { alert("You must be logged in to complete your order."); return; }
-      if (cart.length === 0) { alert("Your cart is empty."); return; }
-
-      const totalAmount = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      try {
-        await db.collection('orders').add({
-          user: user.email,
-          items: cart,
-          total: totalAmount,
-          date: firebase.firestore.Timestamp.now()
-        });
-        alert("✅ Your order has been placed successfully!");
-        localStorage.removeItem('cart');
-        window.location.href = "account.html";
-      } catch (error) {
-        alert("❌ Error placing order: " + error.message);
-      }
-    }
-
-    // 🌟 Stardust effect
-    const stardust = document.getElementById('stardust');
-    for (let i = 0; i < 22; i++) {
-      const star = document.createElement('span');
-      star.style.left = Math.random() * 100 + '%';
-      star.style.top = Math.random() * 100 + '%';
-      star.style.animationDelay = (Math.random() * 3) + 's';
-      star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
-      stardust.appendChild(star);
-    }
-
-    window.addEventListener("load", () => {
-      const overlay = document.getElementById("loading-overlay");
-      setTimeout(() => overlay.classList.add("fade-out"), 1500);
+    cart.forEach((item, index) => {
+      const div = document.createElement('div');
+      div.classList.add('cart-item');
+      div.innerHTML = `
+        <div class="cart-item-left">
+          <img src="shoppingbag.svg" alt="${item.name}" class="product-thumb">
+          <div class="product-info">
+            <strong>${item.name}</strong><br>
+            <small>${item.file}</small>
+          </div>
+        </div>
+        <div class="cart-item-right">
+          <div class="price">€${(item.price * item.qty).toFixed(2)}</div>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="updateQty(${index}, -1)">–</button>
+            <span class="qty-box">${item.qty}</span>
+            <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+          </div>
+          <button class="remove-btn" onclick="removeItem(${index})">✕</button>
+        </div>`;
+      cartContainer.appendChild(div);
+      total += item.price * item.qty;
     });
-  </script>
+
+    subtotalEl.textContent = total.toFixed(2);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+  }
+
+  function updateQty(index, delta) {
+    cart[index].qty += delta;
+    if (cart[index].qty <= 0) removeItem(index);
+    renderCart();
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    renderCart();
+  }
+
+  async function placeOrder() {
+    const user = auth.currentUser;
+    if (!user) { alert("You must be logged in to complete your order."); return; }
+    if (cart.length === 0) { alert("Your cart is empty."); return; }
+
+    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    try {
+      await db.collection("orders").add({
+        user: user.email,
+        items: cart,
+        total: total,
+        date: firebase.firestore.Timestamp.now()
+      });
+      alert("✅ Order placed successfully!");
+      localStorage.removeItem('cart');
+      window.location.href = "account.html";
+    } catch (err) {
+      alert("❌ Error: " + err.message);
+    }
+  }
+
+  // === Laad-overlay logica ===
+  let loadTimeout;
+  function showOverlayIfSlow() {
+    loadTimeout = setTimeout(() => {
+      overlay.style.display = 'flex';
+      // Sterren genereren
+      const stardust = document.getElementById('stardust');
+      for (let i = 0; i < 22; i++) {
+        const star = document.createElement('span');
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = (Math.random() * 3) + 's';
+        star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
+        stardust.appendChild(star);
+      }
+    }, 2000); // verschijnt pas na 2s traag laden
+  }
+
+  function hideOverlay() {
+    clearTimeout(loadTimeout);
+    overlay.style.display = 'none';
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    showOverlayIfSlow();
+  });
+  window.addEventListener("load", () => {
+    hideOverlay();
+    renderCart();
+  });
+</script>
 </body>
 </html>
