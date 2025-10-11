@@ -140,16 +140,31 @@ function removeItem(i){cart.splice(i,1);localStorage.setItem('cart',JSON.stringi
 function updateQty(i,d){const c=Number(cart[i]?.qty)||1;if(c===1&&d<0){removeItem(i);return;}cart[i].qty=c+d<1?1:c+d;localStorage.setItem('cart',JSON.stringify(cart));cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);renderCart();}
 async function placeOrder(){const u=auth.currentUser;if(!u){alert("You must be logged in to complete your order.");return;}if(cart.length===0){alert("Your cart is empty.");return;}const t=cart.reduce((s,it)=>s+((Number(it.price)||0)*(Number(it.qty)||1)),0);try{await db.collection('orders').add({userId:u.uid,email:u.email,items:cart,total:t,date:firebase.firestore.FieldValue.serverTimestamp()});alert("✅ Your order has been placed successfully!");localStorage.removeItem('cart');window.location.href="account.html";}catch(e){alert("❌ Error placing order: "+e.message);}}
 
-// 🔊 geluid ontgrendelen na eerste interactie
-let soundUnlocked=false;
-window.addEventListener('pointerdown',()=>{if(soundUnlocked)return;soundUnlocked=true;['sound-whoosh','sound-chime'].forEach(id=>{const a=document.getElementById(id);if(a&&a.play)a.play().then(()=>a.pause()).catch(()=>{});});},{once:true});
+/* 🔊 BETERE AUDIO-UNLOCK + VEILIGE AFSPEELFUNCTIES */
+const whoosh=document.getElementById('sound-whoosh');
+const chime=document.getElementById('sound-chime');
+let soundReady=false;
+function unlockAudio(){
+  if(soundReady) return;
+  soundReady=true;
+  [whoosh,chime].forEach(a=>{
+    if(a&&a.play)a.play().then(()=>a.pause()).catch(()=>{});
+  });
+  console.log("🔓 Audio unlocked");
+}
+["click","touchstart","keydown","scroll"].forEach(ev=>{
+  window.addEventListener(ev,unlockAudio,{once:true});
+});
+function playSound(audioEl,vol=0.6){
+  if(!soundReady||!audioEl) return;
+  audioEl.currentTime=0;audioEl.volume=vol;
+  audioEl.play().catch(err=>console.warn("Audio blocked:",err.message));
+}
 
 /* 🌌 Stardust-animatie naar laatst toegevoegd item */
 window.addEventListener('load',()=>{
   const overlay=document.getElementById('stardust-overlay');
   const container=document.getElementById('stardust');
-  const whoosh=document.getElementById('sound-whoosh');
-  const chime=document.getElementById('sound-chime');
   const stars=[];
   for(let i=0;i<30;i++){
     const s=document.createElement('span');
@@ -180,9 +195,8 @@ window.addEventListener('load',()=>{
     const cx=r.left+r.width/2;
     const cy=r.top+r.height/2;
 
-    if(soundUnlocked&&whoosh){whoosh.currentTime=0;whoosh.volume=0.6;whoosh.play().catch(()=>{});}
+    playSound(whoosh,0.6);
 
-    // swirl animatie
     stars.forEach((s,i)=>{
       const a=i*0.35;const d=Math.random()*220;
       s.style.transition='top 1.5s cubic-bezier(0.55,0.05,0.19,1),left 1.5s cubic-bezier(0.55,0.05,0.19,1),transform 1.5s ease-in-out,opacity 1.5s ease';
@@ -194,9 +208,8 @@ window.addEventListener('load',()=>{
       },d);
     });
 
-    // explosie + flare
     setTimeout(()=>{
-      if(soundUnlocked&&chime){chime.currentTime=0;chime.volume=0.8;chime.play().catch(()=>{});}
+      playSound(chime,0.8);
       const flare=document.createElement('div');
       flare.style.position='fixed';
       flare.style.left=`${cx-50}px`;
@@ -211,7 +224,6 @@ window.addEventListener('load',()=>{
       requestAnimationFrame(()=>{flare.style.opacity='1';flare.style.transform='scale(1.6)';});
       setTimeout(()=>flare.remove(),700);
 
-      // mini-sparks
       for(let j=0;j<12;j++){
         const sp=document.createElement('span');
         sp.classList.add('star');
