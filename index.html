@@ -175,15 +175,17 @@
     setTimeout(() => popup.style.display = 'none', 2000);
   }
 
-  // ✅ Toegevoegd: juiste addToCart met justAdded trigger
+  // ✅ Toegevoegd: juiste addToCart met justAdded + lastAddedItemName trigger
   async function addToCart(event, name, file, price) {
     event.stopPropagation();
     let existing = cart.find(i => i.name === name);
     if (existing) existing.qty = (existing.qty || 1) + 1;
     else cart.push({ name, file, price, qty: 1 });
 
+    // ✅ Bewaar cart en triggers voor de checkout-animatie
     localStorage.setItem('cart', JSON.stringify(cart));
-    localStorage.setItem('justAdded', 'true'); // 🔔 activeert swirl op checkout
+    localStorage.setItem('justAdded', 'true');
+    localStorage.setItem('lastAddedItemName', name);
 
     updateCartCount();
     showPopup();
