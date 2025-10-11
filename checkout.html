@@ -1,176 +1,13 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Checkout – Starplanner</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
-
-  <style>
-    body { 
-      font-family:'Montserrat Alternates',sans-serif; 
-      margin:0; 
-      padding:0; 
-      background:#fff; 
-    }
-
-    nav {
-      background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 120% 110%;
-      padding: 40px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 70px;
-      padding-left: 100px;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: white;
-      font-size: 18px;
-      font-weight: 600;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    }
-    nav ul li a:hover { color: #FF7929; }
-
-    .nav-icons { display: flex; gap: 30px; align-items: center; position: relative; }
-    .nav-icons img { width:36px; height:36px; cursor:pointer; }
-    .cart-link { position: relative; }
-    .cart-badge {
-      position:absolute; top:-6px; right:-6px;
-      background:#FF6F61; color:#fff; font-size:12px;
-      font-weight:600; padding:2px 6px; border-radius:50%;
-      min-width:18px; text-align:center;
-    }
-
-    main { padding:20px; max-width:900px; margin:0 auto; }
-    h1 { color:#FFC90E; text-align:center; margin-top:30px; margin-bottom:10px; }
-    .continue { color:#FFC90E; text-decoration:underline; text-align:center; cursor:pointer; }
-    .cart-header { display:flex; justify-content:space-between; margin:40px 0 20px; color:#FFC90E; font-weight:600; font-size:16px; }
-    .cart-item { display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #ddd; }
-    .cart-item img { width:80px; height:auto; margin-right:20px; }
-    .product-info { flex:1; }
-    .remove { color:#FFC90E; text-decoration:underline; cursor:pointer; font-size:14px; margin-top:4px; }
-    .qty-controls { display:flex; align-items:center; gap:5px; margin-top:5px; }
-    .qty-btn { background:#FFC90E; border:none; color:#fff; font-size:16px; width:28px; height:28px; border-radius:4px; cursor:pointer; font-weight:bold; }
-    .qty-box { min-width:40px; text-align:center; border:2px solid #FFC90E; padding:4px; border-radius:4px; font-weight:600; background:#fff; }
-    .empty-cart { text-align:center; font-size:18px; color:#666; margin:40px 0; }
-    .summary { margin-top:40px; font-size:18px; font-weight:600; color:#333; }
-    .tax-note { font-size:14px; color:#FFC90E; font-weight:400; margin-top:4px; }
-    .checkout-btn { display:inline-block; margin-top:20px; padding:16px 36px; background:#FFC90E; color:#fff; font-size:18px; font-weight:600; border:none; border-radius:6px; cursor:pointer; }
-    .checkout-btn:hover { background:#e6b800; }
-
-    footer { position: relative; margin-top: 60px; overflow: hidden; }
-    .footer-decoration { width: 100%; height: 100px; object-fit: cover; display: block; }
-    .footer-text { position: absolute; bottom: 10px; width: 100%; text-align: center; color: #fff; font-size: 14px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
-
-    /* 🌟 Stardust overlay */
-    #stardust-overlay {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      font-size: 22px;
-      font-weight: 600;
-      z-index: 9999;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    #stardust {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-    }
-    .star {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, #fffde7 0%, #ffffff 60%, rgba(255,255,255,0) 100%);
-      box-shadow: 0 0 6px 2px rgba(255,255,255,0.8);
-      opacity: 0;
-      animation: twinkle 2s infinite ease-in-out;
-      transform-origin: center;
-    }
-    @keyframes twinkle {
-      0%, 100% {
-        opacity: 0;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.6);
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <!-- 🌠 Stardust Loading Screen -->
-  <div id="stardust-overlay">
-    <div id="stardust"></div>
-    <div>Sprinkling a little stardust…</div>
-  </div>
-
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="thestorybehind.html">THE STORY BEHIND</a></li>
-        <li><a href="shop.html">SHOP</a></li>
-        <li><a href="plannertips.html">PLANNER TIPS</a></li>
-        <li><a href="contact.html">CONTACT</a></li>
-      </ul>
-
-      <div class="nav-icons">
-        <a href="account.html"><img src="user-icon.svg" alt="User"></a>
-        <a href="checkout.html" class="cart-link">
-          <img src="shoppingbag.svg" alt="Shopping Bag">
-          <span id="cart-count" class="cart-badge">0</span>
-        </a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <h1>Your cart</h1>
-    <div class="continue" onclick="window.location.href='shop.html'">Continue shopping</div>
-
-    <div class="cart-header">
-      <div>PRODUCT</div>
-      <div>PRICE</div>
-    </div>
-
-    <div id="cart-items" class="cart-items"></div>
-
-    <div class="summary">
-      Subtotal: €<span id="subtotal">0.00</span>
-      <div class="tax-note">Taxes and shipping calculated at checkout</div>
-      <button class="checkout-btn" onclick="placeOrder()">Checkout</button>
-    </div>
-  </main>
+met roze slierten
 
   <footer>
     <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
+
+  <!-- 🔊 Geluidseffecten -->
+  <audio id="sound-whoosh" src="whoosh-soft.mp3" preload="auto"></audio>
+  <audio id="sound-chime" src="sparkle-chime.mp3" preload="auto"></audio>
 
   <!-- ✅ Firebase compat SDK -->
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
@@ -276,57 +113,123 @@
 
     renderCart();
 
-    // ✨ Stardust generation script
+    // 🌟 Stardust animatie met kleurverloop, trailing, explosie & geluid
     window.addEventListener('load', () => {
       const stardustContainer = document.getElementById('stardust');
       const overlay = document.getElementById('stardust-overlay');
+      const soundWhoosh = document.getElementById('sound-whoosh');
+      const soundChime = document.getElementById('sound-chime');
 
-      for (let i = 0; i < 30; i++) {
+      const justAdded = localStorage.getItem('justAdded') === 'true';
+      localStorage.removeItem('justAdded');
+
+      const stars = [];
+      const numStars = 50;
+
+      const starColors = [
+        'radial-gradient(circle, #ffffff 0%, #fff5c3 40%, rgba(255,255,255,0) 100%)',
+        'radial-gradient(circle, #fff6d9 0%, #ffeab5 40%, rgba(255,255,255,0) 100%)',
+        'radial-gradient(circle, #ffe6e9 0%, #ffd2fa 40%, rgba(255,255,255,0) 100%)',
+        'radial-gradient(circle, #fff9e0 0%, #ffeab5 40%, rgba(255,255,255,0) 100%)'
+      ];
+
+      for (let i = 0; i < numStars; i++) {
         const star = document.createElement('span');
         star.classList.add('star');
-        const size = Math.random() * 2 + 1; // 1–3 px
+        const size = Math.random() * 2.5 + 1;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
         star.style.top = `${Math.random() * 100}%`;
         star.style.left = `${Math.random() * 100}%`;
+        star.style.background = starColors[Math.floor(Math.random() * starColors.length)];
+        star.style.boxShadow = `0 0 ${4 + Math.random() * 4}px ${Math.random() * 2}px rgba(255,240,220,0.8)`;
         star.style.animationDelay = `${Math.random() * 2}s`;
         stardustContainer.appendChild(star);
+        stars.push(star);
       }
 
-      // Verberg overlay na korte tijd
-      setTimeout(() => {
-        overlay.style.opacity = '0';
-        overlay.style.transition = 'opacity 1s ease';
-        setTimeout(() => overlay.style.display = 'none', 1000);
-      }, 2500);
+      if (!justAdded) {
+        // standaard fade-out
+        setTimeout(() => {
+          overlay.style.opacity = '0';
+          overlay.style.transition = 'opacity 1s ease';
+          setTimeout(() => overlay.style.display = 'none', 1000);
+        }, 2500);
+      } else {
+        // 🌪️ swirl met geluid
+        setTimeout(() => {
+          const target = document.querySelector('.cart-item img') || document.querySelector('img[alt="Shopping Bag"]');
+          if (!target) return;
+
+          // start zacht whoosh-geluid
+          soundWhoosh.currentTime = 0;
+          soundWhoosh.volume = 0.4;
+          soundWhoosh.play().catch(()=>{});
+
+          const rect = target.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          stars.forEach((star, i) => {
+            const swirlDuration = 1600 + Math.random() * 400;
+            const angle = Math.random() * Math.PI * 2;
+            const delay = Math.random() * 300;
+            star.style.transition = `top ${swirlDuration}ms cubic-bezier(0.45, 0, 0.55, 1), left ${swirlDuration}ms cubic-bezier(0.45, 0, 0.55, 1), transform ${swirlDuration}ms ease-in-out, opacity 2s ease`;
+            star.style.filter = 'drop-shadow(0 0 10px rgba(255,240,210,0.9))';
+
+            setTimeout(() => {
+              const targetX = centerX + Math.cos(angle + i / 3) * 5;
+              const targetY = centerY + Math.sin(angle + i / 3) * 5;
+              star.style.top = `${targetY}px`;
+              star.style.left = `${targetX}px`;
+              star.style.transform = `scale(0.4) rotate(${angle * 5}rad)`;
+            }, delay);
+          });
+
+          // 💥 explosie + chime
+          setTimeout(() => {
+            soundChime.currentTime = 0;
+            soundChime.volume = 0.6;
+            soundChime.play().catch(()=>{});
+
+            // flare toevoegen
+            const flare = document.createElement('div');
+            flare.style.position = 'fixed';
+            flare.style.top = `${centerY - 75}px`;
+            flare.style.left = `${centerX - 75}px`;
+            flare.style.width = '150px';
+            flare.style.height = '150px';
+            flare.style.borderRadius = '50%';
+            flare.style.background = 'radial-gradient(circle, rgba(255,255,240,0.9) 0%, rgba(255,220,100,0.6) 40%, rgba(255,150,150,0.4) 70%, rgba(255,255,255,0) 100%)';
+            flare.style.boxShadow = '0 0 60px 30px rgba(255,230,180,0.8)';
+            flare.style.pointerEvents = 'none';
+            flare.style.opacity = '0';
+            flare.style.transition = 'opacity 0.5s ease-out, transform 1s ease-in-out';
+            flare.style.zIndex = '10000';
+            stardustContainer.appendChild(flare);
+
+            setTimeout(() => {
+              flare.style.opacity = '1';
+              flare.style.transform = 'scale(1.4)';
+              setTimeout(() => {
+                flare.style.opacity = '0';
+                flare.style.transform = 'scale(2)';
+                setTimeout(() => flare.remove(), 1000);
+              }, 600);
+            }, 100);
+          }, 1500);
+
+          // 🌌 fade-out
+          setTimeout(() => {
+            overlay.style.opacity = '0';
+            overlay.style.transition = 'opacity 1.6s ease-in-out';
+            setTimeout(() => overlay.style.display = 'none', 1000);
+          }, 3700);
+        }, 2500);
+      }
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
