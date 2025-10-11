@@ -1,3 +1,20 @@
+<!--
+Apache serverconfiguratie voor caching en headers
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options nosniff
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,187 +135,44 @@
         transform: scale(1.6);
       }
     }
+
+    /* 📱 Mobiele aanpassing */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        background-size: cover;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 20px;
+        padding-left: 0;
+      }
+      .nav-icons {
+        margin-top: 15px;
+      }
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .cart-item img {
+        width: 60px;
+        margin-bottom: 10px;
+      }
+      .cart-header {
+        font-size: 14px;
+        margin: 20px 0 10px;
+      }
+      main {
+        padding: 10px;
+      }
+      .checkout-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 
-<body>
-  <!-- 🌠 Stardust Loading Screen -->
-  <div id="stardust-overlay">
-    <div id="stardust"></div>
-    <div>Sprinkling a little stardust…</div>
-  </div>
-
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="thestorybehind.html">THE STORY BEHIND</a></li>
-        <li><a href="shop.html">SHOP</a></li>
-        <li><a href="plannertips.html">PLANNER TIPS</a></li>
-        <li><a href="contact.html">CONTACT</a></li>
-      </ul>
-
-      <div class="nav-icons">
-        <a href="account.html"><img src="user-icon.svg" alt="User"></a>
-        <a href="checkout.html" class="cart-link">
-          <img src="shoppingbag.svg" alt="Shopping Bag">
-          <span id="cart-count" class="cart-badge">0</span>
-        </a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <h1>Your cart</h1>
-    <div class="continue" onclick="window.location.href='shop.html'">Continue shopping</div>
-
-    <div class="cart-header">
-      <div>PRODUCT</div>
-      <div>PRICE</div>
-    </div>
-
-    <div id="cart-items" class="cart-items"></div>
-
-    <div class="summary">
-      Subtotal: €<span id="subtotal">0.00</span>
-      <div class="tax-note">Taxes and shipping calculated at checkout</div>
-      <button class="checkout-btn" onclick="placeOrder()">Checkout</button>
-    </div>
-  </main>
-
-  <footer>
-    <img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
-    <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
-  </footer>
-
-  <!-- ✅ Firebase compat SDK -->
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
-      authDomain: "starplanner-3acf9.firebaseapp.com",
-      projectId: "starplanner-3acf9",
-      storageBucket: "starplanner-3acf9.firebasestorage.app",
-      messagingSenderId: "793684440573",
-      appId: "1:793684440573:web:5beb2ab6f64b4fc110d594"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    const cartContainer = document.getElementById('cart-items');
-    const subtotalEl = document.getElementById('subtotal');
-    const cartCount = document.getElementById('cart-count');
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cartCount.textContent = cart.length;
-
-    function renderCart() {
-      cartContainer.innerHTML = '';
-      let total = 0;
-      if (cart.length === 0) {
-        cartContainer.innerHTML = `<div class="empty-cart">Your cart is empty</div>`;
-      } else {
-        cart.forEach((item, index) => {
-          const div = document.createElement('div');
-          div.classList.add('cart-item');
-          div.innerHTML = `
-            <div style="display:flex; align-items:center;">
-              <img src="shoppingbag.svg" alt="${item.name}">
-              <div class="product-info">
-                <div>${item.name}</div>
-                <div class="remove" onclick="removeItem(${index})">REMOVE</div>
-              </div>
-            </div>
-            <div>
-              €${item.price.toFixed(2)} <br>
-              <div class="qty-controls">
-                <button class="qty-btn" onclick="updateQty(${index}, -1)">–</button>
-                <span class="qty-box">${item.qty}</span>
-                <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
-              </div>
-            </div>
-          `;
-          cartContainer.appendChild(div);
-          total += item.price * item.qty;
-        });
-      }
-      subtotalEl.textContent = total.toFixed(2);
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      cartCount.textContent = cart.length;
-      renderCart();
-    }
-
-    function updateQty(index, delta) {
-      cart[index].qty += delta;
-      if (cart[index].qty < 1) cart[index].qty = 1;
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    }
-
-    async function placeOrder() {
-      const user = auth.currentUser;
-      if (!user) {
-        alert("You must be logged in to complete your order.");
-        return;
-      }
-      if (cart.length === 0) {
-        alert("Your cart is empty.");
-        return;
-      }
-
-      const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-      try {
-        await db.collection('orders').add({
-          userId: user.uid,
-          email: user.email,
-          items: cart,
-          total: totalAmount,
-          date: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        alert("✅ Your order has been placed successfully!");
-        localStorage.removeItem('cart');
-        window.location.href = "account.html";
-      } catch (error) {
-        alert("❌ Error placing order: " + error.message);
-      }
-    }
-
-    renderCart();
-
-    // ✨ Stardust generation script
-    window.addEventListener('load', () => {
-      const stardustContainer = document.getElementById('stardust');
-      const overlay = document.getElementById('stardust-overlay');
-
-      for (let i = 0; i < 30; i++) {
-        const star = document.createElement('span');
-        star.classList.add('star');
-        const size = Math.random() * 2 + 1; // 1–3 px
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 2}s`;
-        stardustContainer.appendChild(star);
-      }
-
-      // Verberg overlay na korte tijd
-      setTimeout(() => {
-        overlay.style.opacity = '0';
-        overlay.style.transition = 'opacity 1s ease';
-        setTimeout(() => overlay.style.display = 'none', 1000);
-      }, 2500);
-    });
-  </script>
-</body>
-</html>
+<!-- (de rest van je HTML blijft exact hetzelfde) -->
