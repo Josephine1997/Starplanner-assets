@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Checkout – Starplanner</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     body { 
       font-family:'Montserrat Alternates',sans-serif; 
@@ -89,7 +91,14 @@
       flex-direction: column;
       overflow: hidden;
     }
-    #stardust { position: absolute; width: 100%; height: 100%; top: 0; left: 0; overflow: hidden; }
+    #stardust {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+    }
     .star {
       position: absolute;
       border-radius: 50%;
@@ -97,16 +106,23 @@
       box-shadow: 0 0 6px 2px rgba(255,255,255,0.8);
       opacity: 0;
       animation: twinkle 2s infinite ease-in-out;
+      transform-origin: center;
     }
     @keyframes twinkle {
-      0%, 100% { opacity: 0; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.6); }
+      0%, 100% {
+        opacity: 0;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.6);
+      }
     }
   </style>
 </head>
 
 <body>
-  <!-- 🌠 Stardust overlay -->
+  <!-- 🌠 Stardust Loading Screen -->
   <div id="stardust-overlay">
     <div id="stardust"></div>
     <div>Sprinkling a little stardust…</div>
@@ -121,6 +137,7 @@
         <li><a href="plannertips.html">PLANNER TIPS</a></li>
         <li><a href="contact.html">CONTACT</a></li>
       </ul>
+
       <div class="nav-icons">
         <a href="account.html"><img src="user-icon.svg" alt="User"></a>
         <a href="checkout.html" class="cart-link">
@@ -134,8 +151,14 @@
   <main>
     <h1>Your cart</h1>
     <div class="continue" onclick="window.location.href='shop.html'">Continue shopping</div>
-    <div class="cart-header"><div>PRODUCT</div><div>PRICE</div></div>
+
+    <div class="cart-header">
+      <div>PRODUCT</div>
+      <div>PRICE</div>
+    </div>
+
     <div id="cart-items" class="cart-items"></div>
+
     <div class="summary">
       Subtotal: €<span id="subtotal">0.00</span>
       <div class="tax-note">Taxes and shipping calculated at checkout</div>
@@ -148,82 +171,222 @@
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
-  <!-- 🔊 Geluiden -->
+  <!-- 🔊 (optioneel) geluiden – veilig: spelen alleen als bestand bestaat -->
   <audio id="sound-whoosh" src="whoosh-soft.mp3" preload="auto"></audio>
   <audio id="sound-chime" src="sparkle-chime.mp3" preload="auto"></audio>
 
-  <!-- Firebase + Scripts -->
+  <!-- ✅ Firebase compat SDK -->
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
 
   <script>
-    /* jouw firebase + winkelwagen code blijft ongewijzigd */
-    const firebaseConfig={apiKey:"AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",authDomain:"starplanner-3acf9.firebaseapp.com",projectId:"starplanner-3acf9",storageBucket:"starplanner-3acf9.firebasestorage.app",messagingSenderId:"793684440573",appId:"1:793684440573:web:5beb2ab6f64b4fc110d594"};
-    firebase.initializeApp(firebaseConfig);
-    const auth=firebase.auth(); const db=firebase.firestore();
-    const cartContainer=document.getElementById('cart-items');
-    const subtotalEl=document.getElementById('subtotal');
-    const cartCount=document.getElementById('cart-count');
-    let cart=JSON.parse(localStorage.getItem('cart'))||[];
-    cartCount.textContent=cart.length;
+    const firebaseConfig = {
+      apiKey: "AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
+      authDomain: "starplanner-3acf9.firebaseapp.com",
+      projectId: "starplanner-3acf9",
+      storageBucket: "starplanner-3acf9.firebasestorage.app",
+      messagingSenderId: "793684440573",
+      appId: "1:793684440573:web:5beb2ab6f64b4fc110d594"
+    };
 
-    function renderCart(){cartContainer.innerHTML='';let total=0;
-      if(cart.length===0){cartContainer.innerHTML='<div class="empty-cart">Your cart is empty</div>';}
-      else{cart.forEach((item,i)=>{const div=document.createElement('div');div.classList.add('cart-item');
-        div.innerHTML=`<div style="display:flex;align-items:center;"><img src="shoppingbag.svg" alt="${item.name}"><div class="product-info"><div>${item.name}</div><div class="remove" onclick="removeItem(${i})">REMOVE</div></div></div><div>€${item.price.toFixed(2)}<br><div class="qty-controls"><button class="qty-btn" onclick="updateQty(${i},-1)">–</button><span class="qty-box">${item.qty}</span><button class="qty-btn" onclick="updateQty(${i},1)">+</button></div></div>`;cartContainer.appendChild(div);total+=item.price*item.qty;});}
-      subtotalEl.textContent=total.toFixed(2);}
-    function removeItem(i){cart.splice(i,1);localStorage.setItem('cart',JSON.stringify(cart));cartCount.textContent=cart.length;renderCart();}
-    function updateQty(i,d){cart[i].qty+=d;if(cart[i].qty<1)cart[i].qty=1;localStorage.setItem('cart',JSON.stringify(cart));renderCart();}
-    async function placeOrder(){const u=auth.currentUser;if(!u)return alert("You must be logged in to complete your order.");
-      if(cart.length===0)return alert("Your cart is empty.");
-      const total=cart.reduce((s,i)=>s+(i.price*i.qty),0);
-      try{await db.collection('orders').add({userId:u.uid,email:u.email,items:cart,total,date:firebase.firestore.FieldValue.serverTimestamp()});
-        alert("✅ Order placed!");localStorage.removeItem('cart');window.location.href="account.html";}
-      catch(e){alert("❌ Error: "+e.message);}}
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    const cartContainer = document.getElementById('cart-items');
+    const subtotalEl = document.getElementById('subtotal');
+    const cartCount = document.getElementById('cart-count');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartCount.textContent = cart.length;
+
+    function renderCart() {
+      cartContainer.innerHTML = '';
+      let total = 0;
+      if (cart.length === 0) {
+        cartContainer.innerHTML = `<div class="empty-cart">Your cart is empty</div>`;
+      } else {
+        cart.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.classList.add('cart-item');
+          div.innerHTML = `
+            <div style="display:flex; align-items:center;">
+              <img src="shoppingbag.svg" alt="${item.name}">
+              <div class="product-info">
+                <div>${item.name}</div>
+                <div class="remove" onclick="removeItem(${index})">REMOVE</div>
+              </div>
+            </div>
+            <div>
+              €${item.price.toFixed(2)} <br>
+              <div class="qty-controls">
+                <button class="qty-btn" onclick="updateQty(${index}, -1)">–</button>
+                <span class="qty-box">${item.qty}</span>
+                <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+              </div>
+            </div>
+          `;
+          cartContainer.appendChild(div);
+          total += item.price * item.qty;
+        });
+      }
+      subtotalEl.textContent = total.toFixed(2);
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      cartCount.textContent = cart.length;
+      renderCart();
+    }
+
+    function updateQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty < 1) cart[index].qty = 1;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    async function placeOrder() {
+      const user = auth.currentUser;
+      if (!user) { alert("You must be logged in to complete your order."); return; }
+      if (cart.length === 0) { alert("Your cart is empty."); return; }
+
+      const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      try {
+        await db.collection('orders').add({
+          userId: user.uid,
+          email: user.email,
+          items: cart,
+          total: totalAmount,
+          date: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        alert("✅ Your order has been placed successfully!");
+        localStorage.removeItem('cart');
+        window.location.href = "account.html";
+      } catch (error) {
+        alert("❌ Error placing order: " + error.message);
+      }
+    }
+
     renderCart();
 
-    /* 🌟 animatie + geluiden */
-    window.addEventListener('load',()=>{
-      const overlay=document.getElementById('stardust-overlay');
-      const stardust=document.getElementById('stardust');
-      const justAdded=localStorage.getItem('justAdded')==='true';
-      const whoosh=document.getElementById('sound-whoosh');
-      const chime=document.getElementById('sound-chime');
-      localStorage.removeItem('justAdded');
-      for(let i=0;i<40;i++){const s=document.createElement('span');s.classList.add('star');
-        s.style.width=s.style.height=(Math.random()*2+1)+'px';
-        s.style.top=Math.random()*100+'%';s.style.left=Math.random()*100+'%';
-        s.style.animationDelay=Math.random()*2+'s';stardust.appendChild(s);}
-      if(!justAdded){setTimeout(()=>{overlay.style.opacity='0';overlay.style.transition='opacity 1s';setTimeout(()=>overlay.style.display='none',1000);},2500);}
-      else{
-        whoosh.currentTime=0;whoosh.volume=0.4;whoosh.play().catch(()=>{});
-        setTimeout(()=>{
-          const img=document.querySelector('.cart-item img')||document.querySelector('img[alt="Shopping Bag"]');
-          if(!img)return;
-          const r=img.getBoundingClientRect();const x=r.left+r.width/2;const y=r.top+r.height/2;
-          const stars=document.querySelectorAll('.star');
-          stars.forEach((s,i)=>{
-            const a=Math.random()*Math.PI*2;
-            s.style.transition=`all 1.5s ease-in-out`;setTimeout(()=>{
-              s.style.top=y+'px';s.style.left=x+'px';s.style.transform=`scale(0.3) rotate(${a*5}rad)`;s.style.opacity='0.9';
-            },Math.random()*300);
-          });
-          setTimeout(()=>{
-            chime.currentTime=0;chime.volume=0.6;chime.play().catch(()=>{});
-            const flare=document.createElement('div');
-            flare.style.position='fixed';flare.style.top=y-75+'px';flare.style.left=x-75+'px';
-            flare.style.width='150px';flare.style.height='150px';flare.style.borderRadius='50%';
-            flare.style.background='radial-gradient(circle,rgba(255,255,240,0.9)0%,rgba(255,220,100,0.6)40%,rgba(255,150,150,0.4)70%,rgba(255,255,255,0)100%)';
-            flare.style.boxShadow='0 0 60px 30px rgba(255,230,180,0.8)';
-            flare.style.transition='opacity .5s ease-out,transform 1s ease-in-out';flare.style.opacity='0';flare.style.zIndex='10000';
-            stardust.appendChild(flare);
-            setTimeout(()=>{flare.style.opacity='1';flare.style.transform='scale(1.4)';
-              setTimeout(()=>{flare.style.opacity='0';flare.style.transform='scale(2)';setTimeout(()=>flare.remove(),1000);},600);
-            },100);
-          },1500);
-          setTimeout(()=>{overlay.style.opacity='0';overlay.style.transition='opacity 1.6s';setTimeout(()=>overlay.style.display='none',1000);},3700);
-        },2500);
+    // ✨ Stardust: originele animatie + conditionele swirl/flare (minimaal ingrijpend)
+    window.addEventListener('load', () => {
+      const stardustContainer = document.getElementById('stardust');
+      const overlay = document.getElementById('stardust-overlay');
+
+      // maak dezelfde 30 sterren als in je origineel
+      const stars = [];
+      for (let i = 0; i < 30; i++) {
+        const star = document.createElement('span');
+        star.classList.add('star');
+        const size = Math.random() * 2 + 1; // 1–3 px
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 2}s`;
+        stardustContainer.appendChild(star);
+        stars.push(star);
       }
+
+      const justAdded = localStorage.getItem('justAdded') === 'true';
+      localStorage.removeItem('justAdded'); // 1x
+
+      // helper: veilige fade-out (altijd weghalen)
+      const hideOverlay = (delayMs) => {
+        setTimeout(() => {
+          overlay.style.transition = 'opacity 1s ease';
+          overlay.style.opacity = '0';
+          setTimeout(() => { overlay.style.display = 'none'; }, 1000);
+        }, delayMs);
+      };
+
+      if (!justAdded) {
+        // ✨ originele gedrag
+        hideOverlay(2500);
+        return;
+      }
+
+      // 🌪️ verleng animatie met 1.5s swirl naar item + flare + korte geluidjes (optioneel)
+      const whoosh = document.getElementById('sound-whoosh');
+      const chime  = document.getElementById('sound-chime');
+
+      setTimeout(() => {
+        // doel: centrum van eerste productafbeelding
+        let targetImg = document.querySelector('.cart-item img');
+        // fallback: midden van het scherm als er nog geen itemrender is
+        const fallbackCenter = { x: window.innerWidth/2, y: window.innerHeight/2 };
+
+        let centerX = fallbackCenter.x;
+        let centerY = fallbackCenter.y;
+
+        if (targetImg) {
+          const rect = targetImg.getBoundingClientRect();
+          centerX = rect.left + rect.width / 2;
+          centerY = rect.top  + rect.height / 2;
+        }
+
+        // start zacht whoosh (bestaat alleen als bestand is geüpload)
+        if (whoosh && typeof whoosh.play === 'function') {
+          whoosh.currentTime = 0;
+          whoosh.volume = 0.4;
+          whoosh.play().catch(()=>{});
+          // auto-stop na 1.8s
+          setTimeout(()=>{ try{ whoosh.pause(); }catch(e){} }, 1800);
+        }
+
+        // swirl alle sterren naar het doel (1.5s)
+        stars.forEach((star, i) => {
+          const angle = i * 0.4; // lichte spiraal
+          const delay = Math.random() * 250;
+          star.style.transition = 'top 1.5s ease-in-out, left 1.5s ease-in-out, transform 1.5s ease-in-out, opacity 1.5s ease';
+          setTimeout(() => {
+            star.style.top  = `${centerY + Math.sin(angle)*5}px`;
+            star.style.left = `${centerX + Math.cos(angle)*5}px`;
+            star.style.transform = `scale(0.35) rotate(${angle*6}rad)`;
+            star.style.opacity = '0.9';
+          }, delay);
+        });
+
+        // mini-explosie + korte chime
+        setTimeout(() => {
+          if (chime && typeof chime.play === 'function') {
+            chime.currentTime = 0;
+            chime.volume = 0.6;
+            chime.play().catch(()=>{});
+            setTimeout(()=>{ try{ chime.pause(); }catch(e){} }, 2000);
+          }
+
+          for (let j = 0; j < 12; j++) {
+            const spark = document.createElement('span');
+            spark.classList.add('star');
+            spark.style.width = '3px';
+            spark.style.height = '3px';
+            spark.style.top = `${centerY}px`;
+            spark.style.left = `${centerX}px`;
+            spark.style.opacity = '1';
+            spark.style.transition = 'top .6s ease-out, left .6s ease-out, opacity .6s ease-out, transform .6s ease-out';
+            stardustContainer.appendChild(spark);
+
+            const a = Math.random() * Math.PI * 2;
+            const d = 60 + Math.random() * 70;
+            requestAnimationFrame(() => {
+              spark.style.top  = `${centerY + Math.sin(a)*d}px`;
+              spark.style.left = `${centerX + Math.cos(a)*d}px`;
+              spark.style.opacity = '0';
+              spark.style.transform = 'scale(0.6)';
+            });
+          }
+        }, 1500);
+
+        // overlay pas daarna weg (2.6s = 1.5s swirl + ~1.1s explosie)
+        hideOverlay(2600);
+      }, 2500);
     });
-  </script
+  </script>
+</body>
+</html>
