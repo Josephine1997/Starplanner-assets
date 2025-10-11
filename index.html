@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,189 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Starplanner – Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
-
   <style>
-    /* Styling code remains the same as you provided */
+    body {
+      background: #FFFFFF;
+      margin: 0;
+      font-family: 'Montserrat Alternates', sans-serif;
+    }
+
+    /* Header */
+    nav {
+      background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 120% 110%;
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 70px;
+      padding-left: 100px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    nav ul li a:hover { color:#FF7929; }
+
+    .nav-icons {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      position: relative;
+    }
+
+    .nav-icons img {
+      width:36px;
+      height:36px;
+      cursor: pointer;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #FF6F61;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 50%;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    /* Hero Text */
+    .hero-text {
+      text-align: center;
+      margin: 40px 0;
+      font-size: 36px;
+      font-weight: 700;
+      color: #FFA94D;
+      -webkit-text-stroke: 1.5px #FF7F50;
+      text-stroke: 1.5px #FF7F50;
+    }
+
+    /* Productsectie */
+    .featured {
+      padding: 40px 5vw 60px;
+      background: #fff;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .featured-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      justify-items: center;
+    }
+
+    @media(min-width:900px){
+      .featured-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .product-card {
+      width: 250px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover { transform: scale(1.03); }
+
+    .product-card .thumb {
+      height: 150px;
+      background: #fafafa;
+      overflow: hidden;
+    }
+
+    .product-card .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .thumb img { transform: scale(1.05); }
+
+    .product-body {
+      padding: 12px 16px;
+      text-align: center;
+    }
+
+    .product-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1F1F1F;
+      margin-bottom: 8px;
+    }
+
+    /* === Knoppen-stijl === */
+    .btn-add-cart {
+      display: inline-block;
+      margin: 8px auto 16px auto;
+      padding: 10px 18px;
+      background: #FFC90E;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      border: 2px solid #e6b800;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, border-color 0.3s ease;
+      text-transform: uppercase;
+    }
+    .btn-add-cart:hover { background:#e6b800; border-color:#cc9f00; }
+
+    .product-price {
+      color: #333;
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      margin-top: 40px;
+      overflow: hidden;
+    }
+
+    .footer-decoration {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .footer-text {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 
@@ -63,38 +244,59 @@
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
+  <!-- 🔥 Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+
   <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const firebaseConfig = {
+      apiKey: "AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
+      authDomain: "starplanner-3acf9.firebaseapp.com",
+      projectId: "starplanner-3acf9",
+      storageBucket: "starplanner-3acf9.firebasestorage.app",
+      messagingSenderId: "793684440573",
+      appId: "1:793684440573:web:5beb2ab6f64b4fc110d594"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Winkelmandje
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartCount = document.getElementById('cart-count');
+    cartCount.textContent = cart.length;
 
-    // Functie om winkelwagenteller bij te werken
     function updateCartCount() {
-      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-      cartCount.textContent = totalQty;
+      cartCount.textContent = cart.length;
       localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    updateCartCount();
-
-    // Functie om product aan winkelwagen toe te voegen
-    function addToCart(event, name, file, price) {
-      event.stopPropagation(); // Voorkom dat de klik het product opent
-
-      const existingItem = cart.find(item => item.name === name);
-      if (existingItem) {
-        existingItem.qty += 1;
-      } else {
-        cart.push({ name, file, price, qty: 1 });
-      }
-
-      localStorage.setItem('cart', JSON.stringify(cart));
+    // Product toevoegen
+    async function addToCart(event, name, file, price) {
+      event.stopPropagation();
+      cart.push({ name, file, price });
       updateCartCount();
-      alert(`${name} is toegevoegd aan je winkelwagen!`);
+      saveOrderToFirestore(name, file, price);
+      alert(`${name} toegevoegd aan winkelwagen!`);
     }
 
-    // Open modal (optie)
-    function openModal(image) {
-      console.log("Open modal met:", image);
+    // Firestore opslaan
+    async function saveOrderToFirestore(name, file, price) {
+      const user = firebase.auth().currentUser;
+      try {
+        await db.collection("orders").add({
+          user: user ? user.email : "guest",
+          product: name,
+          file: file,
+          price: price,
+          date: firebase.firestore.Timestamp.now()
+        });
+        console.log("Order opgeslagen in Firestore!");
+      } catch (error) {
+        console.error("Fout bij opslaan:", error);
+      }
     }
   </script>
 </body>
