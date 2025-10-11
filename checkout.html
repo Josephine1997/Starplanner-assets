@@ -8,109 +8,64 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    body { 
-      font-family:'Montserrat Alternates',sans-serif; 
-      margin:0; 
-      padding:0; 
-      background:#fff; 
-    }
-
+    body {font-family:'Montserrat Alternates',sans-serif;margin:0;padding:0;background:#fff;}
     nav {
-      background-image: url('ArtworkWaterverfkwastachterkopjes.jpg');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 120% 110%;
-      padding: 40px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:120% 110%;
+      padding:40px 60px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 70px;
-      padding-left: 100px;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: white;
-      font-size: 18px;
-      font-weight: 600;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    }
-    nav ul li a:hover { color: #FF7929; }
+    nav ul {list-style:none;margin:0;padding:0;display:flex;gap:70px;padding-left:100px;}
+    nav ul li a {text-decoration:none;color:white;font-size:18px;font-weight:600;text-shadow:1px 1px 3px rgba(0,0,0,0.3);}
+    nav ul li a:hover {color:#FF7929;}
+    .nav-icons {display:flex;gap:30px;align-items:center;position:relative;}
+    .nav-icons img {width:36px;height:36px;cursor:pointer;}
+    .cart-link {position:relative;}
+    .cart-badge {position:absolute;top:-6px;right:-6px;background:#FF6F61;color:#fff;font-size:12px;font-weight:600;padding:2px 6px;border-radius:50%;min-width:18px;text-align:center;}
 
-    .nav-icons { display: flex; gap: 30px; align-items: center; position: relative; }
-    .nav-icons img { width:36px; height:36px; cursor:pointer; }
-    .cart-link { position: relative; }
-    .cart-badge {
-      position:absolute; top:-6px; right:-6px;
-      background:#FF6F61; color:#fff; font-size:12px;
-      font-weight:600; padding:2px 6px; border-radius:50%;
-      min-width:18px; text-align:center;
-    }
+    main {padding:20px;max-width:900px;margin:0 auto;}
+    h1 {color:#FFC90E;text-align:center;margin-top:30px;margin-bottom:10px;}
+    .continue {color:#FFC90E;text-decoration:underline;text-align:center;cursor:pointer;}
+    .cart-header {display:flex;justify-content:space-between;margin:40px 0 20px;color:#FFC90E;font-weight:600;font-size:16px;}
+    .cart-item {display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #ddd;}
+    .cart-item img {width:80px;height:auto;margin-right:20px;}
+    .product-info {flex:1;}
+    .remove {color:#FFC90E;text-decoration:underline;cursor:pointer;font-size:14px;margin-top:4px;}
+    .qty-controls {display:flex;align-items:center;gap:5px;margin-top:5px;}
+    .qty-btn {background:#FFC90E;border:none;color:#fff;font-size:16px;width:28px;height:28px;border-radius:4px;cursor:pointer;font-weight:bold;}
+    .qty-box {min-width:40px;text-align:center;border:2px solid #FFC90E;padding:4px;border-radius:4px;font-weight:600;background:#fff;}
+    .empty-cart {text-align:center;font-size:18px;color:#666;margin:40px 0;}
+    .summary {margin-top:40px;font-size:18px;font-weight:600;color:#333;}
+    .tax-note {font-size:14px;color:#FFC90E;font-weight:400;margin-top:4px;}
+    .checkout-btn {display:inline-block;margin-top:20px;padding:16px 36px;background:#FFC90E;color:#fff;font-size:18px;font-weight:600;border:none;border-radius:6px;cursor:pointer;}
+    .checkout-btn:hover {background:#e6b800;}
 
-    main { padding:20px; max-width:900px; margin:0 auto; }
-    h1 { color:#FFC90E; text-align:center; margin-top:30px; margin-bottom:10px; }
-    .continue { color:#FFC90E; text-decoration:underline; text-align:center; cursor:pointer; }
-    .cart-header { display:flex; justify-content:space-between; margin:40px 0 20px; color:#FFC90E; font-weight:600; font-size:16px; }
-    .cart-item { display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #ddd; }
-    .cart-item img { width:80px; height:auto; margin-right:20px; }
-    .product-info { flex:1; }
-    .remove { color:#FFC90E; text-decoration:underline; cursor:pointer; font-size:14px; margin-top:4px; }
-    .qty-controls { display:flex; align-items:center; gap:5px; margin-top:5px; }
-    .qty-btn { background:#FFC90E; border:none; color:#fff; font-size:16px; width:28px; height:28px; border-radius:4px; cursor:pointer; font-weight:bold; }
-    .qty-box { min-width:40px; text-align:center; border:2px solid #FFC90E; padding:4px; border-radius:4px; font-weight:600; background:#fff; }
-    .empty-cart { text-align:center; font-size:18px; color:#666; margin:40px 0; }
-    .summary { margin-top:40px; font-size:18px; font-weight:600; color:#333; }
-    .tax-note { font-size:14px; color:#FFC90E; font-weight:400; margin-top:4px; }
-    .checkout-btn { display:inline-block; margin-top:20px; padding:16px 36px; background:#FFC90E; color:#fff; font-size:18px; font-weight:600; border:none; border-radius:6px; cursor:pointer; }
-    .checkout-btn:hover { background:#e6b800; }
-
-    footer { position: relative; margin-top: 60px; overflow: hidden; }
-    .footer-decoration { width: 100%; height: 100px; object-fit: cover; display: block; }
-    .footer-text { position: absolute; bottom: 10px; width: 100%; text-align: center; color: #fff; font-size: 14px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+    footer {position:relative;margin-top:60px;overflow:hidden;}
+    .footer-decoration {width:100%;height:100px;object-fit:cover;display:block;}
+    .footer-text {position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
 
     /* 🌟 Stardust overlay */
     #stardust-overlay {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      font-size: 22px;
-      font-weight: 600;
-      z-index: 9999;
-      flex-direction: column;
-      overflow: hidden;
+      display:flex;justify-content:center;align-items:center;
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.6);color:white;font-size:22px;font-weight:600;
+      z-index:9999;flex-direction:column;overflow:hidden;
     }
-    #stardust {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-    }
+    #stardust {position:absolute;width:100%;height:100%;top:0;left:0;overflow:hidden;}
     .star {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, #fffde7 0%, #ffffff 60%, rgba(255,255,255,0) 100%);
-      box-shadow: 0 0 6px 2px rgba(255,255,255,0.8);
-      opacity: 0;
-      animation: twinkle 2s infinite ease-in-out;
-      transform-origin: center;
+      position:absolute;border-radius:50%;
+      background:radial-gradient(circle,#fffde7 0%,#ffffff 60%,rgba(255,255,255,0) 100%);
+      box-shadow:0 0 6px 2px rgba(255,255,255,0.8);
+      opacity:0;animation:twinkle 2s infinite ease-in-out;
+      transform-origin:center;
     }
     @keyframes twinkle {
-      0%, 100% { opacity: 0; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.6); }
+      0%,100% {opacity:0;transform:scale(1);}
+      50% {opacity:1;transform:scale(1.6);}
     }
   </style>
 </head>
@@ -131,7 +86,6 @@
         <li><a href="plannertips.html">PLANNER TIPS</a></li>
         <li><a href="contact.html">CONTACT</a></li>
       </ul>
-
       <div class="nav-icons">
         <a href="account.html"><img src="user-icon.svg" alt="User"></a>
         <a href="checkout.html" class="cart-link">
@@ -146,11 +100,7 @@
     <h1>Your cart</h1>
     <div class="continue" onclick="window.location.href='shop.html'">Continue shopping</div>
 
-    <div class="cart-header">
-      <div>PRODUCT</div>
-      <div>PRICE</div>
-    </div>
-
+    <div class="cart-header"><div>PRODUCT</div><div>PRICE</div></div>
     <div id="cart-items" class="cart-items"></div>
 
     <div class="summary">
@@ -165,46 +115,35 @@
     <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
   </footer>
 
-  <!-- 🔊 Geluid (optioneel; geen fout als files ontbreken) -->
+  <!-- 🔊 Sounds -->
   <audio id="sound-whoosh" src="whoosh-soft.mp3" preload="auto"></audio>
   <audio id="sound-chime" src="sparkle-chime.mp3" preload="auto"></audio>
 
-  <!-- ✅ Firebase compat SDK -->
+  <!-- ✅ Firebase -->
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
 
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
-      authDomain: "starplanner-3acf9.firebaseapp.com",
-      projectId: "starplanner-3acf9",
-      storageBucket: "starplanner-3acf9.firebasestorage.app",
-      messagingSenderId: "793684440573",
-      appId: "1:793684440573:web:5beb2ab6f64b4fc110d594"
-    };
-
+    const firebaseConfig={apiKey:"AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",authDomain:"starplanner-3acf9.firebaseapp.com",projectId:"starplanner-3acf9",storageBucket:"starplanner-3acf9.firebasestorage.app",messagingSenderId:"793684440573",appId:"1:793684440573:web:5beb2ab6f64b4fc110d594"};
     firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
+    const auth=firebase.auth(); const db=firebase.firestore();
 
-    const cartContainer = document.getElementById('cart-items');
-    const subtotalEl = document.getElementById('subtotal');
-    const cartCount = document.getElementById('cart-count');
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cartCount.textContent = cart.length;
+    const cartContainer=document.getElementById('cart-items');
+    const subtotalEl=document.getElementById('subtotal');
+    const cartCount=document.getElementById('cart-count');
+    let cart=JSON.parse(localStorage.getItem('cart'))||[];
+    cartCount.textContent=cart.length;
 
-    function renderCart() {
-      cartContainer.innerHTML = '';
-      let total = 0;
-      if (cart.length === 0) {
-        cartContainer.innerHTML = `<div class="empty-cart">Your cart is empty</div>`;
-      } else {
-        cart.forEach((item, index) => {
-          const div = document.createElement('div');
+    function renderCart(){
+      cartContainer.innerHTML=''; let total=0;
+      if(cart.length===0){cartContainer.innerHTML='<div class="empty-cart">Your cart is empty</div>';}
+      else{
+        cart.forEach((item,index)=>{
+          const div=document.createElement('div');
           div.classList.add('cart-item');
-          div.innerHTML = `
-            <div style="display:flex; align-items:center;">
+          div.innerHTML=`
+            <div style="display:flex;align-items:center;">
               <img src="shoppingbag.svg" alt="${item.name}">
               <div class="product-info">
                 <div>${item.name}</div>
@@ -212,173 +151,110 @@
               </div>
             </div>
             <div>
-              €${item.price.toFixed(2)} <br>
+              €${item.price.toFixed(2)}<br>
               <div class="qty-controls">
-                <button class="qty-btn" onclick="updateQty(${index}, -1)">–</button>
+                <button class="qty-btn" onclick="updateQty(${index},-1)">–</button>
                 <span class="qty-box">${item.qty}</span>
-                <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                <button class="qty-btn" onclick="updateQty(${index},1)">+</button>
               </div>
-            </div>
-          `;
+            </div>`;
           cartContainer.appendChild(div);
-          total += item.price * item.qty;
+          total+=item.price*item.qty;
         });
       }
-      subtotalEl.textContent = total.toFixed(2);
+      subtotalEl.textContent=total.toFixed(2);
     }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      cartCount.textContent = cart.length;
-      renderCart();
-    }
-
-    function updateQty(index, delta) {
-      cart[index].qty += delta;
-      if (cart[index].qty < 1) cart[index].qty = 1;
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    }
-
-    async function placeOrder() {
-      const user = auth.currentUser;
-      if (!user) {
-        alert("You must be logged in to complete your order.");
-        return;
-      }
-      if (cart.length === 0) {
-        alert("Your cart is empty.");
-        return;
-      }
-
-      const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-      try {
-        await db.collection('orders').add({
-          userId: user.uid,
-          email: user.email,
-          items: cart,
-          total: totalAmount,
-          date: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
+    function removeItem(index){cart.splice(index,1);localStorage.setItem('cart',JSON.stringify(cart));cartCount.textContent=cart.length;renderCart();}
+    function updateQty(index,d){cart[index].qty+=d;if(cart[index].qty<1)cart[index].qty=1;localStorage.setItem('cart',JSON.stringify(cart));renderCart();}
+    async function placeOrder(){
+      const user=auth.currentUser;
+      if(!user)return alert("You must be logged in to complete your order.");
+      if(cart.length===0)return alert("Your cart is empty.");
+      const totalAmount=cart.reduce((s,i)=>s+(i.price*i.qty),0);
+      try{
+        await db.collection('orders').add({userId:user.uid,email:user.email,items:cart,total:totalAmount,date:firebase.firestore.FieldValue.serverTimestamp()});
         alert("✅ Your order has been placed successfully!");
         localStorage.removeItem('cart');
-        window.location.href = "account.html";
-      } catch (error) {
-        alert("❌ Error placing order: " + error.message);
-      }
+        window.location.href="account.html";
+      }catch(e){alert("❌ Error placing order: "+e.message);}
     }
-
     renderCart();
 
-    // ✨ Stardust: origineel + conditionele swirl naar shoppingbag
-    window.addEventListener('load', () => {
-      const stardustContainer = document.getElementById('stardust');
-      const overlay = document.getElementById('stardust-overlay');
-
-      // Maak 30 sterren (origineel)
-      const stars = [];
-      for (let i = 0; i < 30; i++) {
-        const star = document.createElement('span');
-        star.classList.add('star');
-        const size = Math.random() * 2 + 1; // 1–3 px
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 2}s`;
-        stardustContainer.appendChild(star);
-        stars.push(star);
+    // ✨ Stardust animation with safety checks
+    window.addEventListener('load',()=>{
+      const overlay=document.getElementById('stardust-overlay');
+      const stardust=document.getElementById('stardust');
+      const stars=[];
+      for(let i=0;i<30;i++){
+        const s=document.createElement('span'); s.classList.add('star');
+        const size=Math.random()*2+1;
+        s.style.width=s.style.height=size+'px';
+        s.style.top=Math.random()*100+'%';
+        s.style.left=Math.random()*100+'%';
+        s.style.animationDelay=Math.random()*2+'s';
+        stardust.appendChild(s); stars.push(s);
       }
 
-      const justAdded = localStorage.getItem('justAdded') === 'true';
-      localStorage.removeItem('justAdded'); // éénmalig
+      const justAdded=localStorage.getItem('justAdded')==='true';
+      localStorage.removeItem('justAdded');
+      const whoosh=document.getElementById('sound-whoosh');
+      const chime=document.getElementById('sound-chime');
 
-      const safeFadeOut = (delayMs) => {
-        setTimeout(() => {
-          overlay.style.transition = 'opacity 1s ease';
-          overlay.style.opacity = '0';
-          setTimeout(() => { overlay.style.display = 'none'; }, 1000);
-        }, delayMs);
-        // noodrem (extra zekerheid): forceer verbergen na max 7s
-        setTimeout(() => { overlay.style.display = 'none'; }, 7000);
+      const fadeOut=(delay=2500)=>{
+        setTimeout(()=>{
+          overlay.style.transition='opacity 1s ease';
+          overlay.style.opacity='0';
+          setTimeout(()=>overlay.style.display='none',1000);
+        },delay);
+        // failsafe
+        setTimeout(()=>overlay.style.display='none',7000);
       };
 
-      if (!justAdded) {
-        // Origineel gedrag
-        safeFadeOut(2500);
-        return;
-      }
+      if(!justAdded){fadeOut();return;}
 
-      // 🔊 Geluiden (veilig)
-      const whoosh = document.getElementById('sound-whoosh');
-      const chime  = document.getElementById('sound-chime');
+      // ✨ swirl naar shoppingbag
+      setTimeout(()=>{
+        try{
+          const icon=document.querySelector('.cart-link img[alt="Shopping Bag"]');
+          const rect=icon?icon.getBoundingClientRect():{left:window.innerWidth/2,top:window.innerHeight/2,width:0,height:0};
+          const centerX=rect.left+rect.width/2;
+          const centerY=rect.top+rect.height/2;
 
-      // Na de oorspronkelijke 2.5s: verleng 1.5s met swirl naar shoppingbag-icoon (in nav)
-      setTimeout(() => {
-        // Bestaande shoppingbag naast user: NIET aanpassen; alleen selecteren:
-        const targetIcon = document.querySelector('.cart-link img[alt="Shopping Bag"]');
-        const center = (() => {
-          if (!targetIcon) return { x: window.innerWidth/2, y: window.innerHeight/2 };
-          const r = targetIcon.getBoundingClientRect();
-          return { x: r.left + r.width/2, y: r.top + r.height/2 };
-        })();
+          if(whoosh){whoosh.currentTime=0;whoosh.volume=0.5;whoosh.play().catch(()=>{});setTimeout(()=>{try{whoosh.pause();}catch(e){}},2000);}
 
-        // Whoosh starten en na ~2s stoppen
-        if (whoosh && typeof whoosh.play === 'function') {
-          whoosh.currentTime = 0; whoosh.volume = 0.45;
-          whoosh.play().catch(()=>{});
-          setTimeout(()=>{ try { whoosh.pause(); } catch(e) {} }, 2000);
-        }
+          stars.forEach((star,i)=>{
+            const delay=Math.random()*200;
+            star.style.transition='top 1.5s ease-in-out,left 1.5s ease-in-out,transform 1.5s ease-in-out,opacity 1.5s ease';
+            setTimeout(()=>{
+              star.style.top=centerY+'px';
+              star.style.left=centerX+'px';
+              star.style.transform='scale(0.3) rotate('+(i*7)+'deg)';
+              star.style.opacity='0.9';
+            },delay);
+          });
 
-        // Swirl (1.5s) — sterren convergeren in spiraal op het icoon
-        stars.forEach((star, i) => {
-          const angle = i * 0.35;
-          const delay = Math.random() * 220;
-          star.style.transition = 'top 1.5s ease-in-out, left 1.5s ease-in-out, transform 1.5s ease-in-out, opacity 1.5s ease';
-          setTimeout(() => {
-            star.style.top  = `${center.y}px`;
-            star.style.left = `${center.x}px`;
-            star.style.transform = `scale(0.35) rotate(${angle*7}rad)`;
-            star.style.opacity = '0.9';
-          }, delay);
-        });
-
-        // Mini-explosie + chime
-        setTimeout(() => {
-          if (chime && typeof chime.play === 'function') {
-            chime.currentTime = 0; chime.volume = 0.6;
-            chime.play().catch(()=>{});
-            setTimeout(()=>{ try { chime.pause(); } catch(e) {} }, 2000);
-          }
-
-          for (let j = 0; j < 12; j++) {
-            const spark = document.createElement('span');
-            spark.classList.add('star');
-            spark.style.width = '3px';
-            spark.style.height = '3px';
-            spark.style.top = `${center.y}px`;
-            spark.style.left = `${center.x}px`;
-            spark.style.opacity = '1';
-            spark.style.transition = 'top .6s ease-out, left .6s ease-out, opacity .6s ease-out, transform .6s ease-out';
-            stardustContainer.appendChild(spark);
-
-            const a = Math.random() * Math.PI * 2;
-            const d = 50 + Math.random() * 70;
-            requestAnimationFrame(() => {
-              spark.style.top  = `${center.y + Math.sin(a)*d}px`;
-              spark.style.left = `${center.x + Math.cos(a)*d}px`;
-              spark.style.opacity = '0';
-              spark.style.transform = 'scale(0.6)';
-            });
-          }
-        }, 1500);
-
-        // Overlay daarna altijd weg
-        safeFadeOut(3500);
-      }, 2500);
+          setTimeout(()=>{
+            if(chime){chime.currentTime=0;chime.volume=0.6;chime.play().catch(()=>{});setTimeout(()=>{try{chime.pause();}catch(e){}},2000);}
+            for(let j=0;j<12;j++){
+              const spark=document.createElement('span');
+              spark.classList.add('star');
+              spark.style.width='3px';spark.style.height='3px';
+              spark.style.top=centerY+'px';spark.style.left=centerX+'px';
+              spark.style.opacity='1';spark.style.transition='all .6s ease-out';
+              stardust.appendChild(spark);
+              const a=Math.random()*Math.PI*2;
+              const d=40+Math.random()*60;
+              requestAnimationFrame(()=>{
+                spark.style.top=centerY+Math.sin(a)*d+'px';
+                spark.style.left=centerX+Math.cos(a)*d+'px';
+                spark.style.opacity='0';
+                spark.style.transform='scale(0.5)';
+              });
+            }
+          },1500);
+        }catch(err){console.error('stardust error',err);}
+        finally{fadeOut(3500);}
+      },2500);
     });
   </script>
 </body>
