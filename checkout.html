@@ -97,6 +97,7 @@ const cartCount=document.getElementById('cart-count');
 let cart=(JSON.parse(localStorage.getItem('cart'))||[]).map(it=>({...it,qty:Number(it?.qty)>0?Number(it.qty):1,price:Number(it?.price)?Number(it.price):0}));
 localStorage.setItem('cart',JSON.stringify(cart));
 cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);
+
 function renderCart(){
   cartContainer.innerHTML='';let total=0;
   if(cart.length===0){cartContainer.innerHTML=`<div class="empty-cart">Your cart is empty</div>`;}
@@ -123,6 +124,30 @@ function renderCart(){
   subtotalEl.textContent=total.toFixed(2);
 }
 renderCart();
+
+/* Globale functies zodat onclick werkt */
+function removeItem(i){
+  cart.splice(i,1);
+  localStorage.setItem('cart',JSON.stringify(cart));
+  cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);
+  renderCart();
+}
+
+function updateQty(i,d){
+  const c=Number(cart[i]?.qty)||1;
+  if(c===1 && d<0){removeItem(i);return;}
+  cart[i].qty=c+d<1?1:c+d;
+  localStorage.setItem('cart',JSON.stringify(cart));
+  cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);
+  renderCart();
+}
+
+function placeOrder(){
+  if(cart.length===0){alert("Your cart is empty.");return;}
+  alert("✅ Order placed successfully! (demo mode)");
+  localStorage.removeItem('cart');
+  renderCart();
+}
 
 /* ===== AUDIO ===== */
 const whoosh=document.getElementById('sound-whoosh');
