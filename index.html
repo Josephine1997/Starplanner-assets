@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,23 +176,14 @@
     setTimeout(() => popup.style.display = 'none', 2000);
   }
 
-  // ✅ addToCart met audio-unlock + triggers voor checkout-animatie
+  // ✅ Toegevoegd: juiste addToCart met justAdded + lastAddedItemName trigger
   async function addToCart(event, name, file, price) {
     event.stopPropagation();
     let existing = cart.find(i => i.name === name);
     if (existing) existing.qty = (existing.qty || 1) + 1;
     else cart.push({ name, file, price, qty: 1 });
 
-    // 🔊 Audio alvast ontgrendelen via deze klik (onhoorbaar)
-    try {
-      const a1 = new Audio("whoosh-soft.mp3");
-      const a2 = new Audio("sparkle-chime.mp3");
-      a1.volume = 0.01; a2.volume = 0.01;
-      a1.play().then(() => a1.pause()).catch(()=>{});
-      a2.play().then(() => a2.pause()).catch(()=>{});
-    } catch(_) {}
-
-    // ✅ Triggers voor checkout-animatie
+    // ✅ Bewaar cart en triggers voor de checkout-animatie
     localStorage.setItem('cart', JSON.stringify(cart));
     localStorage.setItem('justAdded', 'true');
     localStorage.setItem('lastAddedItemName', name);
