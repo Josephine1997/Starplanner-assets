@@ -9,7 +9,6 @@
 <style>
   body { background:#FFFFFF; margin:0; font-family:'Montserrat Alternates',sans-serif; }
 
-  /* Header */
   nav {
     background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');
     background-repeat:no-repeat;
@@ -44,7 +43,6 @@
     min-width:18px; text-align:center;
   }
 
-  /* Hero */
   .hero-text {
     text-align:center;
     margin:40px 0;
@@ -54,7 +52,6 @@
     -webkit-text-stroke:1.5px #FF7F50;
   }
 
-  /* Productsectie */
   .featured {
     padding:40px 5vw 60px;
     background:#fff;
@@ -85,7 +82,6 @@
   .product-title { font-size:16px; font-weight:600; color:#1F1F1F; margin-bottom:8px; }
   .product-price { color:#333; font-weight:600; font-size:15px; margin-bottom:8px; }
 
-  /* Knop */
   .btn-add-cart {
     display:inline-block;
     margin:8px auto 16px auto;
@@ -99,7 +95,6 @@
   }
   .btn-add-cart:hover { background:#e6b800; border-color:#cc9f00; }
 
-  /* Popup */
   #cart-popup {
     position:fixed;
     top:70px; left:50%;
@@ -115,7 +110,6 @@
     font-size:16px;
   }
 
-  /* Footer */
   footer {
     position:relative; margin-top:40px; overflow:hidden;
   }
@@ -150,12 +144,10 @@
 
 <h1 class="hero-text">Get the birthday template now ↓</h1>
 
-<!-- Popup -->
 <div id="cart-popup">Item is added to cart</div>
 
 <section class="featured">
   <div class="featured-inner">
-    <!-- Product 1 -->
     <article class="product-card">
       <div class="thumb"><img src="voorbeeldjanuari.png" alt="Birthday Template – Start in January"></div>
       <div class="product-body">
@@ -168,7 +160,6 @@
       </div>
     </article>
 
-    <!-- Product 2 -->
     <article class="product-card">
       <div class="thumb"><img src="voorbeeldapril.png" alt="Birthday Template – Start in April"></div>
       <div class="product-body">
@@ -188,18 +179,16 @@
   <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
 </footer>
 
-<!-- Firebase compat versies -->
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
 
 <script>
-  /* -------- FIREBASE CONFIG -------- */
   const firebaseConfig = {
     apiKey: "AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
     authDomain: "starplanner-3acf9.firebaseapp.com",
     projectId: "starplanner-3acf9",
-    storageBucket: "starplanner-3acf9.firebasestorage.app",
+    storageBucket: "starplanner-3acf9.appspot.com",
     messagingSenderId: "793684440573",
     appId: "1:793684440573:web:5beb2ab6f64b4fc110d594"
   };
@@ -207,7 +196,6 @@
   const auth = firebase.auth();
   const db   = firebase.firestore();
 
-  /* -------- CART LOGICA -------- */
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   const cartCount = document.getElementById('cart-count');
   const popup = document.getElementById('cart-popup');
@@ -231,7 +219,6 @@
     updateCartCount();
     showPopup();
 
-    // optioneel loggen naar Firestore
     try {
       const user = firebase.auth().currentUser;
       await db.collection("orders").add({
@@ -246,5 +233,22 @@
     }
   }
 </script>
+
+<!--
+Apache serverconfiguratie voor caching en headers
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options nosniff
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+-->
 </body>
 </html>
