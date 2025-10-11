@@ -1,5 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Checkout – Starplanner</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{font-family:'Montserrat Alternates',sans-serif;margin:0;padding:0;background:#fff;}
+nav{background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');background-repeat:no-repeat;background-position:center;background-size:120% 110%;padding:40px 60px;display:flex;justify-content:space-between;align-items:center;}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:70px;padding-left:100px;}
+nav ul li a{text-decoration:none;color:white;font-size:18px;font-weight:600;text-shadow:1px 1px 3px rgba(0,0,0,0.3);}
+nav ul li a:hover{color:#FF7929;}
+.nav-icons{display:flex;gap:30px;align-items:center;position:relative;}
+.nav-icons img{width:36px;height:36px;cursor:pointer;}
+.cart-link{position:relative;}
+.cart-badge{position:absolute;top:-6px;right:-6px;background:#FF6F61;color:#fff;font-size:12px;font-weight:600;padding:2px 6px;border-radius:50%;min-width:18px;text-align:center;}
+main{padding:20px;max-width:900px;margin:0 auto;}
+h1{color:#FFC90E;text-align:center;margin-top:30px;margin-bottom:10px;}
+.continue{color:#FFC90E;text-decoration:underline;text-align:center;cursor:pointer;}
+.cart-header{display:flex;justify-content:space-between;margin:40px 0 20px;color:#FFC90E;font-weight:600;font-size:16px;}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #ddd;}
+.cart-item img{width:80px;height:auto;margin-right:20px;}
+.product-info{flex:1;}
+.remove{color:#FFC90E;text-decoration:underline;cursor:pointer;font-size:14px;margin-top:4px;}
+.qty-controls{display:flex;align-items:center;gap:5px;margin-top:5px;}
+.qty-btn{background:#FFC90E;border:none;color:#fff;font-size:16px;width:28px;height:28px;border-radius:4px;cursor:pointer;font-weight:bold;}
+.qty-box{min-width:40px;text-align:center;border:2px solid #FFC90E;padding:4px;border-radius:4px;font-weight:600;background:#fff;}
+.empty-cart{text-align:center;font-size:18px;color:#666;margin:40px 0;}
+.summary{margin-top:40px;font-size:18px;font-weight:600;color:#333;}
+.tax-note{font-size:14px;color:#FFC90E;font-weight:400;margin-top:4px;}
+.checkout-btn{display:inline-block;margin-top:20px;padding:16px 36px;background:#FFC90E;color:#fff;font-size:18px;font-weight:600;border:none;border-radius:6px;cursor:pointer;}
+.checkout-btn:hover{background:#e6b800;}
+footer{position:relative;margin-top:60px;overflow:hidden;}
+.footer-decoration{width:100%;height:100px;object-fit:cover;display:block;}
+.footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
+
+/* 🌟 Stardust overlay */
+#stardust-overlay{display:flex;justify-content:center;align-items:center;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);color:white;font-size:22px;font-weight:600;z-index:9999;flex-direction:column;overflow:hidden;text-align:center;}
+#stardust{position:absolute;width:100%;height:100%;top:0;left:0;overflow:hidden;}
+.star{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,1) 0%,#fff4b0 40%,#ffc0cb 90%);
+  box-shadow:0 0 8px 2px rgba(255,255,255,0.8);
+  opacity:0;animation:twinkle 2s infinite ease-in-out;transform-origin:center;
+  transition:opacity .5s;
+}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(1);}50%{opacity:1;transform:scale(1.6);}}
+</style>
+</head>
+
+<body>
+<div id="stardust-overlay">
+  <div id="stardust"></div>
+  <div id="overlay-text"></div>
+</div>
+
+<header>
+<nav>
+<ul>
+<li><a href="index.html">HOME</a></li>
+<li><a href="thestorybehind.html">THE STORY BEHIND</a></li>
+<li><a href="shop.html">SHOP</a></li>
+<li><a href="plannertips.html">PLANNER TIPS</a></li>
+<li><a href="contact.html">CONTACT</a></li>
+</ul>
+<div class="nav-icons">
+<a href="account.html"><img src="user-icon.svg" alt="User"></a>
+<a href="checkout.html" class="cart-link">
+<img src="shoppingbag.svg" alt="Shopping Bag">
+<span id="cart-count" class="cart-badge">0</span>
+</a>
+</div>
+</nav>
+</header>
+
+<main>
+<h1>Your cart</h1>
+<div class="continue" onclick="window.location.href='shop.html'">Continue shopping</div>
+<div class="cart-header"><div>PRODUCT</div><div>PRICE</div></div>
+<div id="cart-items" class="cart-items"></div>
+<div class="summary">
+Subtotal: €<span id="subtotal">0.00</span>
+<div class="tax-note">Taxes and shipping calculated at checkout</div>
+<button class="checkout-btn" onclick="placeOrder()">Checkout</button>
+</div>
+</main>
+
+<footer>
+<img src="ArtworkWaterverfkwastfootheader.jpg" alt="Footer Decoration" class="footer-decoration">
+<div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
+</footer>
+
+<audio id="sound-whoosh" src="whoosh-soft.mp3" preload="auto" playsinline></audio>
+<audio id="sound-chime"  src="sparkle-chime.mp3" preload="auto" playsinline></audio>
+
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+
 <script>
-/* --- Firebase & cart setup --- */
+/* --- Firebase & cart --- */
 const firebaseConfig={apiKey:"AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",authDomain:"starplanner-3acf9.firebaseapp.com",projectId:"starplanner-3acf9",storageBucket:"starplanner-3acf9.firebasestorage.app",messagingSenderId:"793684440573",appId:"1:793684440573:web:5beb2ab6f64b4fc110d594"};
 firebase.initializeApp(firebaseConfig);
 const auth=firebase.auth();const db=firebase.firestore();
@@ -41,6 +142,10 @@ function renderCart(){
 }
 renderCart();
 
+function removeItem(i){cart.splice(i,1);localStorage.setItem('cart',JSON.stringify(cart));cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);renderCart();}
+function updateQty(i,d){const c=Number(cart[i]?.qty)||1;if(c===1&&d<0){removeItem(i);return;}cart[i].qty=c+d<1?1:c+d;localStorage.setItem('cart',JSON.stringify(cart));cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);renderCart();}
+async function placeOrder(){const u=auth.currentUser;if(!u){alert("You must be logged in to complete your order.");return;}if(cart.length===0){alert("Your cart is empty.");return;}const t=cart.reduce((s,it)=>s+((Number(it.price)||0)*(Number(it.qty)||1)),0);try{await db.collection('orders').add({userId:u.uid,email:u.email,items:cart,total:t,date:firebase.firestore.FieldValue.serverTimestamp()});alert("✅ Your order has been placed successfully!");localStorage.removeItem('cart');window.location.href="account.html";}catch(e){alert("❌ Error placing order: "+e.message);}}
+
 /* --- Audio --- */
 const whoosh=document.getElementById('sound-whoosh');
 const chime=document.getElementById('sound-chime');
@@ -51,10 +156,10 @@ function stopSound(el){try{el.pause();el.currentTime=0;}catch(_){}}
 function flushQueue(){while(queue.length){try{queue.shift()();}catch(_){}}}
 ["click","touchstart","keydown","pointerdown"].forEach(ev=>{window.addEventListener(ev,unlockAudio,{once:true,passive:true});});
 
-/* --- Stardust triggered by first scroll --- */
+/* --- Stardust: start pas na eerste scroll --- */
 window.addEventListener('load',()=>{
   const overlay=document.getElementById('stardust-overlay');
-  const textEl=overlay.querySelector('div:last-child');
+  const textEl=document.getElementById('overlay-text');
   const container=document.getElementById('stardust');
 
   const justAdded=localStorage.getItem('justAdded')==='true';
@@ -65,7 +170,7 @@ window.addEventListener('load',()=>{
     unlockAudio();
     textEl.textContent="Sprinkling a little stardust…";
 
-    // 1️⃣ maak sterren
+    // ⭐ Sterren aanmaken pas nu
     const stars=[];
     for(let i=0;i<30;i++){
       const s=document.createElement('span');
@@ -79,41 +184,42 @@ window.addEventListener('load',()=>{
       stars.push(s);
     }
 
-    // 2️⃣ bepaal doel: shoppingbag bij juiste productnaam
+    // 🎯 Doel bepalen: bag naast het laatst toegevoegde product
     const last=localStorage.getItem('lastAddedItemName');
     let targetBag=null;
-    document.querySelectorAll('.cart-item').forEach(it=>{
-      if(it.textContent.includes(last)){
-        targetBag=it.querySelector('img');
-      }
-    });
-    if(!targetBag){ // fallback
+    if(last){
+      document.querySelectorAll('.cart-item').forEach(it=>{
+        if(it.textContent.includes(last)){
+          const img=it.querySelector('img');
+          if(img) targetBag=img;
+        }
+      });
+    }
+    if(!targetBag){
       targetBag=document.querySelector('.nav-icons img[alt="Shopping Bag"]');
     }
-
     const r=targetBag.getBoundingClientRect();
-    const cx=r.left+r.width/2;
-    const cy=r.top+r.height/2;
+    const cx=r.left + r.width/2;
+    const cy=r.top  + r.height/2;
 
-    // 3️⃣ start samenkomen na 1s (chime speelt direct hierbij)
+    // ⏱️ 1s later start samenkomen → chime NU
     setTimeout(()=>{
-      playSound(chime,0.8); // speelt bij begin van samenkomen
+      playSound(chime,0.9); // start bij begin samenkomen
       stars.forEach((s,i)=>{
-        const angle=i*0.35;
+        const a=i*0.35; // spiraalgevoel
         s.style.transition='top 2s cubic-bezier(0.55,0.05,0.19,1),left 2s cubic-bezier(0.55,0.05,0.19,1),transform 2s ease-in-out,opacity 2s ease';
-        setTimeout(()=>{
-          s.style.top =`${cy+Math.sin(angle)*8}px`;
-          s.style.left=`${cx+Math.cos(angle)*8}px`;
-          s.style.transform=`scale(0.3) rotate(${angle*8}rad)`;
-          s.style.opacity='0.9';
-        },Math.random()*300);
+        s.style.top =`${cy + Math.sin(a)*8}px`;
+        s.style.left=`${cx + Math.cos(a)*8}px`;
+        s.style.transform=`scale(0.3) rotate(${a*8}rad)`;
+        s.style.opacity='0.9';
       });
     },1000);
 
-    // 4️⃣ wanneer sterren gearriveerd zijn → whoosh + explosie
+    // ⏱️ exact 3.0s totaal → whoosh + explosie (1s + 2s)
     setTimeout(()=>{
       playSound(whoosh,0.9);
 
+      // Explosie flair
       const flare=document.createElement('div');
       flare.style.position='fixed';
       flare.style.left=`${cx-50}px`;flare.style.top=`${cy-50}px`;
@@ -127,7 +233,7 @@ window.addEventListener('load',()=>{
       requestAnimationFrame(()=>{flare.style.opacity='1';flare.style.transform='scale(1.6)';});
       setTimeout(()=>flare.remove(),700);
 
-      // mini sterrenexplosie
+      // Mini-sterren burst
       for(let j=0;j<12;j++){
         const sp=document.createElement('span');
         sp.classList.add('star');
@@ -145,14 +251,14 @@ window.addEventListener('load',()=>{
         });
       }
 
-      // stop beide geluiden na kort
+      // Geluiden netjes stoppen
       setTimeout(()=>{
         stopSound(chime);
         stopSound(whoosh);
-      },1500);
+      },1200);
 
       fadeOut(4000);
-    },3100); // 1s wachten + 2s samenkomen = 3.1s totaal
+    },3000);
   }
 
   function firstScroll(){
@@ -172,3 +278,5 @@ function fadeOut(ms){
   setTimeout(()=>overlay.style.display='none',7000);
 }
 </script>
+</body>
+</html>
