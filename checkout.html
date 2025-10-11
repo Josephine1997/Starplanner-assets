@@ -125,15 +125,14 @@ function renderCart(){
 }
 renderCart();
 
-/* Globale functies zodat onclick werkt */
-function removeItem(i){
+/* Global */
+window.removeItem=function(i){
   cart.splice(i,1);
   localStorage.setItem('cart',JSON.stringify(cart));
   cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);
   renderCart();
 }
-
-function updateQty(i,d){
+window.updateQty=function(i,d){
   const c=Number(cart[i]?.qty)||1;
   if(c===1 && d<0){removeItem(i);return;}
   cart[i].qty=c+d<1?1:c+d;
@@ -141,8 +140,7 @@ function updateQty(i,d){
   cartCount.textContent=cart.reduce((s,it)=>s+(Number(it.qty)||1),0);
   renderCart();
 }
-
-function placeOrder(){
+window.placeOrder=function(){
   if(cart.length===0){alert("Your cart is empty.");return;}
   alert("✅ Order placed successfully! (demo mode)");
   localStorage.removeItem('cart');
@@ -159,7 +157,7 @@ function stopSound(el){try{el.pause();el.currentTime=0;}catch(_){}}
 function flushQueue(){while(queue.length){try{queue.shift()();}catch(_){}}}
 ["click","touchstart","keydown","pointerdown"].forEach(ev=>{window.addEventListener(ev,unlockAudio,{once:true,passive:true});});
 
-/* ===== STARDUST (geüpdatet) ===== */
+/* ===== STARDUST ===== */
 window.addEventListener('load',()=>{
   const overlay=document.getElementById('stardust-overlay');
   const textEl=document.getElementById('overlay-text');
@@ -171,7 +169,7 @@ window.addEventListener('load',()=>{
   const PAUSE_BEFORE_SWIRL=1500;
   const SWIRL_DURATION=3000;
   const CHIME_EXTRA_AFTER=1000;
-  let started=false;
+  let started=false, animFrame;
 
   function findTargets(){
     const last=localStorage.getItem('lastAddedItemName');
@@ -214,29 +212,25 @@ window.addEventListener('load',()=>{
 
     setTimeout(()=>{
       playSound(chime,0.9);
-      const moveStars=()=>{
+
+      const animateSwirl=()=>{
         targets.forEach((t,ti)=>{
           const {cx,cy}=getPos(t);
           const g=starGroups[ti]||[];
           g.forEach((s,i)=>{
             const a=i*0.4;
-            s.style.transition=`top ${SWIRL_DURATION}ms cubic-bezier(0.55,0.05,0.19,1),
-                                left ${SWIRL_DURATION}ms cubic-bezier(0.55,0.05,0.19,1),
-                                transform ${SWIRL_DURATION}ms ease-in-out,
-                                opacity ${SWIRL_DURATION}ms ease`;
             s.style.top=(cy+Math.sin(a)*8)+'px';
             s.style.left=(cx+Math.cos(a)*8)+'px';
             s.style.transform=`scale(0.3) rotate(${a*8}rad)`;
             s.style.opacity='0.9';
           });
         });
+        animFrame=requestAnimationFrame(animateSwirl);
       };
-      moveStars();
-      const track=()=>moveStars();
-      window.addEventListener('scroll',track,{passive:true});
-      window.addEventListener('resize',track);
+      animateSwirl();
 
       setTimeout(()=>{
+        cancelAnimationFrame(animFrame);
         playSound(whoosh,0.9);
         targets.forEach(t=>{
           const {cx,cy}=getPos(t);
@@ -255,26 +249,8 @@ window.addEventListener('load',()=>{
           document.body.appendChild(flare);
           requestAnimationFrame(()=>{flare.style.opacity='1';flare.style.transform='scale(1.6)';});
           setTimeout(()=>flare.remove(),700);
-
-          for(let j=0;j<12;j++){
-            const sp=document.createElement('span');
-            sp.classList.add('star');
-            sp.style.width='3px';sp.style.height='3px';
-            sp.style.top=cy+'px';sp.style.left=cx+'px';sp.style.opacity='1';
-            sp.style.transition='top .8s ease-out,left .8s ease-out,opacity .8s ease-out,transform .8s ease-out';
-            field.appendChild(sp);
-            const ang=Math.random()*Math.PI*2,dist=60+Math.random()*90;
-            requestAnimationFrame(()=>{
-              sp.style.top=(cy+Math.sin(ang)*dist)+'px';
-              sp.style.left=(cx+Math.cos(ang)*dist)+'px';
-              sp.style.opacity='0';sp.style.transform='scale(0.6)';
-            });
-          }
         });
-        setTimeout(()=>{
-          stopSound(whoosh);
-          setTimeout(()=>stopSound(chime),CHIME_EXTRA_AFTER);
-        },1200);
+        setTimeout(()=>{stopSound(whoosh);setTimeout(()=>stopSound(chime),CHIME_EXTRA_AFTER);},1200);
         fadeOut(SWIRL_DURATION+1500);
       },SWIRL_DURATION);
     },PAUSE_BEFORE_SWIRL);
