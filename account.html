@@ -10,7 +10,6 @@
   --pastel-orange:#FFC88B;
   --pastel-yellow:#FFF7B2;
   --pastel-pink:#FFD6DA;
-  --mandarin:#FFB84C;
   --gold-stroke:#FFE9A6;
   --btn:#FFC04D;
   --btn-hover:#EAA23D;
@@ -43,7 +42,7 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
 .avatar.has-photo svg{opacity:0;}
 .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
 .avatar.has-photo img{display:block;}
-/* Wit 3D plusje (geen knopvlak) */
+/* Wit 3D plusje */
 .plus-btn{
   position:absolute;inset:0;margin:auto;width:40px;height:40px;border:none;background:transparent;cursor:pointer;
   display:flex;align-items:center;justify-content:center;z-index:2;transform:scale(1);transition:transform .14s ease;
@@ -56,7 +55,7 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
 .plus-btn:before{ width:70%; height:3px; }
 .plus-btn:after{ height:70%; width:3px; }
 
-/* Sidebar kop */
+/* Sidebar heading */
 .side-title{
   font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin:0 0 20px;
   background:linear-gradient(90deg,#FFD974,#FFB84C);
@@ -77,7 +76,7 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
 
 .content{background:var(--cream);border-radius:18px;padding:40px;box-shadow:0 6px 12px rgba(0,0,0,0.05);}
 
-/* Sectietitels –zelfde zachte pastelgradient voor álle h3 */
+/* Sectietitels –zelfde zachte pastel voor álle h3 (uniform) */
 .section-title{
   font-family:'Playfair Display',serif;font-size:26px;margin:0 0 14px;
   background:linear-gradient(90deg,var(--pastel-yellow),var(--pastel-orange),var(--pastel-pink));
@@ -95,7 +94,7 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
 .btn:hover{background:var(--btn-hover);}
 input,select{width:100%;padding:10px;border:2px solid #FFD46A;border-radius:10px;font-size:15px;font-family:'Montserrat Alternates';margin-bottom:10px;}
 
-/* WELCOME! – ORIGINELE OMBRE + extra 3D-rand (alleen schaduw) */
+/* WELCOME! – ORIGINELE OMBRE + extra 3D-rand (alleen schaduw toegevoegd) */
 .welcome-area{text-align:center;margin-bottom:40px;}
 .welcome-area h1{
   font-family:'Playfair Display',serif;
@@ -106,7 +105,7 @@ input,select{width:100%;padding:10px;border:2px solid #FFD46A;border-radius:10px
   -webkit-text-fill-color:transparent;              /* exact origineel */
   margin:0;
   font-weight:700;
-  /* extra 3D-rand zonder de gradient te veranderen */
+  /* subtiele gelaagde 3D-rand */
   text-shadow:
     0 1px   0 #e6c985,
     0 2px   0 #dbb86f,
@@ -121,7 +120,7 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
 /* --- Compact Upload + Circle Crop Modal --- */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px;}
 .modal.open{display:flex;}
-.modal-card{width:min(400px,95vw);background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+.modal-card{width:min(390px,95vw);background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .modal-title{font-family:'Playfair Display',serif;font-size:20px}
 .modal-close{border:none;background:transparent;font-size:24px;cursor:pointer;line-height:1}
@@ -129,31 +128,29 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
 /* Kleine dropzone */
 .dropzone{
   border:2px dashed #e2cf97;border-radius:14px;background:#f9f6ea;
-  height:110px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;position:relative;
+  height:100px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;position:relative;
   color:#8a7b5a;font-size:14px;margin-bottom:10px;
 }
 .dropzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
 
-/* Crop-vierkant met cirkelmask (duidelijk waar er afgesneden wordt) */
-.crop-wrap{position:relative;width:100%;max-height:280px;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#f3efe3;border:2px dashed #e2cf97;}
+/* Cropvak met cirkelmask (duidelijk waar afgesneden wordt) */
+.crop-wrap{position:relative;width:100%;max-height:260px;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#f3efe3;border:2px dashed #e2cf97;}
 .crop-canvas{position:absolute;inset:0;cursor:grab}
 .crop-canvas.dragging{cursor:grabbing}
-/* donker buiten de cirkel (80% van zijde) */
+/* donker buiten de cirkel (78% van zijde) */
 .mask-overlay{
   position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,.5) 41%);
+  background:radial-gradient(circle at 50% 50%, transparent 39%, rgba(0,0,0,.5) 40%);
 }
 /* duidelijke witte rand van de cropcirkel */
 .circle-outline{
   position:absolute;inset:0;pointer-events:none;border-radius:50%;
-  width:80%;height:80%;left:10%;top:10%;
+  width:78%;height:78%;left:11%;top:11%;
   border:2px solid #ffffff;
   box-shadow:0 0 0 2px rgba(0,0,0,.18) inset;
 }
 .modal-actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px}
 .modal-actions input[type=range]{flex:1}
-.note{font-size:12px;color:#6b6049;margin-top:6px}
 .hidden{display:none!important}
 </style>
 </head>
@@ -384,7 +381,7 @@ async function changePassword(){
   }catch(e){ console.error(e); alert(e.message||'Could not update password.'); }
 }
 
-/* Personal data & address — Edit + Save */
+/* Personal data & address — Edit + Save (zelfde layout als andere kopjes) */
 document.getElementById('btn-edit').addEventListener('click', async ()=>{
   const user=auth.currentUser; if(!user) return alert('Please sign in.');
   try{
@@ -434,6 +431,7 @@ const btnSavePhoto=document.getElementById('btn-save-photo');
 
 let img=new Image();
 let imgLoaded=false;
+let minZoom=1;
 let state={scale:1, x:0, y:0, dragging:false, startX:0, startY:0};
 
 function setAvatarImage(url){
@@ -442,8 +440,8 @@ function setAvatarImage(url){
   avatarImg.alt='Profile photo';
 }
 
-plusBtn.addEventListener('click', ()=>{ openModal(); });
-modalClose.addEventListener('click', ()=>{ closeModal(); });
+plusBtn.addEventListener('click', openModal);
+modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
 
 dz.addEventListener('dragover', e=>{ e.preventDefault(); dz.style.background='#f5efd9'; });
@@ -480,13 +478,14 @@ function loadFile(file){
     img=new Image();
     img.onload=()=>{
       imgLoaded=true;
-      // startpositie: cover het vierkant
       const W=canvas.width, H=canvas.height;
-      const scale=Math.max(W/img.width, H/img.height);
-      state.scale=scale;
-      zoomInput.value=Math.max(1, scale).toFixed(2);
-      state.x=(W - img.width*scale)/2;
-      state.y=(H - img.height*scale)/2;
+      // minimale zoom zodat het vierkant bedekt blijft (dus cirkel is ook altijd gevuld)
+      minZoom=Math.max(W/img.width, H/img.height);
+      state.scale=minZoom;
+      zoomInput.min=minZoom.toFixed(2);
+      zoomInput.value=minZoom.toFixed(2);
+      state.x=(W - img.width*state.scale)/2;
+      state.y=(H - img.height*state.scale)/2;
       draw();
     };
     img.src=ev.target.result;
@@ -518,16 +517,17 @@ canvas.addEventListener('mousemove', e=>{
 });
 zoomInput.addEventListener('input', e=>{
   if(!imgLoaded) return;
+  const newScale=Math.max(parseFloat(e.target.value), minZoom);
   const W=canvas.width, H=canvas.height;
-  const prev=state.scale, next=parseFloat(e.target.value);
+  const prev=state.scale;
   const cx=W/2, cy=H/2;
-  state.x = cx - ((cx - state.x) * (next/prev));
-  state.y = cy - ((cy - state.y) * (next/prev));
-  state.scale=next; draw();
+  state.x = cx - ((cx - state.x) * (newScale/prev));
+  state.y = cy - ((cy - state.y) * (newScale/prev));
+  state.scale=newScale; draw();
 });
 
-/* Save: exporteer exact de cirkel (80%) als rond PNG en upload */
-btnSavePhoto.addEventListener('click', async ()=>{
+/* Save: exporteer exact de cirkel (78% van zijde) als rond PNG en upload */
+document.getElementById('btn-save-photo').addEventListener('click', async ()=>{
   const user=auth.currentUser; if(!user) return alert('Please sign in.');
   if(!imgLoaded) return alert('Please upload an image first.');
 
@@ -536,14 +536,14 @@ btnSavePhoto.addEventListener('click', async ()=>{
   out.width=size; out.height=size;
   const octx=out.getContext('2d');
 
-  // clip naar cirkel (80% diameter -> radius 40% van size)
-  const radius=size*0.4, cx=size/2, cy=size/2;
+  // clip naar cirkel (78% diameter -> radius 39%)
+  const radius=size*0.39, cx=size/2, cy=size/2;
   octx.save();
   octx.beginPath(); octx.arc(cx, cy, radius, 0, Math.PI*2); octx.closePath(); octx.clip();
 
   // Map de huidige canvas-positie naar output
-  const viewW=canvas.width, viewH=canvas.height;
-  const scaleFactor = size / viewW; // schaal van zichtcanvas naar outputcanvas
+  const viewW=canvas.width;
+  const scaleFactor = size / viewW;
   const dx = state.x * scaleFactor;
   const dy = state.y * scaleFactor;
   const dw = img.width * state.scale * scaleFactor;
@@ -553,7 +553,6 @@ btnSavePhoto.addEventListener('click', async ()=>{
   octx.drawImage(img, dx, dy, dw, dh);
   octx.restore();
 
-  // transparant buiten de cirkel (al geclipt)
   out.toBlob(async (blob)=>{
     if(!blob){ alert('Nothing to save.'); return; }
     try{
