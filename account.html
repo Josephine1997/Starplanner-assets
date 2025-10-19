@@ -7,21 +7,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --pastel-orange:#FFC88B;
-  --pastel-yellow:#FFF7B2;
-  --pastel-pink:#FFD6DA;
-  --gold-stroke:#FFE9A6;
+  --peach-50:#FFF7EB;
+  --peach-100:#FFF2DF;
+  --peach-200:#FFE6C7;
+  --peach-300:#FFD9A9;
+  --peach-400:#FFC88B;
+  --peach-500:#FFB86E;
+  --mandarin:#FFB84C;
+  --honey:#FFE39C;
+  --butter:#FFF7B2;
+  --rose-100:#FFE6EA;
+  --rose-200:#FFD6DA;
+  --cream:#FFFDF6;
+
   --btn:#FFC04D;
   --btn-hover:#EAA23D;
-  --salmon:#FF9A6A;
-  --salmon-hover:#FF864F;
-  --cream:#FFFDF6;
+
+  /* warm, light shadows (no black/blue) */
+  --shadow-sm: 0 2px 6px rgba(255,168,112,.28);
+  --shadow-md: 0 6px 14px rgba(255,168,112,.24);
+  --shadow-lg: 0 10px 24px rgba(255,168,112,.26);
+
+  /* modal backdrop (warm, light) */
+  --backdrop: rgba(255, 232, 200, .72);
 }
 *{box-sizing:border-box}
 body{font-family:'Montserrat Alternates',sans-serif;margin:0;background:#fff;}
-nav{background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');background-repeat:no-repeat;background-position:center;background-size:120% 110%;padding:40px 60px;display:flex;justify-content:space-between;align-items:center;}
+nav{
+  background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');
+  background-repeat:no-repeat;background-position:center;background-size:120% 110%;
+  padding:40px 60px;display:flex;justify-content:space-between;align-items:center;
+}
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:70px;padding-left:100px;}
-nav ul li a{text-decoration:none;color:white;font-size:18px;font-weight:600;text-shadow:1px 1px 3px rgba(0,0,0,0.3);}
+nav ul li a{
+  text-decoration:none;color:white;font-size:18px;font-weight:600;
+  text-shadow:0 1px 3px rgba(255,168,112,.35); /* warm tint, no black */
+}
 nav ul li a:hover{color:#FF7929;}
 .nav-icons{display:flex;gap:30px;align-items:center;}
 .nav-icons img{width:36px;height:36px;cursor:pointer;}
@@ -30,19 +51,19 @@ nav ul li a:hover{color:#FF7929;}
 
 main{max-width:1100px;margin:60px auto;padding:0 20px;}
 .account-shell{display:grid;grid-template-columns:260px 1fr;gap:24px;}
-.sidebar{background:var(--cream);border-radius:18px;padding:24px;box-shadow:0 4px 12px rgba(0,0,0,.06);text-align:center;}
+.sidebar{background:var(--cream);border-radius:18px;padding:24px;box-shadow:var(--shadow-sm);text-align:center;}
 .avatar{
   width:120px;height:120px;border-radius:50%;margin:0 auto 18px;position:relative;
   background:linear-gradient(145deg,#FFFBEA,#FFE39C);
   border:4px solid #FFA94D;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 10px rgba(255,170,70,0.25);overflow:hidden;transition:transform .18s ease;
+  box-shadow:0 4px 10px rgba(255,180,120,0.28);overflow:hidden;transition:transform .18s ease;
 }
 .avatar:hover{ transform:scale(1.04); }
 .avatar svg{width:65px;height:65px;fill:#FFB766;transition:opacity .2s;}
 .avatar.has-photo svg{opacity:0;}
 .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
 .avatar.has-photo img{display:block;}
-/* Wit 3D plusje */
+/* White 3D plus */
 .plus-btn{
   position:absolute;inset:0;margin:auto;width:40px;height:40px;border:none;background:transparent;cursor:pointer;
   display:flex;align-items:center;justify-content:center;z-index:2;transform:scale(1);transition:transform .14s ease;
@@ -50,107 +71,119 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
 .plus-btn:hover{ transform:scale(1.1); }
 .plus-btn:before, .plus-btn:after{
   content:""; position:absolute; background:#ffffff; border-radius:2px;
-  box-shadow:0 1px 0 rgba(0,0,0,.12), 0 4px 10px rgba(0,0,0,.15);
+  box-shadow:0 2px 10px rgba(255,168,112,.35);
 }
 .plus-btn:before{ width:70%; height:3px; }
 .plus-btn:after{ height:70%; width:3px; }
 
-/* Sidebar heading */
+/* Sidebar title */
 .side-title{
   font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin:0 0 20px;
   background:linear-gradient(90deg,#FFD974,#FFB84C);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;
 }
 
-/* Side nav (origineel) */
+/* Side nav */
 .side-nav{display:flex;flex-direction:column;gap:8px;}
-.side-nav button{background:none;border:none;padding:10px 14px;font-family:'Playfair Display',serif;font-size:18px;cursor:pointer;color:#FFB84C;text-shadow:0 0 1px #FFE6A5;transition:color .2s;}
+.side-nav button{
+  background:none;border:none;padding:10px 14px;font-family:'Playfair Display',serif;font-size:18px;cursor:pointer;
+  color:#FFB84C;text-shadow:0 0 1px #FFE6A5;transition:color .2s;
+}
 .side-nav button:hover,.side-nav button.active{color:#FFA040;text-shadow:0 0 3px #FFE9A6;}
+
 .logout-btn{
-  width:100%;background:var(--salmon);color:#fff;border:none;border-radius:12px;padding:14px 0;font-size:18px;
+  width:100%;background:#FF9A6A;color:#fff;border:none;border-radius:12px;padding:14px 0;font-size:18px;
   font-family:'Montserrat Alternates',sans-serif;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;
-  text-shadow:1px 1px 3px rgba(0,0,0,0.25);margin-top:20px;cursor:pointer;box-shadow:0 4px 8px rgba(255,160,110,0.3);
+  text-shadow:0 1px 3px rgba(255,168,112,.35);margin-top:20px;cursor:pointer;box-shadow:var(--shadow-sm);
   transition:background .25s ease, transform .15s ease;
 }
-.logout-btn:hover{ background:var(--salmon-hover); transform:translateY(-1px); }
+.logout-btn:hover{ background:#FF864F; transform:translateY(-1px); }
 
-.content{background:var(--cream);border-radius:18px;padding:40px;box-shadow:0 6px 12px rgba(0,0,0,0.05);}
+.content{background:var(--cream);border-radius:18px;padding:40px;box-shadow:var(--shadow-md);}
 
-/* Sectietitels –zelfde zachte pastel voor álle h3 (uniform) */
+/* Section titles (uniform) */
 .section-title{
   font-family:'Playfair Display',serif;font-size:26px;margin:0 0 14px;
-  background:linear-gradient(90deg,var(--pastel-yellow),var(--pastel-orange),var(--pastel-pink));
+  background:linear-gradient(90deg,var(--butter),var(--peach-400),var(--rose-200));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  -webkit-text-stroke:1px var(--gold-stroke);
+  -webkit-text-stroke:1px #FFE9A6;
 }
 
 /* Orders */
 .orders p{color:#FFAE42;font-family:'Playfair Display';font-size:17px;}
-.order{background:#FFF8D8;border:2px solid #FFB84C;border-radius:12px;padding:14px;margin-bottom:12px;}
+.order{background:#FFF8D8;border:2px solid #FFB84C;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow-sm);}
 .order h4{margin:0 0 8px;color:#FFAE42;font-family:'Playfair Display';}
 
-/* Buttons & inputs (origineel) */
-.btn{display:inline-block;background:var(--btn);color:#fff;border:none;border-radius:10px;padding:12px 18px;cursor:pointer;font-weight:600;font-family:'Montserrat Alternates';}
+/* Buttons & inputs */
+.btn{display:inline-block;background:var(--btn);color:#fff;border:none;border-radius:10px;padding:12px 18px;cursor:pointer;font-weight:600;font-family:'Montserrat Alternates';box-shadow:var(--shadow-sm);}
 .btn:hover{background:var(--btn-hover);}
-input,select{width:100%;padding:10px;border:2px solid #FFD46A;border-radius:10px;font-size:15px;font-family:'Montserrat Alternates';margin-bottom:10px;}
+input,select{width:100%;padding:10px;border:2px solid #FFD46A;border-radius:10px;font-size:15px;font-family:'Montserrat Alternates';margin-bottom:10px;background:#fff;}
 
-/* WELCOME! – ORIGINELE OMBRE + extra 3D-rand (alleen schaduw toegevoegd) */
+/* Welcome – ORIGINAL ombre + subtle 3D (Option A) */
 .welcome-area{text-align:center;margin-bottom:40px;}
 .welcome-area h1{
   font-family:'Playfair Display',serif;
   font-size:64px;
   letter-spacing:0.5px;
-  background:linear-gradient(90deg,#FFF7B2,#FFB85C); /* exact origineel */
-  -webkit-background-clip:text;                     /* exact origineel */
-  -webkit-text-fill-color:transparent;              /* exact origineel */
-  margin:0;
-  font-weight:700;
-  /* subtiele gelaagde 3D-rand */
+  background:linear-gradient(90deg,#FFF7B2,#FFB85C); /* ORIGINAL */
+  -webkit-background-clip:text;                     /* ORIGINAL */
+  -webkit-text-fill-color:transparent;              /* ORIGINAL */
+  margin:0;font-weight:700;
   text-shadow:
-    0 1px   0 #e6c985,
-    0 2px   0 #dbb86f,
-    0 3px   0 #d0a85a,
-    0 6px  12px rgba(0,0,0,.18);
+    0 1px 0 rgba(200,150,80,.28),
+    0 2px 2px rgba(255,168,112,.25),
+    0 3px 6px rgba(255,168,112,.22);
 }
 
 footer{position:relative;margin:60px 0 0;overflow:hidden;}
 .footer-decoration{width:100%;height:100px;object-fit:cover;display:block;}
-.footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
+.footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:0 1px 3px rgba(255,168,112,.35);}
 
-/* --- Compact Upload + Circle Crop Modal --- */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px;}
+/* --- Compact Upload + Circle Crop Modal (professional, light) --- */
+.modal{position:fixed;inset:0;background:var(--backdrop);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px;}
 .modal.open{display:flex;}
-.modal-card{width:min(390px,95vw);background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+.modal-card{
+  width:min(392px,95vw);background:#fff;border-radius:16px;padding:16px;box-shadow:var(--shadow-lg);
+  border:1px solid #FFE6C0;
+}
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.modal-title{font-family:'Playfair Display',serif;font-size:20px}
-.modal-close{border:none;background:transparent;font-size:24px;cursor:pointer;line-height:1}
+.modal-title{font-family:'Playfair Display',serif;font-size:20px;color:#D7883A}
+.modal-close{border:none;background:transparent;font-size:24px;cursor:pointer;line-height:1;color:#D7883A}
 
-/* Kleine dropzone */
+/* Small dropzone */
 .dropzone{
-  border:2px dashed #e2cf97;border-radius:14px;background:#f9f6ea;
-  height:100px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;position:relative;
-  color:#8a7b5a;font-size:14px;margin-bottom:10px;
+  border:2px dashed #F4C27E;border-radius:14px;background:#FFF6E8;
+  height:110px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;position:relative;
+  color:#9B6B2D;font-size:14px;margin-bottom:10px;
 }
 .dropzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.dropzone:focus-within{outline:3px solid #FFD79C;}
 
-/* Cropvak met cirkelmask (duidelijk waar afgesneden wordt) */
-.crop-wrap{position:relative;width:100%;max-height:260px;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#f3efe3;border:2px dashed #e2cf97;}
+/* Crop area with circle mask (warm overlay; no black) */
+.crop-wrap{
+  position:relative;width:100%;max-height:270px;aspect-ratio:1/1;border-radius:14px;overflow:hidden;
+  background:#FFF3E3;border:2px dashed #F4C27E;
+}
 .crop-canvas{position:absolute;inset:0;cursor:grab}
 .crop-canvas.dragging{cursor:grabbing}
-/* donker buiten de cirkel (78% van zijde) */
+/* warm tint outside the circle (not black/blue) */
 .mask-overlay{
   position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(circle at 50% 50%, transparent 39%, rgba(0,0,0,.5) 40%);
+  background:radial-gradient(circle at 50% 50%, transparent 40%, rgba(255,198,133,.55) 41%);
 }
-/* duidelijke witte rand van de cropcirkel */
+/* crisp white circle guide */
 .circle-outline{
   position:absolute;inset:0;pointer-events:none;border-radius:50%;
-  width:78%;height:78%;left:11%;top:11%;
+  width:80%;height:80%;left:10%;top:10%;
   border:2px solid #ffffff;
-  box-shadow:0 0 0 2px rgba(0,0,0,.18) inset;
+  box-shadow:0 0 0 2px rgba(255,190,130,.34) inset;
 }
 .modal-actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px}
 .modal-actions input[type=range]{flex:1}
+.btn-secondary{
+  background:#FFE2B6;color:#7E4B1A;border:none;border-radius:10px;padding:12px 18px;font-weight:600;cursor:pointer;box-shadow:var(--shadow-sm);
+}
+.btn-secondary:hover{ background:#FFD79C; }
 .hidden{display:none!important}
 </style>
 </head>
@@ -278,13 +311,11 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
       <button class="modal-close" id="modal-close" aria-label="Close">×</button>
     </div>
 
-    <!-- Kleine dropzone -->
     <div class="dropzone" id="dropzone">
-      <div id="dz-text">Drag profile picture here or upload it here</div>
+      <div id="dz-text">Drag profilepicture here or upload it here</div>
       <input type="file" id="file-input" accept="image/*">
     </div>
 
-    <!-- Cirkel-cropper -->
     <div class="crop-wrap">
       <canvas id="crop-canvas" class="crop-canvas"></canvas>
       <div class="mask-overlay"></div>
@@ -292,8 +323,9 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
     </div>
 
     <div class="modal-actions">
+      <button class="btn-secondary" id="btn-cancel-photo" type="button">Cancel</button>
       <input type="range" id="zoom" min="1" max="3" step="0.01" value="1" title="Zoom">
-      <button class="btn" id="btn-save-photo">Save</button>
+      <button class="btn" id="btn-save-photo" type="button">Save</button>
     </div>
   </div>
 </div>
@@ -313,7 +345,7 @@ const auth=firebase.auth();
 const db=firebase.firestore();
 const storage=firebase.storage();
 
-/* Orders */
+/* Load orders & avatar */
 auth.onAuthStateChanged(async user=>{
  if(user){
    document.getElementById('welcome-name').textContent=`Welcome, ${user.email.split('@')[0]}!`;
@@ -349,7 +381,7 @@ async function loadOrders(userId){
   }
 }
 
-/* Navigatie */
+/* Side navigation */
 document.querySelectorAll('.side-nav button').forEach(btn=>{
  btn.addEventListener('click',()=>{
    document.querySelectorAll('.side-nav button').forEach(b=>b.classList.remove('active'));
@@ -381,7 +413,7 @@ async function changePassword(){
   }catch(e){ console.error(e); alert(e.message||'Could not update password.'); }
 }
 
-/* Personal data & address — Edit + Save (zelfde layout als andere kopjes) */
+/* Personal data & address — Edit + Save */
 document.getElementById('btn-edit').addEventListener('click', async ()=>{
   const user=auth.currentUser; if(!user) return alert('Please sign in.');
   try{
@@ -415,12 +447,13 @@ async function saveAddress(){
   }catch(e){ console.error(e); alert('Could not save your details.'); }
 }
 
-/* ===== Avatar upload + CIRCULAR crop (compact & professioneel) ===== */
+/* ===== Avatar upload + Circular crop (professional, light palette) ===== */
 const avatar=document.getElementById('avatar');
 const avatarImg=document.getElementById('avatar-img');
 const plusBtn=document.getElementById('avatar-plus');
 const modal=document.getElementById('avatar-modal');
 const modalClose=document.getElementById('modal-close');
+const btnCancelPhoto=document.getElementById('btn-cancel-photo');
 
 const dz=document.getElementById('dropzone');
 const fileInput=document.getElementById('file-input');
@@ -440,14 +473,17 @@ function setAvatarImage(url){
   avatarImg.alt='Profile photo';
 }
 
+/* Open/close */
 plusBtn.addEventListener('click', openModal);
 modalClose.addEventListener('click', closeModal);
+btnCancelPhoto.addEventListener('click', closeModal);
 modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
 
-dz.addEventListener('dragover', e=>{ e.preventDefault(); dz.style.background='#f5efd9'; });
-dz.addEventListener('dragleave', e=>{ dz.style.background='#f9f6ea'; });
+/* Dropzone */
+dz.addEventListener('dragover', e=>{ e.preventDefault(); dz.style.background='#FFECDD'; });
+dz.addEventListener('dragleave', e=>{ dz.style.background='#FFF6E8'; });
 dz.addEventListener('drop', e=>{
-  e.preventDefault(); dz.style.background='#f9f6ea';
+  e.preventDefault(); dz.style.background='#FFF6E8';
   const f=e.dataTransfer.files?.[0]; if(f) loadFile(f);
 });
 fileInput.addEventListener('change', e=>{
@@ -464,6 +500,7 @@ function closeModal(){
   window.removeEventListener('resize', resizeCanvas);
 }
 
+/* Canvas sizing */
 function resizeCanvas(){
   const wrap=document.querySelector('.crop-wrap');
   const size=Math.min(wrap.clientWidth, wrap.clientHeight);
@@ -479,7 +516,7 @@ function loadFile(file){
     img.onload=()=>{
       imgLoaded=true;
       const W=canvas.width, H=canvas.height;
-      // minimale zoom zodat het vierkant bedekt blijft (dus cirkel is ook altijd gevuld)
+      /* Ensure circle always filled */
       minZoom=Math.max(W/img.width, H/img.height);
       state.scale=minZoom;
       zoomInput.min=minZoom.toFixed(2);
@@ -493,11 +530,11 @@ function loadFile(file){
   reader.readAsDataURL(file);
 }
 
-/* tekenen + interactie (pan/zoom) */
+/* Draw + interactions */
 function draw(){
   const W=canvas.width, H=canvas.height;
   ctx.clearRect(0,0,W,H);
-  ctx.fillStyle='#f3efe3'; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#FFF3E3'; ctx.fillRect(0,0,W,H);
   if(imgLoaded){
     ctx.save(); ctx.imageSmoothingQuality='high';
     ctx.drawImage(img, state.x, state.y, img.width*state.scale, img.height*state.scale);
@@ -526,22 +563,22 @@ zoomInput.addEventListener('input', e=>{
   state.scale=newScale; draw();
 });
 
-/* Save: exporteer exact de cirkel (78% van zijde) als rond PNG en upload */
-document.getElementById('btn-save-photo').addEventListener('click', async ()=>{
+/* Save -> round PNG -> upload -> update Firestore and UI */
+btnSavePhoto.addEventListener('click', async ()=>{
   const user=auth.currentUser; if(!user) return alert('Please sign in.');
   if(!imgLoaded) return alert('Please upload an image first.');
 
-  const size=512; // outputgrootte
+  const size=512; // output
   const out=document.createElement('canvas');
   out.width=size; out.height=size;
   const octx=out.getContext('2d');
 
-  // clip naar cirkel (78% diameter -> radius 39%)
-  const radius=size*0.39, cx=size/2, cy=size/2;
+  // circle radius 40% (matches guide ~80% diameter)
+  const radius=size*0.40, cx=size/2, cy=size/2;
   octx.save();
   octx.beginPath(); octx.arc(cx, cy, radius, 0, Math.PI*2); octx.closePath(); octx.clip();
 
-  // Map de huidige canvas-positie naar output
+  // map current view to export
   const viewW=canvas.width;
   const scaleFactor = size / viewW;
   const dx = state.x * scaleFactor;
@@ -559,7 +596,10 @@ document.getElementById('btn-save-photo').addEventListener('click', async ()=>{
       const ref=storage.ref().child(`users/${user.uid}/avatar.png`);
       await ref.put(blob, {contentType:'image/png'});
       const url=await ref.getDownloadURL();
-      await db.collection('users').doc(user.uid).set({avatarUrl:url, updatedAt: firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+      await db.collection('users').doc(user.uid).set(
+        {avatarUrl:url, updatedAt: firebase.firestore.FieldValue.serverTimestamp()},
+        {merge:true}
+      );
       setAvatarImage(url);
       closeModal();
       alert('Profile photo saved.');
@@ -567,7 +607,7 @@ document.getElementById('btn-save-photo').addEventListener('click', async ()=>{
   }, 'image/png');
 });
 
-/* Returns demo */
+/* Returns (simple demo) */
 function submitReturn(){
   const id=document.getElementById('ret_order').value.trim();
   const reason=document.getElementById('ret_reason').value.trim();
