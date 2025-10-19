@@ -6,8 +6,25 @@
 <title>Account – Starplanner</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 <style>
-body{font-family:'Montserrat Alternates',sans-serif;margin:0;background:#fff;}
-nav{background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');background-repeat:no-repeat;background-position:center;background-size:120% 110%;padding:40px 60px;display:flex;justify-content:space-between;align-items:center;}
+:root{
+  --brand-orange:#FFB84C;
+  --brand-orange-deep:#FFA040;
+  --brand-ink:#3a2e1b;
+  --brand-cream:#FFFDF6;
+  --brand-gold:#FFE9A6;
+  --brand-sunset:#FFC04D;
+  --brand-salmon:#FF9A6A;
+  --brand-salmon-hover:#FF864F;
+  --text-light:#FFAE42;
+  --stroke-default:#FFE9A6;
+}
+*{box-sizing:border-box}
+body{font-family:'Montserrat Alternates',sans-serif;margin:0;background:#fff;color:#2f2a22;}
+nav{
+  background-image:url('ArtworkWaterverfkwastachterkopjes.jpg');
+  background-repeat:no-repeat;background-position:center;background-size:120% 110%;
+  padding:40px 60px;display:flex;justify-content:space-between;align-items:center;
+}
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:70px;padding-left:100px;}
 nav ul li a{text-decoration:none;color:white;font-size:18px;font-weight:600;text-shadow:1px 1px 3px rgba(0,0,0,0.3);}
 nav ul li a:hover{color:#FF7929;}
@@ -18,82 +35,139 @@ nav ul li a:hover{color:#FF7929;}
 
 main{max-width:1100px;margin:60px auto;padding:0 20px;}
 .account-shell{display:grid;grid-template-columns:260px 1fr;gap:24px;}
-.sidebar{background:#FFFDF6;border-radius:18px;padding:24px;box-shadow:0 4px 12px rgba(0,0,0,.06);text-align:center;}
+.sidebar{background:var(--brand-cream);border-radius:18px;padding:24px;box-shadow:0 4px 12px rgba(0,0,0,.06);text-align:center;position:sticky;top:20px;height:fit-content;}
 .avatar{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  margin:0 auto 18px;
+  width:120px;height:120px;border-radius:50%;margin:0 auto 18px;position:relative;
   background:linear-gradient(145deg,#FFFBEA,#FFE39C);
-  border:4px solid #FFA94D;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 4px 10px rgba(255,170,70,0.25);
+  border:4px solid #FFA94D;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 10px rgba(255,170,70,0.25);overflow:hidden;transition:transform .18s ease;
 }
-.avatar svg{width:65px;height:65px;fill:#FFB766;}
+.avatar:hover{ transform:scale(1.04); }
+.avatar svg{width:65px;height:65px;fill:#FFB766;transition:opacity .2s ease;}
+.avatar.has-photo svg{opacity:0;} /* hide icon when photo present */
+.avatar img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;
+}
+.avatar.has-photo img{display:block;}
+/* Plus button */
+.avatar .plus{
+  position:absolute;inset:0;margin:auto;z-index:2;width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(#ffffff,#f0f0f0);
+  box-shadow:
+    0 12px 18px rgba(0,0,0,.15),
+    inset 0 1px 0 #fff,
+    inset 0 -1px 0 #e5e5e5;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .14s ease;
+  border:1px solid rgba(0,0,0,.08);
+}
+.avatar .plus:hover{ transform:scale(1.08); }
+.avatar .plus::before, .avatar .plus::after{
+  content:"";position:absolute;background:#ffffff;border-radius:2px;
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.12));
+}
+.avatar .plus::before{width:60%;height:3px;}
+.avatar .plus::after{height:60%;width:3px}
+
+/* Sidebar text */
 .side-title{
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-  font-weight:700;
-  margin:0 0 20px;
+  font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin:0 0 20px;
+  background:linear-gradient(90deg,#FFD974,#FFB84C);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;
+}
+.side-nav{display:flex;flex-direction:column;gap:8px;}
+.side-nav button{
+  background:none;border:2px solid transparent;border-radius:10px;
+  padding:10px 14px;font-family:'Playfair Display',serif;font-size:18px;cursor:pointer;
+  color:var(--brand-orange);text-shadow:0 0 1px #FFE6A5;transition:all .2s;
+}
+.side-nav button:hover{color:var(--brand-orange-deep)}
+.side-nav button.active{
+  color:#fff;background:var(--brand-orange);
+  border-color:var(--brand-orange);
+  text-shadow:none;
+}
+.logout-btn{
+  width:100%;background:var(--brand-salmon);color:#fff;border:none;border-radius:12px;
+  padding:14px 0;font-size:18px;font-family:'Montserrat Alternates',sans-serif;font-weight:600;
+  letter-spacing:0.5px;text-transform:uppercase;text-shadow:1px 1px 3px rgba(0,0,0,0.25);
+  margin-top:20px;cursor:pointer;box-shadow:0 4px 8px rgba(255,160,110,0.3);transition:background .25s ease, transform .15s ease;
+}
+.logout-btn:hover{ background:var(--brand-salmon-hover); transform:translateY(-1px); }
+
+.content{background:var(--brand-cream);border-radius:18px;padding:40px;box-shadow:0 6px 12px rgba(0,0,0,0.05);}
+
+/* Section title – default (Home keeps this) */
+.section-title{
+  font-family:'Playfair Display',serif;font-size:26px;letter-spacing:.3px;margin:0 0 14px;
   background:linear-gradient(90deg,#FFD974,#FFB84C);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  text-align:center;
+  -webkit-text-stroke:1px var(--stroke-default);
 }
-.side-nav{display:flex;flex-direction:column;gap:8px;}
-.side-nav button{background:none;border:none;padding:10px 14px;font-family:'Playfair Display',serif;font-size:18px;cursor:pointer;color:#FFB84C;text-shadow:0 0 1px #FFE6A5;transition:color .2s;}
-.side-nav button:hover,.side-nav button.active{color:#FFA040;text-shadow:0 0 3px #FFE9A6;}
-.logout-btn{
-  width:100%;
-  background:#FF9A6A;
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  padding:14px 0;
-  font-size:18px;
-  font-family:'Montserrat Alternates',sans-serif;
-  font-weight:600;
-  letter-spacing:0.5px;
-  text-transform:uppercase;
-  text-shadow:1px 1px 3px rgba(0,0,0,0.25);
-  margin-top:20px;
-  cursor:pointer;
-  box-shadow:0 4px 8px rgba(255,160,110,0.3);
-  transition:background .25s ease, transform .15s ease;
-}
-.logout-btn:hover{
-  background:#FF864F;
-  transform:translateY(-1px);
+/* Inverted styling for non-home sections (per request) */
+.section-title.invert{
+  background:none;
+  -webkit-text-fill-color:var(--brand-orange);
+  -webkit-text-stroke:1px #C77B22; /* stroke becomes light-orange-esque border */
 }
 
-.content{background:#FFFDF6;border-radius:18px;padding:40px;box-shadow:0 6px 12px rgba(0,0,0,0.05);}
-.section-title{font-family:'Playfair Display',serif;font-size:26px;background:linear-gradient(90deg,#FFD974,#FFB84C);-webkit-background-clip:text;-webkit-text-stroke:1px #FFE9A6;-webkit-text-fill-color:transparent;margin:0 0 14px;}
-
-.orders p{color:#FFAE42;font-family:'Playfair Display';font-size:17px;}
-.order{background:#FFF8D8;border:2px solid #FFB84C;border-radius:12px;padding:14px;margin-bottom:12px;}
-.order h4{margin:0 0 8px;color:#FFAE42;font-family:'Playfair Display';}
-
-.btn{display:inline-block;background:#FFC04D;color:#fff;border:none;border-radius:10px;padding:12px 18px;cursor:pointer;font-weight:600;font-family:'Montserrat Alternates';}
-.btn:hover{background:#EAA23D;}
-input,select{width:100%;padding:10px;border:2px solid #FFD46A;border-radius:10px;font-size:15px;font-family:'Montserrat Alternates';margin-bottom:10px;}
+/* Orders */
+.orders p{color:var(--text-light);font-family:'Playfair Display',serif;font-size:17px;}
+.order{background:#FFF8D8;border:2px solid var(--brand-orange);border-radius:12px;padding:14px;margin-bottom:12px;}
+.order h4{margin:0 0 8px;color:var(--text-light);font-family:'Playfair Display',serif;}
+.btn{
+  display:inline-block;background:var(--brand-sunset);color:#fff;border:none;border-radius:10px;
+  padding:12px 18px;cursor:pointer;font-weight:600;font-family:'Montserrat Alternates';
+  transition:transform .1s ease, background .2s ease; box-shadow:0 4px 8px rgba(0,0,0,.05);
+}
+.btn:hover{background:#EAA23D; transform:translateY(-1px);}
+input,select{
+  width:100%;padding:10px;border:2px solid #FFD46A;border-radius:10px;font-size:15px;
+  font-family:'Montserrat Alternates';margin-bottom:10px;background:#fff;
+}
+input[disabled], select[disabled]{background:#f8f4e7;color:#8b816d;border-style:dashed;}
+.actions-row{display:flex;gap:12px;align-items:center;margin-top:6px;}
 
 .welcome-area{text-align:center;margin-bottom:40px;}
+/* Professional/classic 3D hero */
 .welcome-area h1{
+  --shadow1: #e6c985;
+  --shadow2: #d9b467;
   font-family:'Playfair Display',serif;
-  font-size:64px;
-  letter-spacing:0.5px;
-  background:linear-gradient(90deg,#FFF7B2,#FFB85C);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  margin:0;
-  font-weight:700;
+  font-size:64px;letter-spacing:0.5px;margin:0;font-weight:700;position:relative;
+  color:#FFB85C;
+  text-shadow:
+    0 1px 0 var(--shadow1),
+    0 2px 0 var(--shadow1),
+    0 3px 0 var(--shadow2),
+    0 4px 4px rgba(0,0,0,.18);
 }
 
 footer{position:relative;margin:60px 0 0;overflow:hidden;}
 .footer-decoration{width:100%;height:100px;object-fit:cover;display:block;}
 .footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
+
+/* Upload & Crop Modal */
+.modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.45);
+  display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;
+}
+.modal.open{display:flex;}
+.modal-card{
+  width:min(720px,95vw);background:#fff;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.modal-title{font-family:'Playfair Display',serif;font-size:22px}
+.modal-close{border:none;background:transparent;font-size:26px;cursor:pointer;line-height:1}
+.crop-area{
+  position:relative;width:100%;aspect-ratio:1/1;background:#f3efe3;border-radius:14px;border:2px dashed #e2cf97;overflow:hidden;
+}
+.crop-canvas{position:absolute;inset:0;cursor:grab}
+.crop-canvas.dragging{cursor:grabbing}
+.modal-controls{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap}
+.range{flex:1}
+.note{font-size:12px;color:#6b6049}
+.hidden{display:none!important}
 </style>
 </head>
 <body>
@@ -120,8 +194,10 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
   <section id="account-section">
     <div class="account-shell">
       <aside class="sidebar">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5S14.76 2 12 2 7 4.24 7 7s2.24 5 5 5zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5z"/></svg>
+        <div class="avatar" id="avatar">
+          <img id="avatar-img" alt="Profile photo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.76 0 5-2.24 5-5S14.76 2 12 2 7 4.24 7 7s2.24 5 5 5zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5z"/></svg>
+          <button class="plus" id="avatar-plus" title="Add/Change photo" aria-label="Add or change profile photo"></button>
         </div>
         <p class="side-title">My Account</p>
         <div class="side-nav">
@@ -143,24 +219,28 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
         </section>
 
         <section id="sec-orders" style="display:none;">
-          <h3 class="section-title">My Orders</h3>
+          <h3 class="section-title invert">My Orders</h3>
           <div id="orders" class="orders"><p>No orders</p></div>
         </section>
 
         <section id="sec-addresses" style="display:none;">
-          <h3 class="section-title">Personal data & address</h3>
+          <h3 class="section-title invert">Personal data & address</h3>
           <form id="form-ship" class="grid-1" style="max-width:500px;">
-            <input id="ship_name" placeholder="Full name">
-            <input id="ship_line1" placeholder="Address line 1">
-            <input id="ship_city" placeholder="City">
-            <input id="ship_postal" placeholder="Postal code">
-            <input id="ship_country" placeholder="Country">
-            <button type="button" class="btn" onclick="saveAddress('shipping')">Save</button>
+            <input id="ship_name" placeholder="Full name" disabled>
+            <input id="ship_line1" placeholder="Address line 1" disabled>
+            <input id="ship_city" placeholder="City" disabled>
+            <input id="ship_postal" placeholder="Postal code" disabled>
+            <input id="ship_country" placeholder="Country" disabled>
+            <div class="actions-row">
+              <button type="button" class="btn" id="btn-edit">Edit</button>
+              <button type="button" class="btn" id="btn-save" disabled>Save</button>
+            </div>
+            <p class="note">Your details are stored securely in your account.</p>
           </form>
         </section>
 
         <section id="sec-security" style="display:none;">
-          <h3 class="section-title">Security</h3>
+          <h3 class="section-title invert">Security</h3>
           <div style="max-width:500px;">
             <input type="password" id="cur_pass" placeholder="Current password">
             <input type="password" id="new_pass" placeholder="New password">
@@ -170,7 +250,7 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
         </section>
 
         <section id="sec-preferences" style="display:none;">
-          <h3 class="section-title">Preferences</h3>
+          <h3 class="section-title invert">Preferences</h3>
           <label>Language</label>
           <select id="pref-lang">
             <option value="en">English</option>
@@ -184,7 +264,7 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
         </section>
 
         <section id="sec-returns" style="display:none;">
-          <h3 class="section-title">Returns</h3>
+          <h3 class="section-title invert">Returns</h3>
           <form id="form-return" style="max-width:500px;">
             <input id="ret_order" placeholder="Order ID">
             <input id="ret_reason" placeholder="Reason">
@@ -201,10 +281,44 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
   <div class="footer-text">© 2025 Starplanner – All rights reserved.</div>
 </footer>
 
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-storage-compat.js"></script>
+
+<!-- Upload & Crop Modal (markup + minimal templating) -->
+<div class="modal" id="avatar-modal" aria-hidden="true" role="dialog" aria-label="Upload profile photo">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-title">Upload & crop your profile photo</div>
+      <button class="modal-close" id="crop-close" aria-label="Close">×</button>
+    </div>
+    <div class="crop-area">
+      <canvas id="crop-canvas" class="crop-canvas"></canvas>
+      <input type="file" id="file-input" accept="image/*" class="hidden">
+    </div>
+    <div class="modal-controls">
+      <div>
+        <button class="btn" id="btn-choose">Choose image</button>
+        <button class="btn" id="btn-reset">Reset</button>
+      </div>
+      <label class="range">
+        Zoom
+        <input type="range" id="zoom" min="1" max="3" step="0.01" value="1" style="width:100%">
+      </label>
+      <div>
+        <button class="btn" id="btn-save-crop">Save photo</button>
+      </div>
+    </div>
+    <p class="note">Tip: drag the image to center your face. Only the square area is saved.</p>
+  </div>
+</div>
+
 <script>
+/* =========================
+   Firebase init
+========================= */
 const firebaseConfig={
   apiKey:"AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
   authDomain:"starplanner-3acf9.firebaseapp.com",
@@ -216,20 +330,26 @@ const firebaseConfig={
 firebase.initializeApp(firebaseConfig);
 const auth=firebase.auth();
 const db=firebase.firestore();
+const storage=firebase.storage();
 
-// ✅ Orders ophalen voor ingelogde gebruiker
+/* =========================
+   Auth state: load UI data
+========================= */
 auth.onAuthStateChanged(async user=>{
- if(user){
-   document.getElementById('welcome-name').textContent=`Welcome, ${user.email.split('@')[0]}!`;
-   await loadOrders(user.uid);
- }
+  if(user){
+    document.getElementById('welcome-name').textContent=`Welcome, ${user.email.split('@')[0]}!`;
+    await Promise.all([loadOrders(user.uid), loadProfile(user.uid)]);
+  }else{
+    // Optional: redirect to login
+  }
 });
 
-// ✅ Functie om orders te laden
+/* =========================
+   ORDERS
+========================= */
 async function loadOrders(userId){
   const ordersDiv=document.getElementById('orders');
   ordersDiv.innerHTML="<p>Loading your orders…</p>";
-
   try{
     const snap=await db.collection('orders')
       .where('userId','==',userId)
@@ -245,9 +365,8 @@ async function loadOrders(userId){
     snap.forEach(doc=>{
       const o=doc.data();
       const date=o.date?.toDate?o.date.toDate().toLocaleString():"Unknown date";
-      const total=o.total?o.total.toFixed(2):"0.00";
-      const items=(o.items||[]).map(i=>`<li>${i.name} – €${i.price.toFixed(2)} × ${i.qty}</li>`).join("");
-
+      const total=typeof o.total==='number'?o.total.toFixed(2):"0.00";
+      const items=(o.items||[]).map(i=>`<li>${escapeHtml(i.name)} – €${(i.price??0).toFixed(2)} × ${i.qty??1}</li>`).join("");
       const block=document.createElement("div");
       block.className="order";
       block.innerHTML=`
@@ -263,17 +382,278 @@ async function loadOrders(userId){
   }
 }
 
-// ✅ Navigatie menu functionaliteit
+/* =========================
+   SIDENAV: show/hide sections
+   + invert titles for non-home
+========================= */
 document.querySelectorAll('.side-nav button').forEach(btn=>{
  btn.addEventListener('click',()=>{
    document.querySelectorAll('.side-nav button').forEach(b=>b.classList.remove('active'));
    btn.classList.add('active');
    const tgt=btn.getAttribute('data-target');
-   document.querySelectorAll('.content>section').forEach(s=>s.style.display=(s.id===tgt?'block':'none'));
+   document.querySelectorAll('.content>section').forEach(s=>{
+     const show=(s.id===tgt);
+     s.style.display= show ? 'block':'none';
+     const title=s.querySelector('.section-title');
+     if(title){
+       if(s.id==='sec-welcome'){ title.classList.remove('invert'); }
+       else { title.classList.add('invert'); }
+     }
+   });
  });
 });
 
-function logout(){auth.signOut();}
+/* =========================
+   LOGOUT
+========================= */
+function logout(){ auth.signOut(); }
+
+/* =========================
+   SECURITY: change password
+========================= */
+async function changePassword(){
+  const user=auth.currentUser; if(!user) return alert('Please sign in.');
+  const current=document.getElementById('cur_pass').value.trim();
+  const np=document.getElementById('new_pass').value.trim();
+  const nr=document.getElementById('new_pass_repeat').value.trim();
+  if(!current || !np || !nr) return alert('Fill in all fields.');
+  if(np!==nr) return alert('New passwords do not match.');
+  try{
+    const cred=firebase.auth.EmailAuthProvider.credential(user.email,current);
+    await user.reauthenticateWithCredential(cred);
+    await user.updatePassword(np);
+    alert('Password updated.');
+    document.getElementById('cur_pass').value='';
+    document.getElementById('new_pass').value='';
+    document.getElementById('new_pass_repeat').value='';
+  }catch(e){
+    console.error(e);
+    alert(e.message||'Could not update password.');
+  }
+}
+
+/* =========================
+   PROFILE: load/save address
+========================= */
+const inputs={
+  name:document.getElementById('ship_name'),
+  line1:document.getElementById('ship_line1'),
+  city:document.getElementById('ship_city'),
+  postal:document.getElementById('ship_postal'),
+  country:document.getElementById('ship_country'),
+};
+const btnEdit=document.getElementById('btn-edit');
+const btnSave=document.getElementById('btn-save');
+
+btnEdit.addEventListener('click', ()=>{
+  toggleEditable(true);
+});
+btnSave.addEventListener('click', saveAddress);
+
+function toggleEditable(on){
+  Object.values(inputs).forEach(el=>el.disabled=!on);
+  btnSave.disabled=!on;
+  btnEdit.disabled=on;
+}
+
+async function loadProfile(uid){
+  try{
+    const docRef=db.collection('users').doc(uid);
+    const snap=await docRef.get();
+    if(snap.exists){
+      const d=snap.data()||{};
+      inputs.name.value=d.name||'';
+      inputs.line1.value=d.address_line1||'';
+      inputs.city.value=d.city||'';
+      inputs.postal.value=d.postal||'';
+      inputs.country.value=d.country||'';
+      if(d.avatarUrl){ setAvatarImage(d.avatarUrl); }
+    }
+  }catch(e){ console.error(e); }
+  // keep fields locked until Edit
+  toggleEditable(false);
+}
+
+async function saveAddress(){
+  const user=auth.currentUser; if(!user) return alert('Please sign in.');
+  const payload={
+    name: inputs.name.value.trim(),
+    address_line1: inputs.line1.value.trim(),
+    city: inputs.city.value.trim(),
+    postal: inputs.postal.value.trim(),
+    country: inputs.country.value.trim(),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+  try{
+    await db.collection('users').doc(user.uid).set(payload,{merge:true});
+    alert('Details saved.');
+    toggleEditable(false);
+  }catch(e){
+    console.error(e);
+    alert('Could not save your details.');
+  }
+}
+
+/* =========================
+   AVATAR: upload + crop
+========================= */
+const avatar=document.getElementById('avatar');
+const avatarImg=document.getElementById('avatar-img');
+const plusBtn=document.getElementById('avatar-plus');
+
+const modal=document.getElementById('avatar-modal');
+const fileInput=document.getElementById('file-input');
+const cropCanvas=document.getElementById('crop-canvas');
+const ctx=cropCanvas.getContext('2d');
+const zoomInput=document.getElementById('zoom');
+const btnChoose=document.getElementById('btn-choose');
+const btnReset=document.getElementById('btn-reset');
+const btnSaveCrop=document.getElementById('btn-save-crop');
+const btnClose=document.getElementById('crop-close');
+
+let img=new Image();
+let imgLoaded=false;
+let state={scale:1, x:0, y:0, dragging:false, startX:0, startY:0, naturalW:0, naturalH:0};
+
+function openModal(){
+  modal.classList.add('open');
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+}
+function closeModal(){
+  modal.classList.remove('open');
+  window.removeEventListener('resize', resizeCanvas);
+}
+plusBtn.addEventListener('click', openModal);
+btnClose.addEventListener('click', closeModal);
+btnChoose.addEventListener('click', ()=>fileInput.click());
+btnReset.addEventListener('click', ()=>{
+  zoomInput.value=1;
+  state.scale=1; state.x=0; state.y=0;
+  draw();
+});
+modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+
+fileInput.addEventListener('change', e=>{
+  const file=e.target.files?.[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    imgLoaded=false;
+    img = new Image();
+    img.onload=()=>{
+      imgLoaded=true;
+      state.naturalW=img.naturalWidth; state.naturalH=img.naturalHeight;
+      // initial fit: cover the square
+      const {width:W,height:H}=cropCanvas;
+      const scale=Math.max(W/img.width, H/img.height);
+      state.scale=scale;
+      zoomInput.value=Math.max(1, scale).toFixed(2);
+      state.x=(W - img.width*scale)/2;
+      state.y=(H - img.height*scale)/2;
+      draw();
+    };
+    img.src=ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+/* Canvas interaction */
+function resizeCanvas(){
+  const area=document.querySelector('.crop-area');
+  const size=Math.min(area.clientWidth, area.clientHeight);
+  cropCanvas.width=size;
+  cropCanvas.height=size;
+  draw();
+}
+function draw(){
+  const W=cropCanvas.width, H=cropCanvas.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#f3efe3';
+  ctx.fillRect(0,0,W,H);
+  if(imgLoaded){
+    ctx.save();
+    ctx.imageSmoothingQuality='high';
+    ctx.drawImage(img, state.x, state.y, img.width*state.scale, img.height*state.scale);
+    ctx.restore();
+  }else{
+    // Placeholder crosshair
+    ctx.strokeStyle='#e2cf97'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(W/2-20,H/2); ctx.lineTo(W/2+20,H/2);
+    ctx.moveTo(W/2,H/2-20); ctx.lineTo(W/2,H/2+20); ctx.stroke();
+  }
+}
+cropCanvas.addEventListener('mousedown', e=>{
+  if(!imgLoaded) return;
+  state.dragging=true; cropCanvas.classList.add('dragging');
+  state.startX=e.offsetX - state.x;
+  state.startY=e.offsetY - state.y;
+});
+window.addEventListener('mouseup', ()=>{
+  state.dragging=false; cropCanvas.classList.remove('dragging');
+});
+cropCanvas.addEventListener('mousemove', e=>{
+  if(!state.dragging) return;
+  state.x=e.offsetX - state.startX;
+  state.y=e.offsetY - state.startY;
+  draw();
+});
+zoomInput.addEventListener('input', e=>{
+  if(!imgLoaded) return;
+  const W=cropCanvas.width, H=cropCanvas.height;
+  const prevScale=state.scale;
+  const newScale=parseFloat(e.target.value);
+  // zoom around center
+  const cx=W/2, cy=H/2;
+  state.x = cx - ( (cx - state.x) * (newScale/prevScale) );
+  state.y = cy - ( (cy - state.y) * (newScale/prevScale) );
+  state.scale=newScale;
+  draw();
+});
+
+function setAvatarImage(url){
+  avatar.classList.add('has-photo');
+  avatarImg.src=url;
+  avatarImg.alt='Profile photo';
+}
+
+/* Save cropped image to Firebase Storage and Firestore */
+btnSaveCrop.addEventListener('click', async ()=>{
+  const user=auth.currentUser; if(!user) { alert('Please sign in.'); return; }
+  try{
+    // export canvas as blob
+    cropCanvas.toBlob(async (blob)=>{
+      if(!blob){ alert('Nothing to save.'); return; }
+      const ref=storage.ref().child(`users/${user.uid}/avatar.jpg`);
+      await ref.put(blob, {contentType: 'image/jpeg'});
+      const url=await ref.getDownloadURL();
+      await db.collection('users').doc(user.uid).set({ avatarUrl:url, updatedAt: firebase.firestore.FieldValue.serverTimestamp() },{merge:true});
+      setAvatarImage(url);
+      closeModal();
+      alert('Profile photo updated.');
+    }, 'image/jpeg', 0.92);
+  }catch(e){
+    console.error(e);
+    alert('Could not save your photo.');
+  }
+});
+
+/* =========================
+   RETURNS (placeholder)
+========================= */
+function submitReturn(){
+  const id=document.getElementById('ret_order').value.trim();
+  const reason=document.getElementById('ret_reason').value.trim();
+  if(!id || !reason) return alert('Fill in order and reason.');
+  alert('Return submitted. We will contact you soon.');
+}
+
+/* =========================
+   Utils
+========================= */
+function escapeHtml(str){
+  return String(str??'').replace(/[&<>"']/g, s=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[s]));
+}
 </script>
 
 <!--
