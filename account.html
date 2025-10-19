@@ -43,7 +43,7 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
 .avatar.has-photo svg{opacity:0;}
 .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
 .avatar.has-photo img{display:block;}
-/* Wit 3D plusje, zonder knopvlak */
+/* Wit 3D plusje, zonder extra knopvlak */
 .plus-btn{
   position:absolute;inset:0;margin:auto;width:40px;height:40px;border:none;background:transparent;cursor:pointer;
   display:flex;align-items:center;justify-content:center;z-index:2;transform:scale(1);transition:transform .14s ease;
@@ -63,7 +63,7 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;
 }
 
-/* Side nav (origineel behouden) */
+/* Side nav (origineel) */
 .side-nav{display:flex;flex-direction:column;gap:8px;}
 .side-nav button{background:none;border:none;padding:10px 14px;font-family:'Playfair Display',serif;font-size:18px;cursor:pointer;color:#FFB84C;text-shadow:0 0 1px #FFE6A5;transition:color .2s;}
 .side-nav button:hover,.side-nav button.active{color:#FFA040;text-shadow:0 0 3px #FFE9A6;}
@@ -77,7 +77,7 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
 
 .content{background:var(--cream);border-radius:18px;padding:40px;box-shadow:0 6px 12px rgba(0,0,0,0.05);}
 
-/* Sectietitels – lichte pastelkleuren passend bij webshop */
+/* Sectietitels – uniforme lichte pastelkleuren voor álle h3 */
 .section-title{
   font-family:'Playfair Display',serif;font-size:26px;margin:0 0 14px;
   background:linear-gradient(90deg,var(--pastel-yellow),var(--pastel-orange),var(--pastel-pink));
@@ -95,7 +95,7 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
 .btn:hover{background:var(--btn-hover);}
 input,select{width:100%;padding:10px;border:2px solid #FFD46A;border-radius:10px;font-size:15px;font-family:'Montserrat Alternates';margin-bottom:10px;}
 
-/* Welcome – EXACT originele ombre behouden + subtiele 3D */
+/* Welcome – EXACT originele ombre behouden + klassieke 3D-diepte */
 .welcome-area{text-align:center;margin-bottom:40px;}
 .welcome-area h1{
   font-family:'Playfair Display',serif;
@@ -106,7 +106,7 @@ input,select{width:100%;padding:10px;border:2px solid #FFD46A;border-radius:10px
   -webkit-text-fill-color:transparent;                /* originele regel */
   margin:0;
   font-weight:700;
-  /* extra diepte, raakt de gradient niet */
+  /* zachte, klassieke 3D stacking (geen kawaii) */
   text-shadow:
     0 1px 0 #e6c985,
     0 2px 0 #dbb86f,
@@ -118,26 +118,41 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
 .footer-decoration{width:100%;height:100px;object-fit:cover;display:block;}
 .footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
 
-/* --- Klein Upload Modal --- */
+/* --- Compact Upload & Circle Crop Modal --- */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px;}
 .modal.open{display:flex;}
-.modal-card{width:min(420px,95vw);background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+.modal-card{width:min(440px,95vw);background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .modal-title{font-family:'Playfair Display',serif;font-size:20px}
 .modal-close{border:none;background:transparent;font-size:24px;cursor:pointer;line-height:1}
 
+/* Kleine dropzone */
 .dropzone{
   border:2px dashed #e2cf97;border-radius:14px;background:#f9f6ea;
-  height:180px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;position:relative;
-  color:#8a7b5a;font-size:14px;
+  height:120px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;position:relative;
+  color:#8a7b5a;font-size:14px;margin-bottom:10px;
 }
 .dropzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
-.dropzone .preview{
-  position:absolute;inset:0;border-radius:12px;overflow:hidden;display:none;
+
+/* Crop area (vierkant), met cirkel-mask overlay */
+.crop-wrap{position:relative;width:100%;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#f3efe3;border:2px dashed #e2cf97;}
+.crop-canvas{position:absolute;inset:0;cursor:grab}
+.crop-canvas.dragging{cursor:grabbing}
+/* donker buiten de cirkel + witte rand op de cirkel */
+.mask-overlay{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 50%, transparent 49%, rgba(0,0,0,.45) 51%);
 }
-.dropzone .preview img{width:100%;height:100%;object-fit:cover;display:block;}
+.circle-outline{
+  position:absolute;inset:0;pointer-events:none;border-radius:50%;
+  width:70%;height:70%; /* maakt de cirkel iets kleiner dan het vlak */
+  left:15%;top:15%;
+  border:2px solid #ffffff;
+  box-shadow:0 0 0 2px rgba(0,0,0,.15) inset;
+}
 .modal-actions{display:flex;justify-content:flex-end;margin-top:12px;gap:10px}
 .note{font-size:12px;color:#6b6049;margin-top:6px}
+.hidden{display:none!important}
 </style>
 </head>
 <body>
@@ -256,22 +271,31 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-storage-compat.js"></script>
 
-<!-- Klein Upload Modal -->
+<!-- Compact Upload + Circle Crop Modal -->
 <div class="modal" id="avatar-modal" aria-hidden="true" role="dialog" aria-label="Upload profile photo">
   <div class="modal-card">
     <div class="modal-header">
       <div class="modal-title">Profile photo</div>
       <button class="modal-close" id="modal-close" aria-label="Close">×</button>
     </div>
+
+    <!-- Kleine dropzone -->
     <div class="dropzone" id="dropzone">
-      <div id="dz-text">Drag profilepicture here or upload it here</div>
-      <div class="preview" id="dz-preview"><img id="dz-img" alt="Preview"></div>
+      <div id="dz-text">Drag profile picture here or upload it here</div>
       <input type="file" id="file-input" accept="image/*">
     </div>
+
+    <!-- Cirkel-cropper (duidelijke rand en donkere buitenzijde) -->
+    <div class="crop-wrap">
+      <canvas id="crop-canvas" class="crop-canvas"></canvas>
+      <div class="mask-overlay"></div>
+      <div class="circle-outline"></div>
+    </div>
+
     <div class="modal-actions">
+      <input type="range" id="zoom" min="1" max="3" step="0.01" value="1" title="Zoom">
       <button class="btn" id="btn-save-photo">Save</button>
     </div>
-    <p class="note">Supported: JPG/PNG (recommended square image for best fit).</p>
   </div>
 </div>
 
@@ -295,7 +319,6 @@ auth.onAuthStateChanged(async user=>{
  if(user){
    document.getElementById('welcome-name').textContent=`Welcome, ${user.email.split('@')[0]}!`;
    await loadOrders(user.uid);
-   // avatar uit Firestore tonen
    try{
      const snap=await db.collection('users').doc(user.uid).get();
      const url=snap.exists ? (snap.data().avatarUrl||"") : "";
@@ -327,7 +350,7 @@ async function loadOrders(userId){
   }
 }
 
-/* Navigatie (ongewijzigd) */
+/* Navigatie */
 document.querySelectorAll('.side-nav button').forEach(btn=>{
  btn.addEventListener('click',()=>{
    document.querySelectorAll('.side-nav button').forEach(b=>b.classList.remove('active'));
@@ -359,7 +382,7 @@ async function changePassword(){
   }catch(e){ console.error(e); alert(e.message||'Could not update password.'); }
 }
 
-/* Personal data & address — Edit + Save (velden zoals origineel) */
+/* Personal data & address — Edit + Save (velden blijven origineel) */
 document.getElementById('btn-edit').addEventListener('click', async ()=>{
   const user=auth.currentUser; if(!user) return alert('Please sign in.');
   try{
@@ -394,7 +417,7 @@ async function saveAddress(){
   }catch(e){ console.error(e); alert('Could not save your details.'); }
 }
 
-/* Avatar upload – klein modal met dropzone */
+/* ===== Avatar upload + CIRCULAR crop ===== */
 const avatar=document.getElementById('avatar');
 const avatarImg=document.getElementById('avatar-img');
 const plusBtn=document.getElementById('avatar-plus');
@@ -402,13 +425,15 @@ const modal=document.getElementById('avatar-modal');
 const modalClose=document.getElementById('modal-close');
 
 const dz=document.getElementById('dropzone');
-const dzText=document.getElementById('dz-text');
-const dzPreview=document.getElementById('dz-preview');
-const dzImg=document.getElementById('dz-img');
 const fileInput=document.getElementById('file-input');
+const canvas=document.getElementById('crop-canvas');
+const ctx=canvas.getContext('2d');
+const zoomInput=document.getElementById('zoom');
 const btnSavePhoto=document.getElementById('btn-save-photo');
 
-let selectedFile=null;
+let img=new Image();
+let imgLoaded=false;
+let state={scale:1, x:0, y:0, dragging:false, startX:0, startY:0};
 
 function setAvatarImage(url){
   avatar.classList.add('has-photo');
@@ -416,54 +441,144 @@ function setAvatarImage(url){
   avatarImg.alt='Profile photo';
 }
 
-plusBtn.addEventListener('click', ()=>{ modal.classList.add('open'); });
-modalClose.addEventListener('click', ()=>{ modal.classList.remove('open'); });
-modal.addEventListener('click', e=>{ if(e.target===modal) modal.classList.remove('open'); });
+plusBtn.addEventListener('click', ()=>{ openModal(); });
+modalClose.addEventListener('click', ()=>{ closeModal(); });
+modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
 
-fileInput.addEventListener('change', handleFiles);
 dz.addEventListener('dragover', e=>{ e.preventDefault(); dz.style.background='#f5efd9'; });
 dz.addEventListener('dragleave', e=>{ dz.style.background='#f9f6ea'; });
 dz.addEventListener('drop', e=>{
   e.preventDefault(); dz.style.background='#f9f6ea';
-  const f=e.dataTransfer.files?.[0]; if(f) setPreview(f);
+  const f=e.dataTransfer.files?.[0]; if(f) loadFile(f);
+});
+fileInput.addEventListener('change', e=>{
+  const f=e.target.files?.[0]; if(f) loadFile(f);
 });
 
-function handleFiles(e){
-  const f=e.target.files?.[0]; if(f) setPreview(f);
+function openModal(){
+  modal.classList.add('open');
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+}
+function closeModal(){
+  modal.classList.remove('open');
+  window.removeEventListener('resize', resizeCanvas);
 }
 
-function setPreview(file){
-  selectedFile=file;
-  const url=URL.createObjectURL(file);
-  dzImg.src=url;
-  dzPreview.style.display='block';
-  dzText.style.opacity='0';
+function resizeCanvas(){
+  const wrap=document.querySelector('.crop-wrap');
+  const size=Math.min(wrap.clientWidth, wrap.clientHeight);
+  canvas.width=size; canvas.height=size;
+  draw();
 }
 
-/* Save -> upload naar Storage + URL opslaan in Firestore */
+function loadFile(file){
+  const reader=new FileReader();
+  reader.onload=(ev)=>{
+    imgLoaded=false;
+    img=new Image();
+    img.onload=()=>{
+      imgLoaded=true;
+      // cover de cirkel: begin met cover van het vierkant
+      const W=canvas.width, H=canvas.height;
+      const scale=Math.max(W/img.width, H/img.height);
+      state.scale=scale;
+      zoomInput.value=Math.max(1, scale).toFixed(2);
+      state.x=(W - img.width*scale)/2;
+      state.y=(H - img.height*scale)/2;
+      draw();
+    };
+    img.src=ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* tekenen + interactie (pannen/zoomen) */
+function draw(){
+  const W=canvas.width, H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#f3efe3'; ctx.fillRect(0,0,W,H);
+  if(imgLoaded){
+    ctx.save();
+    ctx.imageSmoothingQuality='high';
+    ctx.drawImage(img, state.x, state.y, img.width*state.scale, img.height*state.scale);
+    ctx.restore();
+  }
+}
+canvas.addEventListener('mousedown', e=>{
+  if(!imgLoaded) return; state.dragging=true; canvas.classList.add('dragging');
+  state.startX=e.offsetX - state.x; state.startY=e.offsetY - state.y;
+});
+window.addEventListener('mouseup', ()=>{ state.dragging=false; canvas.classList.remove('dragging'); });
+canvas.addEventListener('mousemove', e=>{
+  if(!state.dragging) return;
+  state.x=e.offsetX - state.startX;
+  state.y=e.offsetY - state.startY;
+  draw();
+});
+zoomInput.addEventListener('input', e=>{
+  if(!imgLoaded) return;
+  const W=canvas.width, H=canvas.height;
+  const prev=state.scale, next=parseFloat(e.target.value);
+  const cx=W/2, cy=H/2;
+  state.x = cx - ((cx - state.x) * (next/prev));
+  state.y = cy - ((cy - state.y) * (next/prev));
+  state.scale=next; draw();
+});
+
+/* Save: exporteer rond PNG (transparant buiten de cirkel) en upload */
 btnSavePhoto.addEventListener('click', async ()=>{
   const user=auth.currentUser; if(!user) return alert('Please sign in.');
-  if(!selectedFile) return alert('Please choose an image first.');
-  try{
-    const ref=storage.ref().child(`users/${user.uid}/avatar.jpg`);
-    await ref.put(selectedFile, {contentType: selectedFile.type||'image/jpeg'});
-    const url=await ref.getDownloadURL();
-    await db.collection('users').doc(user.uid).set({avatarUrl:url, updatedAt: firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
-    setAvatarImage(url);
-    modal.classList.remove('open');
-    // reset
-    selectedFile=null; dzPreview.style.display='none'; dzText.style.opacity='1';
-    alert('Profile photo saved.');
-  }catch(e){ console.error(e); alert('Could not save your photo.'); }
-});
+  if(!imgLoaded) return alert('Please upload an image first.');
 
-/* Returns demo */
-function submitReturn(){
-  const id=document.getElementById('ret_order').value.trim();
-  const reason=document.getElementById('ret_reason').value.trim();
-  if(!id || !reason) return alert('Fill in order and reason.');
-  alert('Return submitted. We will contact you soon.');
-}
+  // Maak export-canvas (rond)
+  const size=512; // nette resolutie voor avatar
+  const out=document.createElement('canvas');
+  out.width=size; out.height=size;
+  const octx=out.getContext('2d');
+
+  // Clip naar cirkel
+  octx.save();
+  octx.beginPath();
+  octx.arc(size/2, size/2, size*0.35, 0, Math.PI*2); // zelfde ratio als overlay (70%)
+  octx.closePath();
+  octx.clip();
+
+  // Bereken projectie van huidige view naar export-canvas
+  const W=canvas.width, H=canvas.height;
+  const viewCenterX=W/2, viewCenterY=H/2;
+  // Schaal factor tussen view en export
+  const scaleFactor = (size / W);
+  const dx = (state.x - 0) * scaleFactor;
+  const dy = (state.y - 0) * scaleFactor;
+  const dw = img.width * state.scale * scaleFactor;
+  const dh = img.height * state.scale * scaleFactor;
+
+  octx.imageSmoothingQuality='high';
+  octx.drawImage(img, dx, dy, dw, dh);
+  octx.restore();
+
+  // Optioneel: zachte rand anti-alias (heel subtiel)
+  octx.globalCompositeOperation='destination-in';
+  octx.beginPath();
+  octx.arc(size/2, size/2, size*0.35, 0, Math.PI*2);
+  octx.closePath();
+  octx.fill();
+
+  // Upload als PNG (transparant) -> Storage -> URL naar Firestore
+  out.toBlob(async (blob)=>{
+    if(!blob){ alert('Nothing to save.'); return; }
+    try{
+      const ref=storage.ref().child(`users/${user.uid}/avatar.png`);
+      await ref.put(blob, {contentType:'image/png'});
+      const url=await ref.getDownloadURL();
+      await db.collection('users').doc(user.uid).set({avatarUrl:url, updatedAt: firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+      setAvatarImage(url);
+      closeModal();
+      alert('Profile photo saved.');
+    }catch(e){ console.error(e); alert('Could not save your photo.'); }
+  }, 'image/png');
+});
 
 /* Utils */
 function escapeHtml(str){ return String(str??'').replace(/[&<>"']/g, s=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[s])); }
