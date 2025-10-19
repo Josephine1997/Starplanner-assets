@@ -6,17 +6,17 @@
 <title>Account – Starplanner</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 <style>
-/* ==== Basiskleuren ==== */
 :root{
-  --mandarin:#FFB84C;           /* mandarijn-oranje (stroke) */
-  --mandarin-deep:#FFA040;
-  --light-yellow:#FFF7B2;       /* lichtgeel (fill) */
-  --cream:#FFFDF6;
+  --pastel-orange:#FFC88B;
+  --pastel-yellow:#FFF7B2;
+  --pastel-pink:#FFD6DA;
+  --mandarin:#FFB84C;
   --gold-stroke:#FFE9A6;
   --btn:#FFC04D;
   --btn-hover:#EAA23D;
   --salmon:#FF9A6A;
   --salmon-hover:#FF864F;
+  --cream:#FFFDF6;
 }
 *{box-sizing:border-box}
 body{font-family:'Montserrat Alternates',sans-serif;margin:0;background:#fff;}
@@ -43,17 +43,15 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
 .avatar.has-photo svg{opacity:0;}
 .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
 .avatar.has-photo img{display:block;}
-
-/* Wit 3D plusje – zonder knopachtergrond, alleen het plus-symbool */
+/* Wit 3D plusje, zonder knopvlak */
 .plus-btn{
   position:absolute;inset:0;margin:auto;width:40px;height:40px;border:none;background:transparent;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;z-index:2;
-  transform:scale(1);transition:transform .14s ease;
+  display:flex;align-items:center;justify-content:center;z-index:2;transform:scale(1);transition:transform .14s ease;
 }
 .plus-btn:hover{ transform:scale(1.1); }
 .plus-btn:before, .plus-btn:after{
   content:""; position:absolute; background:#ffffff; border-radius:2px;
-  box-shadow:0 1px 0 rgba(0,0,0,.12), 0 4px 10px rgba(0,0,0,.15); /* 3D diepte */
+  box-shadow:0 1px 0 rgba(0,0,0,.12), 0 4px 10px rgba(0,0,0,.15);
 }
 .plus-btn:before{ width:70%; height:3px; }
 .plus-btn:after{ height:70%; width:3px; }
@@ -65,13 +63,13 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;
 }
 
-/* Side navigatie */
+/* Side nav (origineel behouden) */
 .side-nav{display:flex;flex-direction:column;gap:8px;}
-.side-nav button{background:none;border:none;padding:10px 14px;font-family:'Playfair Display',serif;font-size:18px;cursor:pointer;color:var(--mandarin);text-shadow:0 0 1px #FFE6A5;transition:color .2s;}
-.side-nav button:hover,.side-nav button.active{color:var(--mandarin-deep);text-shadow:0 0 3px #FFE9A6;}
+.side-nav button{background:none;border:none;padding:10px 14px;font-family:'Playfair Display',serif;font-size:18px;cursor:pointer;color:#FFB84C;text-shadow:0 0 1px #FFE6A5;transition:color .2s;}
+.side-nav button:hover,.side-nav button.active{color:#FFA040;text-shadow:0 0 3px #FFE9A6;}
 .logout-btn{
-  width:100%;background:var(--salmon);color:#fff;border:none;border-radius:12px;padding:14px 0;
-  font-size:18px;font-family:'Montserrat Alternates',sans-serif;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;
+  width:100%;background:var(--salmon);color:#fff;border:none;border-radius:12px;padding:14px 0;font-size:18px;
+  font-family:'Montserrat Alternates',sans-serif;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;
   text-shadow:1px 1px 3px rgba(0,0,0,0.25);margin-top:20px;cursor:pointer;box-shadow:0 4px 8px rgba(255,160,110,0.3);
   transition:background .25s ease, transform .15s ease;
 }
@@ -79,39 +77,36 @@ main{max-width:1100px;margin:60px auto;padding:0 20px;}
 
 .content{background:var(--cream);border-radius:18px;padding:40px;box-shadow:0 6px 12px rgba(0,0,0,0.05);}
 
-/* Sectietitel – standaard (incl. Home, met gradient) */
+/* Sectietitels – lichte pastelkleuren passend bij webshop */
 .section-title{
-  font-family:'Playfair Display',serif;font-size:26px;
-  background:linear-gradient(90deg,#FFD974,#FFB84C);
-  -webkit-background-clip:text;-webkit-text-stroke:1px var(--gold-stroke);-webkit-text-fill-color:transparent;
-  margin:0 0 14px;
-}
-/* Actieve pagina (niet-Home): binnenkant lichtgeel, rand mandarijn-oranje */
-.section-title.active{
-  background:none;
-  -webkit-text-fill-color:var(--light-yellow);
-  -webkit-text-stroke:1.2px var(--mandarin);
+  font-family:'Playfair Display',serif;font-size:26px;margin:0 0 14px;
+  background:linear-gradient(90deg,var(--pastel-yellow),var(--pastel-orange),var(--pastel-pink));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  -webkit-text-stroke:1px var(--gold-stroke);
 }
 
 /* Orders */
 .orders p{color:#FFAE42;font-family:'Playfair Display';font-size:17px;}
-.order{background:#FFF8D8;border:2px solid var(--mandarin);border-radius:12px;padding:14px;margin-bottom:12px;}
+.order{background:#FFF8D8;border:2px solid #FFB84C;border-radius:12px;padding:14px;margin-bottom:12px;}
 .order h4{margin:0 0 8px;color:#FFAE42;font-family:'Playfair Display';}
 
-/* Knoppen & inputs */
-.btn{display:inline-block;background:var(--btn);color:#fff;border:none;border-radius:10px;padding:12px 18px;cursor:pointer;font-weight:600;font-family:'Montserrat Alternates';transition:transform .1s ease, background .2s ease;box-shadow:0 4px 8px rgba(0,0,0,.05);}
-.btn:hover{background:var(--btn-hover);transform:translateY(-1px);}
-input,select{width:100%;padding:10px;border:2px solid #FFD46A;border-radius:10px;font-size:15px;font-family:'Montserrat Alternates';margin-bottom:10px;background:#fff;}
-input[disabled], select[disabled]{background:#f7f3e7;color:#8b816d;border-style:dashed;}
-.actions-row{display:flex;gap:12px;align-items:center;margin-top:6px;}
+/* Knoppen & inputs (originele look) */
+.btn{display:inline-block;background:var(--btn);color:#fff;border:none;border-radius:10px;padding:12px 18px;cursor:pointer;font-weight:600;font-family:'Montserrat Alternates';}
+.btn:hover{background:var(--btn-hover);}
+input,select{width:100%;padding:10px;border:2px solid #FFD46A;border-radius:10px;font-size:15px;font-family:'Montserrat Alternates';margin-bottom:10px;}
 
-/* Welcome – behoud ombre, voeg klassieke 3D diepte toe */
+/* Welcome – EXACT originele ombre behouden + subtiele 3D */
 .welcome-area{text-align:center;margin-bottom:40px;}
 .welcome-area h1{
-  font-family:'Playfair Display',serif;font-size:64px;letter-spacing:0.5px;margin:0;font-weight:700;
-  background:linear-gradient(90deg,#FFF7B2,#FFB85C);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  /* 3D: subtiele stacking (klassiek, niet speels) */
+  font-family:'Playfair Display',serif;
+  font-size:64px;
+  letter-spacing:0.5px;
+  background:linear-gradient(90deg,#FFF7B2,#FFB85C); /* originele ombre */
+  -webkit-background-clip:text;                       /* originele regel */
+  -webkit-text-fill-color:transparent;                /* originele regel */
+  margin:0;
+  font-weight:700;
+  /* extra diepte, raakt de gradient niet */
   text-shadow:
     0 1px 0 #e6c985,
     0 2px 0 #dbb86f,
@@ -123,20 +118,26 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
 .footer-decoration{width:100%;height:100px;object-fit:cover;display:block;}
 .footer-text{position:absolute;bottom:10px;width:100%;text-align:center;color:#fff;font-size:14px;text-shadow:1px 1px 3px rgba(0,0,0,0.5);}
 
-/* Upload & Crop Modal */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;}
+/* --- Klein Upload Modal --- */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px;}
 .modal.open{display:flex;}
-.modal-card{width:min(720px,95vw);background:#fff;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.modal-title{font-family:'Playfair Display',serif;font-size:22px}
-.modal-close{border:none;background:transparent;font-size:26px;cursor:pointer;line-height:1}
-.crop-area{position:relative;width:100%;aspect-ratio:1/1;background:#f3efe3;border-radius:14px;border:2px dashed #e2cf97;overflow:hidden;}
-.crop-canvas{position:absolute;inset:0;cursor:grab}
-.crop-canvas.dragging{cursor:grabbing}
-.modal-controls{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap}
-.range{flex:1}
-.note{font-size:12px;color:#6b6049}
-.hidden{display:none!important}
+.modal-card{width:min(420px,95vw);background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.modal-title{font-family:'Playfair Display',serif;font-size:20px}
+.modal-close{border:none;background:transparent;font-size:24px;cursor:pointer;line-height:1}
+
+.dropzone{
+  border:2px dashed #e2cf97;border-radius:14px;background:#f9f6ea;
+  height:180px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;position:relative;
+  color:#8a7b5a;font-size:14px;
+}
+.dropzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.dropzone .preview{
+  position:absolute;inset:0;border-radius:12px;overflow:hidden;display:none;
+}
+.dropzone .preview img{width:100%;height:100%;object-fit:cover;display:block;}
+.modal-actions{display:flex;justify-content:flex-end;margin-top:12px;gap:10px}
+.note{font-size:12px;color:#6b6049;margin-top:6px}
 </style>
 </head>
 <body>
@@ -195,14 +196,14 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
         <section id="sec-addresses" style="display:none;">
           <h3 class="section-title">Personal data & address</h3>
           <form id="form-ship" class="grid-1" style="max-width:500px;">
-            <input id="ship_name" placeholder="Full name" disabled>
-            <input id="ship_line1" placeholder="Address line 1" disabled>
-            <input id="ship_city" placeholder="City" disabled>
-            <input id="ship_postal" placeholder="Postal code" disabled>
-            <input id="ship_country" placeholder="Country" disabled>
+            <input id="ship_name" placeholder="Full name">
+            <input id="ship_line1" placeholder="Address line 1">
+            <input id="ship_city" placeholder="City">
+            <input id="ship_postal" placeholder="Postal code">
+            <input id="ship_country" placeholder="Country">
             <div class="actions-row">
               <button type="button" class="btn" id="btn-edit">Edit</button>
-              <button type="button" class="btn" id="btn-save" disabled>Save</button>
+              <button type="button" class="btn" id="btn-save">Save</button>
             </div>
           </form>
         </section>
@@ -255,36 +256,27 @@ footer{position:relative;margin:60px 0 0;overflow:hidden;}
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-storage-compat.js"></script>
 
-<!-- Upload & Crop Modal -->
+<!-- Klein Upload Modal -->
 <div class="modal" id="avatar-modal" aria-hidden="true" role="dialog" aria-label="Upload profile photo">
   <div class="modal-card">
     <div class="modal-header">
-      <div class="modal-title">Upload & crop your profile photo</div>
-      <button class="modal-close" id="crop-close" aria-label="Close">×</button>
+      <div class="modal-title">Profile photo</div>
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
     </div>
-    <div class="crop-area">
-      <canvas id="crop-canvas" class="crop-canvas"></canvas>
-      <input type="file" id="file-input" accept="image/*" class="hidden">
+    <div class="dropzone" id="dropzone">
+      <div id="dz-text">Drag profilepicture here or upload it here</div>
+      <div class="preview" id="dz-preview"><img id="dz-img" alt="Preview"></div>
+      <input type="file" id="file-input" accept="image/*">
     </div>
-    <div class="modal-controls">
-      <div>
-        <button class="btn" id="btn-choose">Choose image</button>
-        <button class="btn" id="btn-reset">Reset</button>
-      </div>
-      <label class="range">
-        Zoom
-        <input type="range" id="zoom" min="1" max="3" step="0.01" value="1" style="width:100%">
-      </label>
-      <div>
-        <button class="btn" id="btn-save-crop">Save photo</button>
-      </div>
+    <div class="modal-actions">
+      <button class="btn" id="btn-save-photo">Save</button>
     </div>
-    <p class="note">Tip: drag the image to center your face. Only the square is saved.</p>
+    <p class="note">Supported: JPG/PNG (recommended square image for best fit).</p>
   </div>
 </div>
 
 <script>
-/* ==== Firebase init ==== */
+/* Firebase init */
 const firebaseConfig={
   apiKey:"AIzaSyApt-W5-Ag4Ov2JxVcudSrV4VL0zCBE8pc",
   authDomain:"starplanner-3acf9.firebaseapp.com",
@@ -298,28 +290,26 @@ const auth=firebase.auth();
 const db=firebase.firestore();
 const storage=firebase.storage();
 
-/* ==== Auth: load orders & profile ==== */
+/* Orders */
 auth.onAuthStateChanged(async user=>{
  if(user){
    document.getElementById('welcome-name').textContent=`Welcome, ${user.email.split('@')[0]}!`;
-   await Promise.all([loadOrders(user.uid), loadProfile(user.uid)]);
+   await loadOrders(user.uid);
+   // avatar uit Firestore tonen
+   try{
+     const snap=await db.collection('users').doc(user.uid).get();
+     const url=snap.exists ? (snap.data().avatarUrl||"") : "";
+     if(url) setAvatarImage(url);
+   }catch(e){console.error(e);}
  }
 });
 
-/* ==== Orders ==== */
 async function loadOrders(userId){
   const ordersDiv=document.getElementById('orders');
   ordersDiv.innerHTML="<p>Loading your orders…</p>";
   try{
-    const snap=await db.collection('orders')
-      .where('userId','==',userId)
-      .orderBy('date','desc')
-      .get();
-
-    if(snap.empty){
-      ordersDiv.innerHTML="<p>No orders found.</p>";
-      return;
-    }
+    const snap=await db.collection('orders').where('userId','==',userId).orderBy('date','desc').get();
+    if(snap.empty){ ordersDiv.innerHTML="<p>No orders found.</p>"; return; }
     ordersDiv.innerHTML="";
     snap.forEach(doc=>{
       const o=doc.data();
@@ -337,28 +327,20 @@ async function loadOrders(userId){
   }
 }
 
-/* ==== Navigatie + actieve titelkleuren ==== */
+/* Navigatie (ongewijzigd) */
 document.querySelectorAll('.side-nav button').forEach(btn=>{
  btn.addEventListener('click',()=>{
    document.querySelectorAll('.side-nav button').forEach(b=>b.classList.remove('active'));
    btn.classList.add('active');
    const tgt=btn.getAttribute('data-target');
-   document.querySelectorAll('.content>section').forEach(s=>{
-     const show=(s.id===tgt);
-     s.style.display= show ? 'block':'none';
-     const title=s.querySelector('.section-title');
-     if(title){
-       if(s.id==='sec-welcome'){ title.classList.remove('active'); } // Home behoudt gradient
-       else { title.classList.add('active'); } // binnen lichtgeel, rand mandarijn
-     }
-   });
+   document.querySelectorAll('.content>section').forEach(s=>s.style.display=(s.id===tgt?'block':'none'));
  });
 });
 
-/* ==== Logout ==== */
+/* Logout */
 function logout(){auth.signOut();}
 
-/* ==== Security: password change ==== */
+/* Security */
 async function changePassword(){
   const user=auth.currentUser; if(!user) return alert('Please sign in.');
   const current=document.getElementById('cur_pass').value.trim();
@@ -374,84 +356,59 @@ async function changePassword(){
     document.getElementById('cur_pass').value='';
     document.getElementById('new_pass').value='';
     document.getElementById('new_pass_repeat').value='';
-  }catch(e){
-    console.error(e); alert(e.message||'Could not update password.');
-  }
+  }catch(e){ console.error(e); alert(e.message||'Could not update password.'); }
 }
 
-/* ==== Profiel/Adres laden & opslaan ==== */
-const inputs={
-  name:document.getElementById('ship_name'),
-  line1:document.getElementById('ship_line1'),
-  city:document.getElementById('ship_city'),
-  postal:document.getElementById('ship_postal'),
-  country:document.getElementById('ship_country'),
-};
-const btnEdit=document.getElementById('btn-edit');
-const btnSave=document.getElementById('btn-save');
-
-btnEdit.addEventListener('click', ()=>toggleEditable(true));
-btnSave.addEventListener('click', saveAddress);
-
-function toggleEditable(on){
-  Object.values(inputs).forEach(el=>el.disabled=!on);
-  btnSave.disabled=!on;
-  btnEdit.disabled=on;
-}
-
-async function loadProfile(uid){
+/* Personal data & address — Edit + Save (velden zoals origineel) */
+document.getElementById('btn-edit').addEventListener('click', async ()=>{
+  const user=auth.currentUser; if(!user) return alert('Please sign in.');
   try{
-    const snap=await db.collection('users').doc(uid).get();
+    const snap=await db.collection('users').doc(user.uid).get();
     if(snap.exists){
       const d=snap.data()||{};
-      inputs.name.value=d.name||'';
-      inputs.line1.value=d.address_line1||'';
-      inputs.city.value=d.city||'';
-      inputs.postal.value=d.postal||'';
-      inputs.country.value=d.country||'';
-      if(d.avatarUrl){ setAvatarImage(d.avatarUrl); }
+      document.getElementById('ship_name').value=d.name||'';
+      document.getElementById('ship_line1').value=d.address_line1||'';
+      document.getElementById('ship_city').value=d.city||'';
+      document.getElementById('ship_postal').value=d.postal||'';
+      document.getElementById('ship_country').value=d.country||'';
+    }else{
+      alert('No saved details found yet. You can fill them in and press Save.');
     }
-  }catch(e){ console.error(e); }
-  toggleEditable(false);
-}
+  }catch(e){ console.error(e); alert('Could not load your details.'); }
+});
 
+document.getElementById('btn-save').addEventListener('click', saveAddress);
 async function saveAddress(){
   const user=auth.currentUser; if(!user) return alert('Please sign in.');
   const payload={
-    name: inputs.name.value.trim(),
-    address_line1: inputs.line1.value.trim(),
-    city: inputs.city.value.trim(),
-    postal: inputs.postal.value.trim(),
-    country: inputs.country.value.trim(),
+    name: document.getElementById('ship_name').value.trim(),
+    address_line1: document.getElementById('ship_line1').value.trim(),
+    city: document.getElementById('ship_city').value.trim(),
+    postal: document.getElementById('ship_postal').value.trim(),
+    country: document.getElementById('ship_country').value.trim(),
     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   };
   try{
     await db.collection('users').doc(user.uid).set(payload,{merge:true});
     alert('Details saved.');
-    toggleEditable(false);
-  }catch(e){
-    console.error(e); alert('Could not save your details.');
-  }
+  }catch(e){ console.error(e); alert('Could not save your details.'); }
 }
 
-/* ==== Avatar upload + crop ==== */
+/* Avatar upload – klein modal met dropzone */
 const avatar=document.getElementById('avatar');
 const avatarImg=document.getElementById('avatar-img');
 const plusBtn=document.getElementById('avatar-plus');
-
 const modal=document.getElementById('avatar-modal');
-const fileInput=document.getElementById('file-input');
-const cropCanvas=document.getElementById('crop-canvas');
-const ctx=cropCanvas.getContext('2d');
-const zoomInput=document.getElementById('zoom');
-const btnChoose=document.getElementById('btn-choose');
-const btnReset=document.getElementById('btn-reset');
-const btnSaveCrop=document.getElementById('btn-save-crop');
-const btnClose=document.getElementById('crop-close');
+const modalClose=document.getElementById('modal-close');
 
-let img=new Image();
-let imgLoaded=false;
-let state={scale:1, x:0, y:0, dragging:false, startX:0, startY:0};
+const dz=document.getElementById('dropzone');
+const dzText=document.getElementById('dz-text');
+const dzPreview=document.getElementById('dz-preview');
+const dzImg=document.getElementById('dz-img');
+const fileInput=document.getElementById('file-input');
+const btnSavePhoto=document.getElementById('btn-save-photo');
+
+let selectedFile=null;
 
 function setAvatarImage(url){
   avatar.classList.add('has-photo');
@@ -459,94 +416,45 @@ function setAvatarImage(url){
   avatarImg.alt='Profile photo';
 }
 
-function openModal(){ modal.classList.add('open'); resizeCanvas(); window.addEventListener('resize', resizeCanvas); }
-function closeModal(){ modal.classList.remove('open'); window.removeEventListener('resize', resizeCanvas); }
-plusBtn.addEventListener('click', openModal);
-btnClose.addEventListener('click', closeModal);
-modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+plusBtn.addEventListener('click', ()=>{ modal.classList.add('open'); });
+modalClose.addEventListener('click', ()=>{ modal.classList.remove('open'); });
+modal.addEventListener('click', e=>{ if(e.target===modal) modal.classList.remove('open'); });
 
-btnChoose.addEventListener('click', ()=>fileInput.click());
-btnReset.addEventListener('click', ()=>{
-  zoomInput.value=1; state.scale=1; state.x=0; state.y=0; draw();
+fileInput.addEventListener('change', handleFiles);
+dz.addEventListener('dragover', e=>{ e.preventDefault(); dz.style.background='#f5efd9'; });
+dz.addEventListener('dragleave', e=>{ dz.style.background='#f9f6ea'; });
+dz.addEventListener('drop', e=>{
+  e.preventDefault(); dz.style.background='#f9f6ea';
+  const f=e.dataTransfer.files?.[0]; if(f) setPreview(f);
 });
 
-fileInput.addEventListener('change', e=>{
-  const file=e.target.files?.[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    imgLoaded=false;
-    img = new Image();
-    img.onload=()=>{
-      imgLoaded=true;
-      // initial fit: cover square
-      const W=cropCanvas.width, H=cropCanvas.height;
-      const scale=Math.max(W/img.width, H/img.height);
-      state.scale=scale; zoomInput.value=Math.max(1, scale).toFixed(2);
-      state.x=(W - img.width*scale)/2;
-      state.y=(H - img.height*scale)/2;
-      draw();
-    };
-    img.src=ev.target.result;
-  };
-  reader.readAsDataURL(file);
-});
-
-/* Canvas interactie */
-function resizeCanvas(){
-  const area=document.querySelector('.crop-area');
-  const size=Math.min(area.clientWidth, area.clientHeight);
-  cropCanvas.width=size; cropCanvas.height=size;
-  draw();
+function handleFiles(e){
+  const f=e.target.files?.[0]; if(f) setPreview(f);
 }
-function draw(){
-  const W=cropCanvas.width, H=cropCanvas.height;
-  ctx.clearRect(0,0,W,H);
-  ctx.fillStyle='#f3efe3'; ctx.fillRect(0,0,W,H);
-  if(imgLoaded){
-    ctx.save(); ctx.imageSmoothingQuality='high';
-    ctx.drawImage(img, state.x, state.y, img.width*state.scale, img.height*state.scale);
-    ctx.restore();
-  }else{
-    // placeholder kruisje
-    ctx.strokeStyle='#e2cf97'; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(W/2-20,H/2); ctx.lineTo(W/2+20,H/2);
-    ctx.moveTo(W/2,H/2-20); ctx.lineTo(W/2,H/2+20); ctx.stroke();
-  }
-}
-cropCanvas.addEventListener('mousedown', e=>{
-  if(!imgLoaded) return; state.dragging=true; cropCanvas.classList.add('dragging');
-  state.startX=e.offsetX - state.x; state.startY=e.offsetY - state.y;
-});
-window.addEventListener('mouseup', ()=>{ state.dragging=false; cropCanvas.classList.remove('dragging'); });
-cropCanvas.addEventListener('mousemove', e=>{
-  if(!state.dragging) return;
-  state.x=e.offsetX - state.startX; state.y=e.offsetY - state.startY; draw();
-});
-zoomInput.addEventListener('input', e=>{
-  if(!imgLoaded) return;
-  const W=cropCanvas.width, H=cropCanvas.height;
-  const prev=state.scale, next=parseFloat(e.target.value);
-  const cx=W/2, cy=H/2;
-  state.x = cx - ((cx - state.x) * (next/prev));
-  state.y = cy - ((cy - state.y) * (next/prev));
-  state.scale=next; draw();
-});
 
-/* Opslaan naar Storage + Firestore */
-btnSaveCrop.addEventListener('click', async ()=>{
-  const user=auth.currentUser; if(!user){ alert('Please sign in.'); return; }
-  cropCanvas.toBlob(async (blob)=>{
-    if(!blob){ alert('Nothing to save.'); return; }
-    try{
-      const ref=storage.ref().child(`users/${user.uid}/avatar.jpg`);
-      await ref.put(blob, {contentType:'image/jpeg'});
-      const url=await ref.getDownloadURL();
-      await db.collection('users').doc(user.uid).set({avatarUrl:url, updatedAt: firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
-      setAvatarImage(url);
-      closeModal();
-      alert('Profile photo updated.');
-    }catch(e){ console.error(e); alert('Could not save your photo.'); }
-  }, 'image/jpeg', 0.92);
+function setPreview(file){
+  selectedFile=file;
+  const url=URL.createObjectURL(file);
+  dzImg.src=url;
+  dzPreview.style.display='block';
+  dzText.style.opacity='0';
+}
+
+/* Save -> upload naar Storage + URL opslaan in Firestore */
+btnSavePhoto.addEventListener('click', async ()=>{
+  const user=auth.currentUser; if(!user) return alert('Please sign in.');
+  if(!selectedFile) return alert('Please choose an image first.');
+  try{
+    const ref=storage.ref().child(`users/${user.uid}/avatar.jpg`);
+    await ref.put(selectedFile, {contentType: selectedFile.type||'image/jpeg'});
+    const url=await ref.getDownloadURL();
+    await db.collection('users').doc(user.uid).set({avatarUrl:url, updatedAt: firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+    setAvatarImage(url);
+    modal.classList.remove('open');
+    // reset
+    selectedFile=null; dzPreview.style.display='none'; dzText.style.opacity='1';
+    alert('Profile photo saved.');
+  }catch(e){ console.error(e); alert('Could not save your photo.'); }
 });
 
 /* Returns demo */
